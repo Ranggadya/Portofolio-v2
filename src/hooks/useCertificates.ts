@@ -7,7 +7,7 @@ interface UseCertificatesReturn {
     isLoading: boolean;
     errorMessage: string | null;
     refetch: () => void;
-};
+}
 
 export function useCertificates(): UseCertificatesReturn {
     const [certificates, setCertificates] = useState<Certificate[]>([]);
@@ -23,7 +23,7 @@ export function useCertificates(): UseCertificatesReturn {
             const { data, error } = await supabase
                 .from("certifikat")
                 .select("*")
-                .order("issue_date", { ascending: false })
+                .order("created_at", { ascending: false });
 
             if (error) {
                 setErrorMessage(error.message);
@@ -32,12 +32,11 @@ export function useCertificates(): UseCertificatesReturn {
                 setCertificates(data ?? []);
             }
 
-            setIsLoading(false)
+            setIsLoading(false);
         }
 
         fetchCertificates();
     }, [fetchTrigger]);
-
 
     function refetch() {
         setFetchTrigger((previous) => previous + 1);
