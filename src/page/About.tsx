@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { Briefcase } from "lucide-react";
+import { Briefcase, FileText } from "lucide-react";
 import {
     SiReact,
     SiNextdotjs,
@@ -315,6 +315,21 @@ export default function About() {
                                     </span>
                                 </div>
                             ))}
+                            {/* CV Button */}
+                            <a
+                                href="cv.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="col-span-2 sm:col-span-1 flex items-center justify-center w-full"
+                            >
+                                <button
+                                    data-aos="fade-up"
+                                    data-aos-duration="800"
+                                    className="w-full sm:px-6 py-3 sm:py-4 rounded-lg bg-gradient-to-r from-[#6366f1] to-[#a855f7] text-white font-medium transition-all duration-300 hover:scale-105 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl cursor-pointer"
+                                >
+                                    <FileText className="w-4 h-4 sm:w-5 sm:h-5" /> Download CV
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -52,20 +52,12 @@ const EXPERIENCE_ITEMS: ExperienceItem[] = [
 const EDUCATION_ITEMS: EducationItem[] = [
     {
         id: 1,
-        degree: "MSc Human-Computer Interaction",
-        institution: "POLYTECHNIC INSTITUTE",
-        period: "2014 — 2016",
+        degree: "Bachelor of Computer Science",
+        institution: "Diponegoro University",
+        period: "2023 - current",
         description:
             "Focus on cognitive psychology in digital interfaces and advanced interaction design paradigms.",
-    },
-    {
-        id: 2,
-        degree: "BDes Graphic Design",
-        institution: "ACADEMY OF ARTS",
-        period: "2010 — 2014",
-        description:
-            "Foundational studies in typography, visual hierarchy, and brand identity systems.",
-    },
+    }
 ];
 
 interface ExperienceCardProps {

@@ -1,4 +1,5 @@
 import { memo, useRef, useState, useCallback, useEffect } from "react";
+import { Award, ExternalLink } from "lucide-react";
 import { useCertificates } from "../hooks/useCertificates";
 import type { Certificate } from "../types/certificate";
 
@@ -49,68 +50,65 @@ const CertificateCard = memo(function CertificateCard({
   certificate,
 }: CertificateCardProps) {
   return (
-    <article className="group glass-panel rounded-xl overflow-hidden hover:border-white/15 transition-all duration-300 flex-shrink-0 w-full sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-48px)/3)]">
-
-      {/* Certificate Image */}
-      <div className="relative aspect-[4/3] bg-gradient-to-br from-white/5 to-white/0 overflow-hidden flex items-center justify-center p-4">
-        {certificate.img ? (
-          <img
-            src={certificate.img}
-            alt={`${certificate.title} certificate`}
-            className="w-full h-full object-contain opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500 rounded-sm"
+    <div className="group relative h-full flex-shrink-0 w-full sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-48px)/3)]">
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-2xl blur opacity-0 group-hover:opacity-30 transition duration-500"></div>
+      <div className="relative glass-panel rounded-2xl border border-white/10 overflow-hidden hover:border-white/20 transition-all duration-300 transform group-hover:-translate-y-2 group-hover:shadow-2xl h-full flex flex-col">
+        <div className="relative overflow-hidden aspect-[4/3] bg-[#0b1120]/50 flex items-center justify-center p-4">
+          <img 
+            src={certificate.img || 'https://images.unsplash.com/photo-1586380879823-b0dc8c8c7d5e?w=600&h=400&fit=crop'} 
+            alt={certificate.title}
+            className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1586380879823-b0dc8c8c7d5e?w=600&h=400&fit=crop';
+            }}
           />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center">
-            <span className="material-symbols-outlined text-[64px] text-white/10">
-              workspace_premium
-            </span>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          <div className="absolute top-4 right-4 bg-white/5 backdrop-blur-xl rounded-full p-2 border border-white/20 group-hover:bg-white/10 transition-all duration-300">
+            <Award className="w-5 h-5 text-cyan-400" />
           </div>
-        )}
-
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0b1120] via-transparent to-transparent" />
-      </div>
-
-      {/* Certificate Info */}
-      <div className="p-6 flex flex-col gap-4">
-
-        {/* Title */}
-        <h3 className="font-grotesk font-semibold text-[16px] text-white group-hover:text-cyan-400 transition-colors duration-300 line-clamp-2">
-          {certificate.title}
-        </h3>
-
-        {/* Date */}
-        <div className="flex items-center gap-2 text-white/30">
-          <span className="material-symbols-outlined text-[15px]">
-            calendar_today
-          </span>
-          <span className="font-jetbrains text-[11px] tracking-widest">
-            {formatDate(certificate.created_at)}
-          </span>
         </div>
-
-        {/* Credential Link */}
-        {certificate.link ? (
-          <a
-            href={certificate.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 font-jetbrains text-[11px] tracking-widest text-white/30 hover:text-cyan-400 transition-colors duration-200 border border-white/10 hover:border-cyan-400/30 px-4 py-2 rounded-lg group/link"
-          >
-            <span className="material-symbols-outlined text-[15px] group-hover/link:rotate-45 transition-transform duration-300">
-              open_in_new
-            </span>
-            VIEW CREDENTIAL
-          </a>
-        ) : (
-          <div className="inline-flex items-center justify-center gap-2 font-jetbrains text-[11px] tracking-widest text-white/15 border border-white/5 px-4 py-2 rounded-lg cursor-not-allowed">
-            <span className="material-symbols-outlined text-[15px]">lock</span>
-            NO LINK PROVIDED
+        <div className="p-6 flex-1 flex flex-col justify-between">
+          <div>
+            <div className="min-h-[56px] mb-2 flex items-start">
+              <h3 className="text-xl font-grotesk font-bold bg-gradient-to-r from-white via-cyan-100 to-purple-200 bg-clip-text text-transparent leading-tight line-clamp-2">
+                {certificate.title}
+              </h3>
+            </div>
+            <div className="flex items-center gap-2 text-white/30 mb-6">
+              <span className="material-symbols-outlined text-[15px]">
+                calendar_today
+              </span>
+              <span className="font-jetbrains text-[11px] tracking-widest">
+                {formatDate(certificate.created_at)}
+              </span>
+            </div>
           </div>
-        )}
-
+          {certificate.link ? (
+            <a 
+              href={certificate.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group/btn relative inline-block w-full"
+            >
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg opacity-30 blur-sm group-hover/btn:opacity-60 transition-all duration-300"></div>
+              <div className="relative bg-[#1d1233] backdrop-blur-xl rounded-lg border border-purple-500/30 px-4 py-3 flex items-center justify-center gap-2 hover:border-purple-400/60 transition-all duration-300">
+                <span className="bg-gradient-to-r from-purple-200 to-white bg-clip-text text-transparent font-medium text-sm font-jetbrains tracking-widest uppercase">
+                  Lihat Sertifikat
+                </span>
+                <ExternalLink size={16} className="text-purple-300 group-hover/btn:translate-x-1 transition-transform duration-300" />
+              </div>
+            </a>
+          ) : (
+            <div className="relative bg-white/5 backdrop-blur-xl rounded-lg border border-white/10 px-4 py-3 flex items-center justify-center gap-2 cursor-not-allowed">
+              <span className="font-jetbrains tracking-widest text-white/30 font-medium text-[11px] uppercase">
+                Tidak Ada Link
+              </span>
+              <span className="material-symbols-outlined text-[16px] text-white/30">lock</span>
+            </div>
+          )}
+        </div>
       </div>
-    </article>
+    </div>
   );
 });
 
@@ -373,6 +371,7 @@ export default function Certificates() {
     scrollContainer.scrollLeft = scrollStartLeft - dragDistance;
   }
 
+  // Handle touch end to snap to nearest card
   function handleTouchEnd() {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
@@ -388,6 +387,7 @@ export default function Certificates() {
     scrollToIndex(nearestIndex);
   }
 
+  // Handle scroll to sync index
   const handleScroll = useCallback(() => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
@@ -423,11 +423,6 @@ export default function Certificates() {
 
       {!isLoading && !errorMessage && certificates.length > 0 && (
         <>
-          {/* Certificate Count */}
-          <p className="font-jetbrains text-[11px] tracking-widest text-white/30 mb-8">
-            {certificates.length} CERTIFICATE
-            {certificates.length > 1 ? "S" : ""} — DRAG OR SWIPE TO EXPLORE
-          </p>
 
           {/* Fade edges */}
           <div className="relative">
