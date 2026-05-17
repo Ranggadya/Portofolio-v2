@@ -4,7 +4,8 @@ import About from "./page/About";
 import Projects from "./page/Projects";
 import Experience from "./page/Experience";
 import Contact from "./page/Contact";
-
+import Footer from "./components/Footer";
+import Certificates from "./page/Certificates";
 
 export default function App() {
   return (
@@ -23,7 +24,9 @@ export default function App() {
         <About />
         <Projects />
         <Experience/>
+        <Certificates/>
         <Contact/>
+        <Footer/>
       </main>
     </div>
   );

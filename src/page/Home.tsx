@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { useTypingEffect } from "../hooks/useTypingEffect";
 import SocialLinks from "../components/SocialLinks";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 // ============================================================
 // CONSTANTS
@@ -44,9 +45,9 @@ const PROFILE_TECH_TAGS: string[] = [
 ];
 
 const SOCIAL_LINKS = [
-    { icon: "code", label: "GitHub", url: "https://github.com/" },
-    { icon: "work", label: "LinkedIn", url: "https://linkedin.com/" },
-    { icon: "alternate_email", label: "Twitter", url: "https://twitter.com/" },
+    { icon: <FaGithub />, label: "GitHub", url: "https://github.com/Ranggadya" },
+    { icon: <FaLinkedin />, label: "LinkedIn", url: "https://www.linkedin.com/in/ranggadya/" },
+    { icon: <FaInstagram />, label: "Instagram", url: "https://www.instagram.com/rnggdyar/" },
 ];
 
 // ============================================================
