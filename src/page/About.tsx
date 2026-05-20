@@ -13,7 +13,7 @@ import {
     SiTypescript,
     SiGo
 } from "react-icons/si";
-import heroImg from "../assets/hero.png";
+import heroImg from "../assets/Photo.jpg";
 
 const ProfileImage = memo(() => (
   <div className="flex justify-end items-center sm:p-4 sm:py-0 sm:pb-0 p-0 py-2 pb-2">

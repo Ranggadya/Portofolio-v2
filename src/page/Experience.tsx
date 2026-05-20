@@ -19,32 +19,22 @@ interface EducationItem {
 const EXPERIENCE_ITEMS: ExperienceItem[] = [
     {
         id: 1,
-        role: "Senior Product Designer",
-        company: "NEXUS DYNAMICS",
-        period: "2021 — PRESENT",
+        role: "Internship Software Engineer",
+        company: "SKENACORP",
+        period: "January 2026 - March 2026",
         description:
-            "Leading design initiatives for enterprise SaaS platforms, focusing on complex data visualization and modular design systems. Orchestrated the redesign of the core analytics suite, resulting in a 40% increase in user engagement.",
-        techStack: ["Figma", "Design Systems", "React"],
-        isCurrent: true,
-    },
-    {
-        id: 2,
-        role: "UX/UI Designer",
-        company: "AETHER CREATIVE",
-        period: "2018 — 2021",
-        description:
-            "Developed intuitive user interfaces for high-profile fintech clients. Conducted extensive user research and usability testing to refine transaction flows and improve overall user satisfaction.",
-        techStack: ["Figma", "Vue.js", "CSS"],
+            "Built a web scraper to collect news from online media and display it in a dashboard and user interface.",
+        techStack: ["Python", "Design Systems", "React"],
         isCurrent: false,
     },
     {
-        id: 3,
-        role: "Junior Web Designer",
-        company: "LUMINA STUDIOS",
-        period: "2016 — 2018",
+        id: 2,
+        role: "Internship Full Stack Developer",
+        company: "DSI",
+        period: "November 2025 - December 2025",
         description:
-            "Assisted in the creation of responsive marketing websites and digital campaigns. Handled front-end prototyping using HTML, CSS, and early-stage JavaScript frameworks.",
-        techStack: ["HTML", "CSS", "JavaScript"],
+            "Developed a payroll system for employee salary processing and participated in integration with customs and manufacturing company systems.",
+        techStack: ["PHP", "Javascript", "CSS", "React"],
         isCurrent: false,
     },
 ];
@@ -71,8 +61,8 @@ function ExperienceCard({ experienceItem }: ExperienceCardProps) {
             {/* Timeline dot */}
             <div
                 className={`absolute left-[-5px] top-2 w-[10px] h-[10px] rounded-full ring-4 ring-[#0b1120] transition-colors duration-300 ${experienceItem.isCurrent
-                        ? "bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]"
-                        : "bg-white/20 group-hover:bg-cyan-400"
+                    ? "bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]"
+                    : "bg-white/20 group-hover:bg-cyan-400"
                     }`}
             />
 
@@ -82,7 +72,7 @@ function ExperienceCard({ experienceItem }: ExperienceCardProps) {
                 {/* Card Header */}
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 mb-3">
                     <div>
-                        <h3 className="font-grotesk font-semibold text-[17px] text-white">
+                        <h3 className="font-grotesk font-semibold text-[18px] text-white">
                             {experienceItem.role}
                         </h3>
                         <p className={`font-jetbrains text-[11px] tracking-widest mt-1 ${experienceItem.isCurrent ? "text-cyan-400" : "text-purple-400"
@@ -96,7 +86,7 @@ function ExperienceCard({ experienceItem }: ExperienceCardProps) {
                 </div>
 
                 {/* Description */}
-                <p className="font-geist text-[14px] text-white/40 leading-relaxed mb-4">
+                <p className="font-geist text-[18px] text-white/40 leading-relaxed mb-4">
                     {experienceItem.description}
                 </p>
 
@@ -145,7 +135,7 @@ function EducationCard({ educationItem }: EducationCardProps) {
                 </div>
 
                 {/* Description */}
-                <p className="font-geist text-[13px] text-white/40 leading-relaxed">
+                <p className="font-geist text-[15px] text-white/40 leading-relaxed">
                     {educationItem.description}
                 </p>
 

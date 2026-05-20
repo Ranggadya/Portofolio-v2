@@ -50,7 +50,6 @@ const SOCIAL_LINKS = [
     { icon: <FaInstagram />, label: "Instagram", url: "https://www.instagram.com/rnggdyar/" },
 ];
 
-// ============================================================
 // HELPER
 // ============================================================
 
@@ -68,16 +67,19 @@ function scrollToSection(sectionId: string) {
 
 const StatusBadge = memo(function StatusBadge() {
     return (
-        <div className="inline-block">
-            <div className="relative group">
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full blur opacity-30 group-hover:opacity-60 transition duration-1000" />
-                <div className="relative px-4 py-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                    <span className="bg-gradient-to-r from-cyan-400 to-purple-400 text-transparent bg-clip-text font-jetbrains text-[11px] tracking-widest">
-                        AVAILABLE FOR OPPORTUNITIES
-                    </span>
-                </div>
+        <div className="relative inline-flex w-fit group">
+
+           
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-400/20 to-purple-400/20 opacity-50 group-hover:opacity-80 blur-sm transition duration-300" />
+
+            <div className="relative inline-flex items-center gap-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 px-4 py-2">
+                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+
+                <span className="text-white font-jetbrains text-[11px] tracking-widest whitespace-nowrap">
+                    AVAILABLE FOR OPPORTUNITIES
+                </span>
             </div>
+
         </div>
     );
 });
@@ -231,10 +233,6 @@ const ProfileCard = memo(function ProfileCard() {
     );
 });
 
-// ============================================================
-// TYPING DISPLAY — sengaja TIDAK di-memo karena komponen ini
-// memang harus re-render setiap karakter berubah
-// ============================================================
 
 function TypingDisplay({ displayedText }: { displayedText: string }) {
     return (
@@ -247,9 +245,7 @@ function TypingDisplay({ displayedText }: { displayedText: string }) {
     );
 }
 
-// ============================================================
 // MAIN COMPONENT
-// ============================================================
 
 export default function Home() {
     const { displayedText } = useTypingEffect({
