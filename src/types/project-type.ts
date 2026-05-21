@@ -1,8 +1,9 @@
-// ============================================================
-// types.ts — bisa dipisah ke file terpisah
-// ============================================================
+// src/types/project-type.ts
 
-export type AccentColor = "cyan" | "purple";
+export type AccentColor = "cyan" | "purple" | "emerald" | "amber";
+
+export type ProjectLayout = "featured" | "wide" | "compact" | "soft";
+
 export type ColSpan = 5 | 7 | 12;
 
 export interface ProjectTag {
@@ -24,8 +25,10 @@ export interface Project {
   description: string;
   stats?: ProjectStat[];
   accentColor: AccentColor;
-  isFeatured: boolean;
+  layout: ProjectLayout;
   colSpan: ColSpan;
   githubUrl: string;
   liveUrl: string;
+  imageUrl?: string;
+  placeholderIcon?: string;
 }
