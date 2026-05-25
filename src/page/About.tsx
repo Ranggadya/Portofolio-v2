@@ -108,7 +108,7 @@ const SKILL_CATEGORIES: SkillCategory[] = [
 
 const PROFILE_META_ITEMS: ProfileMetaItem[] = [
     { label: "ENV.LOCATION", value: "Indonesia" },
-    { label: "ENV.EXPERIENCE", value: "2+ Years" },
+    { label: "ENV.EXPERIENCE", value: "1 Years" },
 ];
 
 const TECH_STACK_MARQUEE = [

@@ -145,16 +145,32 @@ const ProjectImage = memo(function ProjectImage({
     accentColor: AccentColor;
     featured?: boolean;
 }) {
+    const tokens = ACCENT_TOKENS[accentColor];
+
     return (
-        <div className="relative h-full w-full overflow-hidden">
+        <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-[#090f1d]">
+            <div
+                className={cn(
+                    "absolute inset-0 opacity-70",
+                    "bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.12),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(255,255,255,0.06),transparent_42%)]"
+                )}
+            />
+
+            <div
+                className={cn(
+                    "absolute left-1/2 top-1/2 h-[70%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[90px]",
+                    tokens.glow
+                )}
+            />
+
             {imageUrl ? (
                 <img
                     src={imageUrl}
                     alt={alt}
                     className={cn(
-                        "h-full w-full object-cover transition-transform duration-700 ease-out",
-                        "group-hover:scale-[1.035]",
-                        featured && "object-center"
+                        "relative z-10 h-full w-full object-contain p-3 transition-transform duration-700 ease-out",
+                        "drop-shadow-[0_24px_60px_rgba(0,0,0,0.42)] group-hover:scale-[1.025]",
+                        featured ? "md:p-5" : "md:p-4"
                     )}
                     loading="lazy"
                     decoding="async"
@@ -213,7 +229,7 @@ const BrowserMockupPreview = memo(function BrowserMockupPreview({
             <div
                 className={cn(
                     "relative overflow-hidden",
-                    large ? "h-[320px] md:h-[400px]" : "h-[190px]"
+                    large ? "aspect-[16/9]" : "aspect-[16/10]"
                 )}
             >
                 <ProjectImage
@@ -234,11 +250,6 @@ const BrowserMockupPreview = memo(function BrowserMockupPreview({
 
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.14),transparent_30%)]" />
 
-                <div className="absolute bottom-4 left-4 rounded-full border border-white/10 bg-black/35 px-3 py-1.5 backdrop-blur-md">
-                    <span className="font-jetbrains text-[10px] uppercase tracking-widest text-white/55">
-                        Interface Preview
-                    </span>
-                </div>
             </div>
         </div>
     );
@@ -513,7 +524,7 @@ const CompactProjectCard = memo(function CompactProjectCard({
         <article
             className={cn(
                 COL_SPAN_CLASS[project.colSpan],
-                "group relative flex min-h-[420px] flex-col overflow-hidden rounded-[26px]",
+                "group relative flex min-h-[500px] flex-col overflow-hidden rounded-[26px]",
                 "border border-white/10 bg-white/[0.045] backdrop-blur-xl",
                 "shadow-[0_20px_80px_rgba(0,0,0,0.22)]",
                 "transition-all duration-500 hover:bg-white/[0.065]",
@@ -626,64 +637,51 @@ const SoftBlendProjectCard = memo(function SoftBlendProjectCard({
         <article
             className={cn(
                 COL_SPAN_CLASS[project.colSpan],
-                "group relative overflow-hidden rounded-[26px]",
-                "min-h-[420px] border border-white/10 bg-white/[0.045]",
+                "group relative flex min-h-[500px] flex-col overflow-hidden rounded-[26px]",
+                "border border-white/10 bg-white/[0.045]",
                 "shadow-[0_22px_90px_rgba(0,0,0,0.25)] backdrop-blur-xl",
                 "transition-all duration-500 hover:bg-white/[0.065]",
                 tokens.border
             )}
             aria-label={`Project: ${project.title}`}
         >
-            <div className="absolute inset-y-0 right-0 w-full md:w-[68%]">
-                <ProjectImage
-                    imageUrl={project.imageUrl}
-                    placeholderIcon={project.placeholderIcon}
-                    alt={`${project.title} preview`}
-                    accentColor={project.accentColor}
-                />
-            </div>
-
             <div
                 className={cn(
-                    "absolute right-[-10%] top-[-12%] h-[300px] w-[300px] rounded-full blur-[100px] opacity-35",
+                    "absolute right-[-18%] top-[-14%] h-[280px] w-[280px] rounded-full blur-[100px] opacity-30",
                     tokens.glowStrong
                 )}
             />
 
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(11,17,32,0.98)_0%,rgba(11,17,32,0.95)_34%,rgba(11,17,32,0.78)_52%,rgba(11,17,32,0.42)_74%,rgba(11,17,32,0.18)_100%)]" />
-
-            <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(11,17,32,0.94)_0%,rgba(11,17,32,0.52)_40%,rgba(11,17,32,0.08)_100%)]" />
-
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_20%,rgba(255,255,255,0.13),transparent_34%)]" />
-
             <div className="absolute inset-0 opacity-[0.045] bg-[linear-gradient(to_right,rgba(255,255,255,0.75)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.75)_1px,transparent_1px)] bg-[size:52px_52px]" />
-
-            <div className="absolute inset-0 bg-[#0b1120]/35 md:bg-transparent" />
 
             <div className="absolute left-0 top-0 z-20 h-[1px] w-full bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
-            <div className="absolute left-5 right-5 top-5 z-20 flex items-center justify-between gap-3">
-                <CategoryBadge project={project} />
-
-                <div className="flex items-center gap-2 opacity-100 md:opacity-0 md:transition-opacity md:duration-300 md:group-hover:opacity-100">
-                    <ActionIconButton
-                        href={project.githubUrl}
-                        icon="code"
-                        label={`View ${project.title} source code`}
-                        accentColor={project.accentColor}
-                    />
-
-                    <ActionIconButton
-                        href={project.liveUrl}
-                        icon="open_in_new"
-                        label={`Visit ${project.title} live`}
-                        accentColor={project.accentColor}
-                    />
-                </div>
+            <div className="relative z-10 p-5 pb-0">
+                <BrowserMockupPreview project={project} />
             </div>
 
-            <div className="relative z-10 flex min-h-[420px] items-end md:items-center p-6">
-                <div className="w-full max-w-[460px] pt-20 md:pt-12">
+            <div className="relative z-10 flex flex-1 flex-col p-6">
+                <div className="mb-5 flex items-center justify-between gap-3">
+                    <CategoryBadge project={project} />
+
+                    <div className="flex items-center gap-2">
+                        <ActionIconButton
+                            href={project.githubUrl}
+                            icon="code"
+                            label={`View ${project.title} source code`}
+                            accentColor={project.accentColor}
+                        />
+
+                        <ActionIconButton
+                            href={project.liveUrl}
+                            icon="open_in_new"
+                            label={`Visit ${project.title} live`}
+                            accentColor={project.accentColor}
+                        />
+                    </div>
+                </div>
+
+                <div>
                     <div className="mb-4 flex flex-wrap gap-2">
                         {project.tags.map((tag) => (
                             <ProjectTagBadge
@@ -694,87 +692,70 @@ const SoftBlendProjectCard = memo(function SoftBlendProjectCard({
                         ))}
                     </div>
 
-                    <div className="mb-4 flex items-start gap-3">
-                        <div
-                            className={cn(
-                                "flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl",
-                                "border border-white/10 bg-black/20 backdrop-blur-xl",
-                                tokens.iconBg
-                            )}
-                            aria-hidden="true"
-                        >
-                            <span className="material-symbols-outlined text-[20px]">
-                                {project.categoryIcon}
-                            </span>
-                        </div>
+                    <h3
+                        className={cn(
+                            "font-grotesk text-[28px] font-bold leading-tight text-white",
+                            "transition-colors duration-300",
+                            tokens.hoverTitle
+                        )}
+                    >
+                        {project.title}
+                    </h3>
 
-                        <div>
-                            <h3
-                                className={cn(
-                                    "font-grotesk text-[28px] font-bold leading-tight text-white",
-                                    "transition-colors duration-300",
-                                    tokens.hoverTitle
-                                )}
+                    <p className="mt-3 font-geist text-[14px] leading-relaxed text-white/52">
+                        {project.description}
+                    </p>
+                </div>
+
+                {project.stats && project.stats.length > 0 && (
+                    <div className="mb-6 mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        {project.stats.slice(0, 2).map((stat) => (
+                            <div
+                                key={stat.label}
+                                className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 backdrop-blur-sm"
                             >
-                                {project.title}
-                            </h3>
-
-                            <p className="mt-3 max-w-[410px] font-geist text-[14px] leading-relaxed text-white/52">
-                                {project.description}
-                            </p>
-                        </div>
+                                <span className="block font-jetbrains text-[9px] uppercase tracking-widest text-white/28">
+                                    {stat.label}
+                                </span>
+                                <span className="mt-1 block font-jetbrains text-[11px] text-white/85">
+                                    {stat.value}
+                                </span>
+                            </div>
+                        ))}
                     </div>
+                )}
 
-                    {project.stats && project.stats.length > 0 && (
-                        <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
-                            {project.stats.slice(0, 2).map((stat) => (
-                                <div
-                                    key={stat.label}
-                                    className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 backdrop-blur-sm"
-                                >
-                                    <span className="block font-jetbrains text-[9px] uppercase tracking-widest text-white/28">
-                                        {stat.label}
-                                    </span>
-                                    <span className="mt-1 block font-jetbrains text-[11px] text-white/85">
-                                        {stat.value}
-                                    </span>
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                <div className="mt-auto flex items-center justify-between gap-4 border-t border-white/10 pt-4">
+                    <a
+                        href={project.liveUrl}
+                        target={isExternalLive ? "_blank" : undefined}
+                        rel={isExternalLive ? "noopener noreferrer" : undefined}
+                        className={cn(
+                            "inline-flex items-center gap-2 font-jetbrains text-[11px] font-semibold tracking-widest",
+                            "transition-colors duration-200",
+                            tokens.text,
+                            "hover:text-white"
+                        )}
+                        aria-label={`View ${project.title} live demo`}
+                    >
+                        EXPLORE PROJECT
+                        <span className="material-symbols-outlined text-[15px]" aria-hidden="true">
+                            arrow_forward
+                        </span>
+                    </a>
 
-                    <div className="flex items-center justify-between gap-4 border-t border-white/10 pt-4">
-                        <a
-                            href={project.liveUrl}
-                            target={isExternalLive ? "_blank" : undefined}
-                            rel={isExternalLive ? "noopener noreferrer" : undefined}
-                            className={cn(
-                                "inline-flex items-center gap-2 font-jetbrains text-[11px] font-semibold tracking-widest",
-                                "transition-colors duration-200",
-                                tokens.text,
-                                "hover:text-white"
-                            )}
-                            aria-label={`View ${project.title} live demo`}
-                        >
-                            EXPLORE PROJECT
-                            <span className="material-symbols-outlined text-[15px]" aria-hidden="true">
-                                arrow_forward
-                            </span>
-                        </a>
-
-                        <a
-                            href={project.githubUrl}
-                            target={isExternalGithub ? "_blank" : undefined}
-                            rel={isExternalGithub ? "noopener noreferrer" : undefined}
-                            className="inline-flex items-center gap-2 font-jetbrains text-[11px] tracking-widest text-white/30 transition-colors duration-200 hover:text-white/60"
-                            aria-label={`View ${project.title} source on GitHub`}
-                        >
-                            SOURCE
-                            <span className="material-symbols-outlined text-[15px]" aria-hidden="true">
-                                code
-                            </span>
-                        </a>
-                    </div>
+                    <a
+                        href={project.githubUrl}
+                        target={isExternalGithub ? "_blank" : undefined}
+                        rel={isExternalGithub ? "noopener noreferrer" : undefined}
+                        className="inline-flex items-center gap-2 font-jetbrains text-[11px] tracking-widest text-white/30 transition-colors duration-200 hover:text-white/60"
+                        aria-label={`View ${project.title} source on GitHub`}
+                    >
+                        SOURCE
+                        <span className="material-symbols-outlined text-[15px]" aria-hidden="true">
+                            code
+                        </span>
+                    </a>
                 </div>
             </div>
         </article>

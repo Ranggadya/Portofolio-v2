@@ -197,7 +197,7 @@ export const PROJECTS: Project[] = [
         colSpan: 5,
         githubUrl: "#",
         liveUrl: "#",
-        imageUrl: "/public/Photo.jpg",
+        imageUrl: "/Photo.jpg",
         placeholderIcon: "cloud",
     },
 ];

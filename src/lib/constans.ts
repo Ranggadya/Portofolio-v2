@@ -21,7 +21,7 @@ export const PROJECTS: Project[] = [
             { label: "Performance", value: "60 FPS Render" },
         ],
         accentColor: "cyan",
-        isFeatured: true,
+        layout: "featured",
         colSpan: 12,
         githubUrl: "#",
         liveUrl: "#",
@@ -38,7 +38,7 @@ export const PROJECTS: Project[] = [
         description:
             "A comprehensive design system and component library built for a high-frequency trading terminal.",
         accentColor: "purple",
-        isFeatured: false,
+        layout: "soft",
         colSpan: 7,
         githubUrl: "#",
         liveUrl: "#",
@@ -55,7 +55,7 @@ export const PROJECTS: Project[] = [
         description:
             "A lightweight, highly secure authentication microservice structured around biometric spatial mapping.",
         accentColor: "cyan",
-        isFeatured: false,
+        layout: "compact",
         colSpan: 5,
         githubUrl: "#",
         liveUrl: "#",
@@ -72,7 +72,7 @@ export const PROJECTS: Project[] = [
         description:
             "A full-featured ERP dashboard for managing inventory, HR, and finance modules in real-time.",
         accentColor: "cyan",
-        isFeatured: false,
+        layout: "compact",
         colSpan: 5,
         githubUrl: "#",
         liveUrl: "#",
@@ -89,7 +89,7 @@ export const PROJECTS: Project[] = [
         description:
             "Automated deployment pipeline with containerized services, monitoring, and zero-downtime deploys.",
         accentColor: "purple",
-        isFeatured: false,
+        layout: "soft",
         colSpan: 7,
         githubUrl: "#",
         liveUrl: "#",
