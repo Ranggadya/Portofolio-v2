@@ -35,7 +35,7 @@ const PROJECTS: Project[] = [
     id: 2,
     title: "Venue Event Management",
     category: "Management System",
-    categoryIcon: "",
+    categoryIcon: "meeting_room",
     tags: [
       { label: "NestJS", icon: "code_blocks" },
       { label: "MySQL", icon: "database" },
@@ -50,7 +50,7 @@ const PROJECTS: Project[] = [
     ],
     accentColor: "purple",
     layout: "compact",
-    colSpan: 5,
+    colSpan: 6,
     githubUrl: "#",
     liveUrl: "#",
     imageUrl: "/venue.png",
@@ -73,10 +73,10 @@ const PROJECTS: Project[] = [
     ],
     accentColor: "cyan",
     layout: "soft",
-    colSpan: 7,
+    colSpan: 6,
     githubUrl: "#",
     liveUrl: "https://shoes4us.vercel.app/",
-    imageUrl: "/shoes4us.png",
+    imageUrl: "/Porto.png",
     placeholderIcon: "lock",
   },
   {
@@ -98,7 +98,7 @@ const PROJECTS: Project[] = [
     ],
     accentColor: "emerald",
     layout: "soft",
-    colSpan: 7,
+    colSpan: 6,
     githubUrl: "#",
     liveUrl: "https://market-place-flame.vercel.app/",
     imageUrl: "/UMKM.png",
@@ -121,10 +121,10 @@ const PROJECTS: Project[] = [
     ],
     accentColor: "purple",
     layout: "compact",
-    colSpan: 5,
+    colSpan: 6,
     githubUrl: "#",
     liveUrl: "#",
-    imageUrl: "/Photo.jpg",
+    imageUrl: undefined,
     placeholderIcon: "cloud",
   },
 ];
@@ -162,11 +162,14 @@ const SectionHeader = memo(function SectionHeader() {
 // ─── Projects Main Export ──────────────────────────────────────────────────────
 
 export default function Projects() {
-  const sortedProjects = useMemo(() => {
-    const featured = PROJECTS.filter((project) => project.layout === "featured");
-    const regular = PROJECTS.filter((project) => project.layout !== "featured");
+  const { featuredProject, bodyProjects } = useMemo(() => {
+    const featuredProject =
+      PROJECTS.find((project) => project.layout === "featured") ?? PROJECTS[0];
+    const bodyProjects = PROJECTS.filter(
+      (project) => project.id !== featuredProject.id
+    );
 
-    return [...featured, ...regular];
+    return { featuredProject, bodyProjects };
   }, []);
 
   return (
@@ -177,10 +180,14 @@ export default function Projects() {
     >
       <SectionHeader />
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
-        {sortedProjects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
+      <div className="space-y-6">
+        {featuredProject && <ProjectCard project={featuredProject} />}
+
+        <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-12">
+          {bodyProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
       </div>
     </section>
   );

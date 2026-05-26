@@ -4,7 +4,7 @@ export type AccentColor = "cyan" | "purple" | "emerald" | "amber";
 
 export type ProjectLayout = "featured" | "wide" | "compact" | "soft";
 
-export type ColSpan = 5 | 7 | 12;
+export type ColSpan = 5 | 6 | 7 | 12;
 
 export interface ProjectTag {
   label: string;

@@ -71,6 +71,7 @@ export const ACCENT_TOKENS: Record<AccentColor, AccentTokens> = {
 
 export const COL_SPAN_CLASS: Record<ColSpan, string> = {
     5: "md:col-span-5",
+    6: "md:col-span-6",
     7: "md:col-span-7",
     12: "md:col-span-12",
 };

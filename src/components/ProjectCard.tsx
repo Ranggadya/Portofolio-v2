@@ -78,6 +78,7 @@ const ACCENT_TOKENS: Record<AccentColor, AccentTokens> = {
 
 const COL_SPAN_CLASS: Record<ColSpan, string> = {
     5: "md:col-span-5",
+    6: "md:col-span-6",
     7: "md:col-span-7",
     12: "md:col-span-12",
 };
@@ -93,6 +94,8 @@ function getProjectUrlLabel(project: Project): string {
 
     return `${project.title.toLowerCase().replace(/\s+/g, "-")}.app`;
 }
+
+const BROWSER_TAB_LOGO = "/logo%20Ra.png";
 
 // ─── Image Placeholder ─────────────────────────────────────────────────────────
 
@@ -208,22 +211,27 @@ const BrowserMockupPreview = memo(function BrowserMockupPreview({
                 large ? "w-full max-w-[780px]" : "w-full"
             )}
         >
-            <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.035] px-4 py-3">
-                <div className="flex items-center gap-2" aria-hidden="true">
+            <div className="flex items-center gap-3 border-b border-white/10 bg-white/[0.035] px-3 py-2.5 md:px-4 md:py-3">
+                <div className="flex shrink-0 items-center gap-2" aria-hidden="true">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
                     <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
                     <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
                 </div>
 
-                <div className="mx-4 flex-1">
-                    <div className="mx-auto flex max-w-[260px] items-center justify-center rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5">
-                        <span className="truncate font-jetbrains text-[10px] tracking-widest text-white/35">
-                            {getProjectUrlLabel(project)}
-                        </span>
-                    </div>
+                <div className="flex min-w-0 flex-1 items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1.5">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/10">
+                        <img
+                            src={BROWSER_TAB_LOGO}
+                            alt=""
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                            decoding="async"
+                        />
+                    </span>
+                    <span className="truncate font-jetbrains text-[10px] tracking-widest text-white/38">
+                        {getProjectUrlLabel(project)}
+                    </span>
                 </div>
-
-                <div className="w-[44px]" />
             </div>
 
             <div
@@ -524,7 +532,7 @@ const CompactProjectCard = memo(function CompactProjectCard({
         <article
             className={cn(
                 COL_SPAN_CLASS[project.colSpan],
-                "group relative flex min-h-[500px] flex-col overflow-hidden rounded-[26px]",
+                "group relative flex h-full min-h-[520px] flex-col overflow-hidden rounded-[26px]",
                 "border border-white/10 bg-white/[0.045] backdrop-blur-xl",
                 "shadow-[0_20px_80px_rgba(0,0,0,0.22)]",
                 "transition-all duration-500 hover:bg-white/[0.065]",
@@ -575,11 +583,11 @@ const CompactProjectCard = memo(function CompactProjectCard({
                     {project.title}
                 </h3>
 
-                <p className="mb-6 font-geist text-[13px] leading-relaxed text-white/48">
+                <p className="mb-6 line-clamp-3 min-h-[63px] font-geist text-[13px] leading-relaxed text-white/48">
                     {project.description}
                 </p>
 
-                <div className="mb-6 flex flex-wrap gap-2">
+                <div className="mb-6 flex min-h-[56px] flex-wrap content-start gap-2">
                     {project.tags.map((tag) => (
                         <ProjectTagBadge
                             key={tag.label}
@@ -589,6 +597,24 @@ const CompactProjectCard = memo(function CompactProjectCard({
                         />
                     ))}
                 </div>
+
+                {project.stats && project.stats.length > 0 && (
+                    <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        {project.stats.slice(0, 2).map((stat) => (
+                            <div
+                                key={stat.label}
+                                className="rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 backdrop-blur-sm"
+                            >
+                                <span className="block font-jetbrains text-[9px] uppercase tracking-widest text-white/28">
+                                    {stat.label}
+                                </span>
+                                <span className="mt-1 block font-jetbrains text-[11px] text-white/85">
+                                    {stat.value}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                )}
 
                 <div className="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
                     <a
@@ -637,7 +663,7 @@ const SoftBlendProjectCard = memo(function SoftBlendProjectCard({
         <article
             className={cn(
                 COL_SPAN_CLASS[project.colSpan],
-                "group relative flex min-h-[500px] flex-col overflow-hidden rounded-[26px]",
+                "group relative flex h-full min-h-[520px] flex-col overflow-hidden rounded-[26px]",
                 "border border-white/10 bg-white/[0.045]",
                 "shadow-[0_22px_90px_rgba(0,0,0,0.25)] backdrop-blur-xl",
                 "transition-all duration-500 hover:bg-white/[0.065]",
@@ -656,11 +682,11 @@ const SoftBlendProjectCard = memo(function SoftBlendProjectCard({
 
             <div className="absolute left-0 top-0 z-20 h-[1px] w-full bg-gradient-to-r from-transparent via-white/15 to-transparent" />
 
-            <div className="relative z-10 p-5 pb-0">
+            <div className="relative z-10 p-4 pb-0 sm:p-5 sm:pb-0">
                 <BrowserMockupPreview project={project} />
             </div>
 
-            <div className="relative z-10 flex flex-1 flex-col p-6">
+            <div className="relative z-10 flex flex-1 flex-col p-5 sm:p-6">
                 <div className="mb-5 flex items-center justify-between gap-3">
                     <CategoryBadge project={project} />
 
@@ -682,7 +708,7 @@ const SoftBlendProjectCard = memo(function SoftBlendProjectCard({
                 </div>
 
                 <div>
-                    <div className="mb-4 flex flex-wrap gap-2">
+                    <div className="mb-4 flex min-h-[56px] flex-wrap content-start gap-2">
                         {project.tags.map((tag) => (
                             <ProjectTagBadge
                                 key={tag.label}
@@ -702,7 +728,7 @@ const SoftBlendProjectCard = memo(function SoftBlendProjectCard({
                         {project.title}
                     </h3>
 
-                    <p className="mt-3 font-geist text-[14px] leading-relaxed text-white/52">
+                    <p className="mt-3 line-clamp-3 min-h-[67px] font-geist text-[14px] leading-relaxed text-white/52">
                         {project.description}
                     </p>
                 </div>
@@ -785,7 +811,7 @@ export const ProjectCard = memo(function ProjectCard({
     }
 
     if (project.layout === "soft") {
-        return <SoftBlendProjectCard project={project} />;
+        return <CompactProjectCard project={project} />;
     }
 
     if (project.layout === "wide") {
