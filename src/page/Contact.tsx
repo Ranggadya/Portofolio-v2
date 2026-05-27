@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { 
-    CheckCircle2, 
-    Loader2, 
-    Send 
+import {
+    CheckCircle2,
+    Loader2,
+    Send
 } from "lucide-react";
-import { 
-    GithubIcon, 
-    LinkedinIcon, 
-    XIcon, 
-    InstagramIcon 
+import {
+    GithubIcon,
+    LinkedinIcon,
+    XIcon,
+    InstagramIcon
 } from "../components/BrandIcons";
+import { sendContactMessage } from "../lib/contactService";
 
 interface ContactFormData {
     operatorName: string;
@@ -161,6 +162,7 @@ export default function Contact() {
     const [formErrors, setFormErrors] = useState<ContactFormErrors>({});
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
     const [isSubmitSuccess, setIsSubmitSuccess] = useState<boolean>(false);
+    const [serverError, setServerError] = useState<string | null>(null);
 
     function handleFieldChange(
         fieldName: keyof ContactFormData,
@@ -189,16 +191,19 @@ export default function Contact() {
         }
 
         setIsSubmitting(true);
+        setServerError(null);
 
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        const result = await sendContactMessage(formData);
 
         setIsSubmitting(false);
-        setIsSubmitSuccess(true);
-        setFormData(INITIAL_FORM_DATA);
 
-        // Reset success message after 4 seconds
-        setTimeout(() => setIsSubmitSuccess(false), 4000);
+        if (result.success) {
+            setIsSubmitSuccess(true);
+            setFormData(INITIAL_FORM_DATA);
+            setTimeout(() => setIsSubmitSuccess(false), 4000);
+        } else {
+            setServerError(result.message);
+        }
     }
 
     return (
@@ -248,6 +253,15 @@ export default function Contact() {
                             establish connection.
                         </p>
                     </div>
+
+                    {/* Server Error Message */}
+                    {serverError && (
+                        <div className="mb-6 px-4 py-3 rounded-lg bg-red-400/10 border border-red-400/30 flex items-center gap-3">
+                            <span className="font-jetbrains text-[12px] tracking-widest text-red-400">
+                                ⚠ TRANSMISSION FAILED — {serverError}
+                            </span>
+                        </div>
+                    )}
 
                     {/* Success Message */}
                     {isSubmitSuccess && (
