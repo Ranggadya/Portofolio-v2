@@ -266,7 +266,7 @@ Project yang ditampilkan:
 | Venue Event Management | Sistem manajemen booking venue untuk admin | NestJS, MySQL, Prisma, EJS |
 | Web Portofolio Profile | Website portfolio profile | React, Tailwind CSS |
 | LokaLin | Web e-commerce untuk UMKM | Next.js, Tailwind CSS, PostgreSQL, Supabase |
-| DevOps Pipeline | Konsep pipeline deployment dan containerized service | Docker, CI/CD |
+| CuanSelor | Platform perencanaan pensiun dengan simulasi Monte Carlo dan AI advisor | Next.js, Express.js, FastAPI, Gemini AI |
 
 ## Design System
 
