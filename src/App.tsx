@@ -1,4 +1,6 @@
+import { useCallback, useState } from "react";
 import Navbar from "./components/Navbar";
+import WelcomeScreen from "./components/WelcomeScreen";
 import Home from "./page/Home";
 import About from "./page/About";
 import Projects from "./page/Projects";
@@ -8,8 +10,12 @@ import Footer from "./components/Footer";
 import Certificates from "./page/Certificates";
 
 export default function App() {
+  const [showWelcome, setShowWelcome] = useState(true);
+  const closeWelcome = useCallback(() => setShowWelcome(false), []);
+
   return (
     <div className="bg-[#0b1120] text-white min-h-screen flex flex-col overflow-x-hidden">
+      {showWelcome && <WelcomeScreen onComplete={closeWelcome} />}
 
       {/* Ambient glow */}
       <div className="fixed inset-0 z-0 pointer-events-none">

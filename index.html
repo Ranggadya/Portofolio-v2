@@ -15,9 +15,22 @@
     rel="stylesheet" />
   <!-- Favicon: using logo from public/ -->
   <link rel="icon" href="/logo%20Ra.png" />
+  <style>
+    /*
+      Critical first-paint gate. It prevents the app from appearing before
+      React and the welcome screen CSS have initialized.
+    */
+    #initial-welcome-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #080d19;
+    }
+  </style>
 </head>
 
 <body>
+  <div id="initial-welcome-gate" aria-hidden="true"></div>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 </body>
