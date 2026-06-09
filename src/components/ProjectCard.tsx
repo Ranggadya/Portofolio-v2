@@ -361,8 +361,10 @@ const ActionIconButton = memo(function ActionIconButton({
 
 const FeaturedProjectCard = memo(function FeaturedProjectCard({
     project,
+    onExplore,
 }: {
     project: Project;
+    onExplore: (project: Project) => void;
 }) {
     const tokens = ACCENT_TOKENS[project.accentColor];
     const isExternalLive = project.liveUrl !== "#";
@@ -480,17 +482,17 @@ const FeaturedProjectCard = memo(function FeaturedProjectCard({
                             LIVE DEMO
                         </a>
 
-                        <a
-                            href={project.liveUrl}
-                            target={isExternalLive ? "_blank" : undefined}
-                            rel={isExternalLive ? "noopener noreferrer" : undefined}
+                        <button
+                            type="button"
+                            onClick={() => onExplore(project)}
                             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-5 py-3 font-jetbrains text-[11px] tracking-widest text-white/55 transition-all duration-200 hover:bg-white/10 hover:text-white"
+                            aria-label={`Explore ${project.title} case study`}
                         >
                             VIEW CASE STUDY
                             <span className="material-symbols-outlined text-[15px]" aria-hidden="true">
                                 arrow_forward
                             </span>
-                        </a>
+                        </button>
 
                         <a
                             href={project.githubUrl}
@@ -523,11 +525,12 @@ const FeaturedProjectCard = memo(function FeaturedProjectCard({
 
 const CompactProjectCard = memo(function CompactProjectCard({
     project,
+    onExplore,
 }: {
     project: Project;
+    onExplore: (project: Project) => void;
 }) {
     const tokens = ACCENT_TOKENS[project.accentColor];
-    const isExternalLive = project.liveUrl !== "#";
     const isExternalGithub = project.githubUrl !== "#";
 
     return (
@@ -619,22 +622,22 @@ const CompactProjectCard = memo(function CompactProjectCard({
                 )}
 
                 <div className="mt-auto flex items-center justify-between border-t border-white/10 pt-4">
-                    <a
-                        href={project.liveUrl}
-                        target={isExternalLive ? "_blank" : undefined}
-                        rel={isExternalLive ? "noopener noreferrer" : undefined}
+                    <button
+                        type="button"
+                        onClick={() => onExplore(project)}
                         className={cn(
                             "inline-flex items-center gap-2 font-jetbrains text-[11px] font-semibold tracking-widest",
                             "transition-colors duration-200",
                             tokens.text,
                             "hover:text-white"
                         )}
+                        aria-label={`Explore ${project.title}`}
                     >
                         EXPLORE
                         <span className="material-symbols-outlined text-[15px]" aria-hidden="true">
                             arrow_forward
                         </span>
-                    </a>
+                    </button>
 
                     <a
                         href={project.githubUrl}
@@ -654,11 +657,12 @@ const CompactProjectCard = memo(function CompactProjectCard({
 
 const SoftBlendProjectCard = memo(function SoftBlendProjectCard({
     project,
+    onExplore,
 }: {
     project: Project;
+    onExplore: (project: Project) => void;
 }) {
     const tokens = ACCENT_TOKENS[project.accentColor];
-    const isExternalLive = project.liveUrl !== "#";
     const isExternalGithub = project.githubUrl !== "#";
 
     return (
@@ -754,23 +758,22 @@ const SoftBlendProjectCard = memo(function SoftBlendProjectCard({
                 )}
 
                 <div className="mt-auto flex items-center justify-between gap-4 border-t border-white/10 pt-4">
-                    <a
-                        href={project.liveUrl}
-                        target={isExternalLive ? "_blank" : undefined}
-                        rel={isExternalLive ? "noopener noreferrer" : undefined}
+                    <button
+                        type="button"
+                        onClick={() => onExplore(project)}
                         className={cn(
                             "inline-flex items-center gap-2 font-jetbrains text-[11px] font-semibold tracking-widest",
                             "transition-colors duration-200",
                             tokens.text,
                             "hover:text-white"
                         )}
-                        aria-label={`View ${project.title} live demo`}
+                        aria-label={`Explore ${project.title}`}
                     >
                         EXPLORE PROJECT
                         <span className="material-symbols-outlined text-[15px]" aria-hidden="true">
                             arrow_forward
                         </span>
-                    </a>
+                    </button>
 
                     <a
                         href={project.githubUrl}
@@ -795,30 +798,34 @@ const SoftBlendProjectCard = memo(function SoftBlendProjectCard({
 
 const WideProjectCard = memo(function WideProjectCard({
     project,
+    onExplore,
 }: {
     project: Project;
+    onExplore: (project: Project) => void;
 }) {
-    return <SoftBlendProjectCard project={project} />;
+    return <SoftBlendProjectCard project={project} onExplore={onExplore} />;
 });
 
 // ─── Project Card Router ───────────────────────────────────────────────────────
 
 export const ProjectCard = memo(function ProjectCard({
     project,
+    onExplore,
 }: {
     project: Project;
+    onExplore: (project: Project) => void;
 }) {
     if (project.layout === "featured") {
-        return <FeaturedProjectCard project={project} />;
+        return <FeaturedProjectCard project={project} onExplore={onExplore} />;
     }
 
     if (project.layout === "soft") {
-        return <CompactProjectCard project={project} />;
+        return <CompactProjectCard project={project} onExplore={onExplore} />;
     }
 
     if (project.layout === "wide") {
-        return <WideProjectCard project={project} />;
+        return <WideProjectCard project={project} onExplore={onExplore} />;
     }
 
-    return <CompactProjectCard project={project} />;
+    return <CompactProjectCard project={project} onExplore={onExplore} />;
 });

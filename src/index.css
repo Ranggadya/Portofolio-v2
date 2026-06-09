@@ -251,6 +251,11 @@ section {
   box-shadow: inset 20px 20px 40px -20px rgba(0, 218, 243, 0.1);
 }
 
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }

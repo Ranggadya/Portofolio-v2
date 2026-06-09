@@ -1,7 +1,8 @@
 ﻿// src/pages/Projects.tsx
 
-import { useMemo, memo } from "react";
+import { useCallback, useMemo, useState, memo } from "react";
 import { ProjectCard } from "../components/ProjectCard";
+import ProjectDetailsModal from "../components/ProjectDetailsModal";
 import type { Project } from "../types/project-type";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -18,7 +19,7 @@ const PROJECTS: Project[] = [
       { label: "PostgreSQL", icon: "database" },
     ],
     description:
-      "A E-Commerce Shoes Store website to buy shoes.",
+      "A simple online shoe store that makes finding and buying the right pair feel effortless.",
     stats: [
       { label: "System", value: "E-Commerce" },
       { label: "Role", value: "Full-Stack Developer" },
@@ -30,6 +31,24 @@ const PROJECTS: Project[] = [
     liveUrl: "https://shoes4us.vercel.app/",
     imageUrl: "/shoes4us.jpg",
     placeholderIcon: "hub",
+    details: {
+      overview:
+        "Shoes4Us is an online store designed to help people discover, compare, and purchase shoes without the friction of visiting multiple stores.",
+      problem:
+        "Buying shoes online can feel overwhelming when products are difficult to browse and important information is scattered.",
+      solution:
+        "The experience presents products in a clear, familiar shopping flow so customers can quickly understand their options and move confidently toward checkout.",
+      benefits: [
+        "Saves time when searching for suitable shoes.",
+        "Makes product information easier to understand.",
+        "Creates a smooth shopping journey from discovery to purchase.",
+      ],
+      highlights: [
+        "Browse available shoe collections.",
+        "Review product details before making a choice.",
+        "Purchase products through a simple online flow.",
+      ],
+    },
   },
   {
     id: 2,
@@ -43,7 +62,7 @@ const PROJECTS: Project[] = [
       { label: "EJS", icon: "web" },
     ],
     description:
-      "A production-style venue booking management system designed for venue providers such as hotels, campuses, co-working spaces, and rental businesses. The system allows admins to manage venues, schedule event bookings, calculate rental costs, monitor payment status, and analyze revenue statistics.",
+      "A central workspace that helps venue providers manage bookings, payments, schedules, and revenue.",
     stats: [
       { label: "System", value: "Admin Panel" },
       { label: "Role", value: "Backend Engineer" },
@@ -55,6 +74,24 @@ const PROJECTS: Project[] = [
     liveUrl: "#",
     imageUrl: "/venue.jpg",
     placeholderIcon: "meeting_room",
+    details: {
+      overview:
+        "Venue Event Management helps hotels, campuses, co-working spaces, and rental businesses organize their venue operations from one place.",
+      problem:
+        "Managing bookings through chats and spreadsheets makes it easy to miss schedule conflicts, payment updates, and important customer details.",
+      solution:
+        "The system brings venue availability, booking schedules, rental costs, and payment progress into one organized dashboard.",
+      benefits: [
+        "Reduces the risk of double bookings.",
+        "Makes daily venue operations easier to monitor.",
+        "Helps teams understand revenue and payment status.",
+      ],
+      highlights: [
+        "Manage venue information and availability.",
+        "Schedule and review event bookings.",
+        "Track rental costs, payments, and revenue.",
+      ],
+    },
   },
   {
     id: 3,
@@ -66,7 +103,7 @@ const PROJECTS: Project[] = [
       { label: "Tailwind CSS", icon: "database" },
     ],
     description:
-      "A Web Portofolio Profile website.",
+      "A personal portfolio that introduces my work, experience, and capabilities in one clear destination.",
     stats: [
       { label: "System", value: "Profile" },
       { label: "Role", value: "UI/UX Designer" },
@@ -78,6 +115,24 @@ const PROJECTS: Project[] = [
     liveUrl: "https://shoes4us.vercel.app/",
     imageUrl: "/Porto.jpg",
     placeholderIcon: "lock",
+    details: {
+      overview:
+        "This portfolio gives visitors a quick and engaging way to understand who I am, what I can build, and the experience I bring to a project.",
+      problem:
+        "A traditional resume often cannot show the personality, visual quality, and practical thinking behind someone’s work.",
+      solution:
+        "The website combines selected projects, experience, skills, and contact information into an easy-to-explore personal profile.",
+      benefits: [
+        "Helps visitors understand my profile quickly.",
+        "Keeps projects and experience in one accessible place.",
+        "Makes it easy for potential collaborators to contact me.",
+      ],
+      highlights: [
+        "Explore selected projects and case studies.",
+        "Review professional experience and capabilities.",
+        "Send a message directly through the contact section.",
+      ],
+    },
   },
   {
     id: 4,
@@ -91,7 +146,7 @@ const PROJECTS: Project[] = [
       { label: "Supabase", icon: "database" },
     ],
     description:
-      "Web e-coommerce untuk UMKM",
+      "A digital marketplace that helps local small businesses reach more customers online.",
     stats: [
       { label: "System", value: "E-Commerce" },
       { label: "Role", value: "Full-Stack Developer" },
@@ -103,6 +158,24 @@ const PROJECTS: Project[] = [
     liveUrl: "https://market-place-flame.vercel.app/",
     imageUrl: "/UMKM.jpg",
     placeholderIcon: "account_tree",
+    details: {
+      overview:
+        "LokaLin connects customers with products from local small businesses, giving those businesses a more visible and accessible digital storefront.",
+      problem:
+        "Many small businesses have great products but struggle to reach customers beyond their immediate neighborhood.",
+      solution:
+        "LokaLin provides a shared online marketplace where customers can discover local products and businesses can present their offerings more professionally.",
+      benefits: [
+        "Helps local businesses reach a wider audience.",
+        "Makes local products easier for customers to discover.",
+        "Supports a more convenient shopping experience.",
+      ],
+      highlights: [
+        "Browse products from local businesses.",
+        "Discover and learn about participating sellers.",
+        "Shop through a convenient online marketplace.",
+      ],
+    },
   },
   {
     id: 5,
@@ -116,7 +189,7 @@ const PROJECTS: Project[] = [
       { label: "Gemini AI", icon: "auto_awesome" },
     ],
     description:
-      "A retirement planning platform with actuarial calculations, 10,000-iteration Monte Carlo simulations, comprehensive financial projections, and a personalized AI advisor.",
+      "A retirement planning companion that turns complex financial choices into a clearer, more personal plan.",
     stats: [
       { label: "Simulation", value: "Monte Carlo 10K" },
       { label: "Role", value: "Full-Stack Developer" },
@@ -128,6 +201,24 @@ const PROJECTS: Project[] = [
     liveUrl: "https://cuanselor.my.id",
     imageUrl: undefined,
     placeholderIcon: "monitoring",
+    details: {
+      overview:
+        "CuanSelor helps people understand whether their current financial habits can support the retirement they want and what they can improve along the way.",
+      problem:
+        "Retirement planning often feels distant and confusing because people must make decisions using complex assumptions and uncertain future conditions.",
+      solution:
+        "The platform translates financial information into understandable projections, explores different future scenarios, and provides personalized guidance.",
+      benefits: [
+        "Makes retirement planning easier to understand.",
+        "Shows how current decisions may affect future goals.",
+        "Provides practical guidance tailored to each user.",
+      ],
+      highlights: [
+        "Create a personalized retirement projection.",
+        "Explore possible future financial scenarios.",
+        "Receive guidance from an AI-powered advisor.",
+      ],
+    },
   },
 ];
 
@@ -164,6 +255,7 @@ const SectionHeader = memo(function SectionHeader() {
 // ─── Projects Main Export ──────────────────────────────────────────────────────
 
 export default function Projects() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const { featuredProject, bodyProjects } = useMemo(() => {
     const featuredProject =
       PROJECTS.find((project) => project.layout === "featured") ?? PROJECTS[0];
@@ -173,6 +265,11 @@ export default function Projects() {
 
     return { featuredProject, bodyProjects };
   }, []);
+  const closeProjectDetails = useCallback(() => setSelectedProject(null), []);
+  const openProjectDetails = useCallback(
+    (project: Project) => setSelectedProject(project),
+    []
+  );
 
   return (
     <section
@@ -182,14 +279,25 @@ export default function Projects() {
       <SectionHeader />
 
       <div className="space-y-6">
-        {featuredProject && <ProjectCard project={featuredProject} />}
+        {featuredProject && (
+          <ProjectCard project={featuredProject} onExplore={openProjectDetails} />
+        )}
 
         <div className="grid grid-cols-1 items-stretch gap-6 md:grid-cols-12">
           {bodyProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              onExplore={openProjectDetails}
+            />
           ))}
         </div>
       </div>
+
+      <ProjectDetailsModal
+        project={selectedProject}
+        onClose={closeProjectDetails}
+      />
     </section>
   );
 }

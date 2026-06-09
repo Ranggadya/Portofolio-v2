@@ -16,6 +16,14 @@ export interface ProjectStat {
   value: string;
 }
 
+export interface ProjectDetails {
+  overview: string;
+  problem: string;
+  solution: string;
+  benefits: string[];
+  highlights: string[];
+}
+
 export interface Project {
   id: number;
   title: string;
@@ -31,4 +39,5 @@ export interface Project {
   liveUrl: string;
   imageUrl?: string;
   placeholderIcon?: string;
+  details?: ProjectDetails;
 }
