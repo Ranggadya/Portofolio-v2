@@ -28,7 +28,7 @@ const PROJECTS: Project[] = [
     colSpan: 12,
     githubUrl: "#",
     liveUrl: "https://shoes4us.vercel.app/",
-    imageUrl: "/shoes4us.png",
+    imageUrl: "/shoes4us.jpg",
     placeholderIcon: "hub",
   },
   {
@@ -53,7 +53,7 @@ const PROJECTS: Project[] = [
     colSpan: 6,
     githubUrl: "#",
     liveUrl: "#",
-    imageUrl: "/venue.png",
+    imageUrl: "/venue.jpg",
     placeholderIcon: "meeting_room",
   },
   {
@@ -76,7 +76,7 @@ const PROJECTS: Project[] = [
     colSpan: 6,
     githubUrl: "#",
     liveUrl: "https://shoes4us.vercel.app/",
-    imageUrl: "/Porto.png",
+    imageUrl: "/Porto.jpg",
     placeholderIcon: "lock",
   },
   {
@@ -101,7 +101,7 @@ const PROJECTS: Project[] = [
     colSpan: 6,
     githubUrl: "#",
     liveUrl: "https://market-place-flame.vercel.app/",
-    imageUrl: "/UMKM.png",
+    imageUrl: "/UMKM.jpg",
     placeholderIcon: "account_tree",
   },
   {
@@ -176,7 +176,6 @@ export default function Projects() {
 
   return (
     <section
-      id="projects"
       className="min-h-screen w-full px-[5%] py-24 lg:px-[10%]"
       aria-label="Projects section"
     >

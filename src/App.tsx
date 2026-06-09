@@ -1,13 +1,15 @@
-import { useCallback, useState } from "react";
+import { lazy, useCallback, useState } from "react";
 import Navbar from "./components/Navbar";
 import WelcomeScreen from "./components/WelcomeScreen";
 import Home from "./page/Home";
-import About from "./page/About";
-import Projects from "./page/Projects";
-import Experience from "./page/Experience";
-import Contact from "./page/Contact";
-import Footer from "./components/Footer";
-import Certificates from "./page/Certificates";
+import DeferredSection from "./components/DeferredSection";
+
+const About = lazy(() => import("./page/About"));
+const Projects = lazy(() => import("./page/Projects"));
+const Experience = lazy(() => import("./page/Experience"));
+const Certificates = lazy(() => import("./page/Certificates"));
+const Contact = lazy(() => import("./page/Contact"));
+const Footer = lazy(() => import("./components/Footer"));
 
 export default function App() {
   const [showWelcome, setShowWelcome] = useState(true);
@@ -27,12 +29,12 @@ export default function App() {
 
       <main className="flex-grow relative z-10">
         <Home/>
-        <About />
-        <Projects />
-        <Experience/>
-        <Certificates/>
-        <Contact/>
-        <Footer/>
+        <DeferredSection id="about" component={About} />
+        <DeferredSection id="projects" component={Projects} />
+        <DeferredSection id="experience" component={Experience} />
+        <DeferredSection id="certificates" component={Certificates} />
+        <DeferredSection id="contact" component={Contact} />
+        <DeferredSection id="footer" component={Footer} minHeight="20vh" />
       </main>
     </div>
   );

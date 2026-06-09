@@ -208,7 +208,6 @@ export default function Contact() {
 
     return (
         <section
-            id="contact"
             className="min-h-screen w-full px-[5%] lg:px-[10%] py-24"
         >
 

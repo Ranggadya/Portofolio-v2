@@ -40,8 +40,11 @@ const ProfileImage = memo(() => (
           <img
             src={heroImg}
             alt="Profile"
+            width="700"
+            height="789"
             className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
             loading="lazy"
+            decoding="async"
           />
 
           {/* Advanced hover effects - desktop only */}
@@ -216,7 +219,6 @@ function SkillCard({ skillCategory }: SkillCardProps) {
 export default function About() {
     return (
         <section
-            id="about"
             className="min-h-screen w-full px-[5%] lg:px-[10%] py-24"
         >
 

@@ -57,6 +57,10 @@ const CertificateCard = memo(function CertificateCard({
           <img 
             src={certificate.img || 'https://images.unsplash.com/photo-1586380879823-b0dc8c8c7d5e?w=600&h=400&fit=crop'} 
             alt={certificate.title}
+            width="600"
+            height="400"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
             onError={(e) => {
               (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1586380879823-b0dc8c8c7d5e?w=600&h=400&fit=crop';
@@ -406,7 +410,6 @@ export default function Certificates() {
 
   return (
     <section
-      id="certificates"
       className="w-full px-[5%] lg:px-[10%] py-24"
     >
       <SectionHeader />

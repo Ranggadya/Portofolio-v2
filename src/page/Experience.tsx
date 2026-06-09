@@ -147,7 +147,6 @@ function EducationCard({ educationItem }: EducationCardProps) {
 export default function Experience() {
     return (
         <section
-            id="experience"
             className="min-h-screen w-full px-[5%] lg:px-[10%] py-24"
         >
 

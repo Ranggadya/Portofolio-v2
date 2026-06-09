@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-const INTRO_DURATION_MS = 2800;
-const EXIT_DURATION_MS = 650;
+const INTRO_DURATION_MS = 1200;
+const EXIT_DURATION_MS = 350;
 
 interface WelcomeScreenProps {
     onComplete: () => void;

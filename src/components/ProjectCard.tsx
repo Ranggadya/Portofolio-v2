@@ -95,7 +95,7 @@ function getProjectUrlLabel(project: Project): string {
     return `${project.title.toLowerCase().replace(/\s+/g, "-")}.app`;
 }
 
-const BROWSER_TAB_LOGO = "/logo%20Ra.png";
+const BROWSER_TAB_LOGO = "/logo-small.png";
 
 // ─── Image Placeholder ─────────────────────────────────────────────────────────
 
@@ -223,6 +223,8 @@ const BrowserMockupPreview = memo(function BrowserMockupPreview({
                         <img
                             src={BROWSER_TAB_LOGO}
                             alt=""
+                            width="20"
+                            height="20"
                             className="h-full w-full object-cover"
                             loading="lazy"
                             decoding="async"
