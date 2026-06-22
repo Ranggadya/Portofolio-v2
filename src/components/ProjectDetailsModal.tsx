@@ -55,6 +55,16 @@ export default function ProjectDetailsModal({
       "Complete key activities in one organized place.",
     ],
   };
+  const collaboration = details.collaboration ?? "Individual Project";
+  const coreTechnologies =
+    details.coreTechnologies ?? project.tags.map((tag) => tag.label);
+  const keyFeatures =
+    details.keyFeatures ??
+    details.highlights.map((highlight) => ({
+      title: highlight,
+      description:
+        "Designed to help users complete this activity through a clear and convenient experience.",
+    }));
 
   return createPortal(
     <div
@@ -116,15 +126,39 @@ export default function ProjectDetailsModal({
                   Role: {role}
                 </span>
               </div>
-            <h2
-              id="project-dialog-title"
-              className="mt-3 font-grotesk text-[34px] font-bold leading-tight text-white md:text-[48px]"
-            >
-              {project.title}
-            </h2>
-            <p className="mt-4 font-geist text-[16px] leading-relaxed text-white/60 md:text-[18px]">
-              {details.overview}
-            </p>
+              <h2
+                id="project-dialog-title"
+                className="mt-3 font-grotesk text-[34px] font-bold leading-tight text-white md:text-[48px]"
+              >
+                {project.title}
+              </h2>
+              <p className="mt-4 font-geist text-[16px] leading-relaxed text-white/60 md:text-[18px]">
+                {details.overview}
+              </p>
+            </div>
+
+            <div className="mb-8 grid gap-4 rounded-2xl border border-white/10 bg-white/[0.025] p-5 sm:grid-cols-2 lg:grid-cols-3">
+              <SnapshotItem icon="badge" label="My Role" value={role} />
+              <SnapshotItem
+                icon={collaboration === "Team Project" ? "groups" : "person"}
+                label="Collaboration"
+                value={collaboration}
+              />
+              <div className="sm:col-span-2 lg:col-span-1">
+                <span className="font-jetbrains text-[10px] uppercase tracking-widest text-white/30">
+                  Core Technology
+                </span>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {coreTechnologies.map((technology) => (
+                    <span
+                      key={technology}
+                      className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 font-jetbrains text-[10px] text-cyan-300"
+                    >
+                      {technology}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
 
             <div className="mb-8 grid gap-4 md:grid-cols-2">
@@ -138,6 +172,32 @@ export default function ProjectDetailsModal({
                 title="The solution"
                 copy={details.solution}
               />
+            </div>
+
+            <div className="mb-8 border-t border-white/10 pt-8">
+              <div className="mb-5 flex items-center gap-3">
+                <span className="material-symbols-outlined text-[23px] text-cyan-400">
+                  featured_play_list
+                </span>
+                <div>
+                  <h3 className="font-grotesk text-[22px] font-semibold text-white">
+                    Key Features
+                  </h3>
+                  <p className="mt-1 font-geist text-[13px] text-white/40">
+                    The most important capabilities available in this project.
+                  </p>
+                </div>
+              </div>
+              <div className="grid gap-4 md:grid-cols-2">
+                {keyFeatures.map((feature, index) => (
+                  <FeatureCard
+                    key={feature.title}
+                    index={index + 1}
+                    title={feature.title}
+                    description={feature.description}
+                  />
+                ))}
+              </div>
             </div>
 
             <div className="grid gap-8 border-t border-white/10 pt-8 md:grid-cols-2">
@@ -180,6 +240,56 @@ export default function ProjectDetailsModal({
       </article>
     </div>,
     document.body,
+  );
+}
+
+function SnapshotItem({
+  icon,
+  label,
+  value,
+}: {
+  icon: string;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="flex items-start gap-3">
+      <span className="material-symbols-outlined text-[22px] text-purple-300">
+        {icon}
+      </span>
+      <div>
+        <span className="block font-jetbrains text-[10px] uppercase tracking-widest text-white/30">
+          {label}
+        </span>
+        <span className="mt-2 block font-geist text-[14px] font-medium text-white/80">
+          {value}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function FeatureCard({
+  index,
+  title,
+  description,
+}: {
+  index: number;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[0.035] p-5">
+      <span className="font-jetbrains text-[10px] tracking-widest text-cyan-400">
+        FEATURE {String(index).padStart(2, "0")}
+      </span>
+      <h4 className="mt-3 font-grotesk text-[17px] font-semibold text-white">
+        {title}
+      </h4>
+      <p className="mt-2 font-geist text-[13px] leading-relaxed text-white/45">
+        {description}
+      </p>
+    </div>
   );
 }
 

@@ -22,6 +22,12 @@ export interface ProjectDetails {
   solution: string;
   benefits: string[];
   highlights: string[];
+  collaboration?: "Individual Project" | "Team Project";
+  coreTechnologies?: string[];
+  keyFeatures?: {
+    title: string;
+    description: string;
+  }[];
 }
 
 export interface Project {

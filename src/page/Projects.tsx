@@ -48,6 +48,25 @@ const PROJECTS: Project[] = [
         "Review product details before making a choice.",
         "Purchase products through a simple online flow.",
       ],
+      collaboration: "Individual Project",
+      coreTechnologies: ["Next.js", "Tailwind CSS", "PostgreSQL"],
+      keyFeatures: [
+        {
+          title: "Product Catalog",
+          description:
+            "Customers can browse available shoes through a clear and organized product collection.",
+        },
+        {
+          title: "Product Details",
+          description:
+            "Each product page presents the information customers need before deciding to buy.",
+        },
+        {
+          title: "Simple Purchase Flow",
+          description:
+            "The shopping journey is designed to move customers smoothly from product discovery toward purchase.",
+        },
+      ],
     },
   },
   {
@@ -91,6 +110,25 @@ const PROJECTS: Project[] = [
         "Schedule and review event bookings.",
         "Track rental costs, payments, and revenue.",
       ],
+      collaboration: "Individual Project",
+      coreTechnologies: ["NestJS", "MySQL", "Prisma", "EJS"],
+      keyFeatures: [
+        {
+          title: "Venue Management",
+          description:
+            "Administrators can organize venue details, rental prices, and availability from one workspace.",
+        },
+        {
+          title: "Booking Scheduler",
+          description:
+            "Booking schedules are displayed clearly to help prevent conflicts and missed reservations.",
+        },
+        {
+          title: "Payment and Revenue Tracking",
+          description:
+            "The dashboard helps teams monitor payment progress and understand venue revenue.",
+        },
+      ],
     },
   },
   {
@@ -131,6 +169,25 @@ const PROJECTS: Project[] = [
         "Explore selected projects and case studies.",
         "Review professional experience and capabilities.",
         "Send a message directly through the contact section.",
+      ],
+      collaboration: "Individual Project",
+      coreTechnologies: ["React", "TypeScript", "Tailwind CSS"],
+      keyFeatures: [
+        {
+          title: "Interactive Project Showcase",
+          description:
+            "Visitors can explore selected projects and understand the purpose and value behind each one.",
+        },
+        {
+          title: "Professional Profile",
+          description:
+            "Skills, experience, and background are presented in a concise and approachable format.",
+        },
+        {
+          title: "Direct Contact",
+          description:
+            "A dedicated contact section makes it easy for visitors to start a conversation.",
+        },
       ],
     },
   },
@@ -175,6 +232,25 @@ const PROJECTS: Project[] = [
         "Discover and learn about participating sellers.",
         "Shop through a convenient online marketplace.",
       ],
+      collaboration: "Team Project",
+      coreTechnologies: ["Next.js", "Tailwind CSS", "PostgreSQL", "Supabase"],
+      keyFeatures: [
+        {
+          title: "Local Product Marketplace",
+          description:
+            "Customers can discover products from multiple local businesses in one convenient place.",
+        },
+        {
+          title: "Seller Storefront",
+          description:
+            "Each business can present its products through a more professional digital storefront.",
+        },
+        {
+          title: "Online Shopping Experience",
+          description:
+            "The platform simplifies product discovery and purchasing for customers.",
+        },
+      ],
     },
   },
   {
@@ -217,6 +293,25 @@ const PROJECTS: Project[] = [
         "Create a personalized retirement projection.",
         "Explore possible future financial scenarios.",
         "Receive guidance from an AI-powered advisor.",
+      ],
+      collaboration: "Team Project",
+      coreTechnologies: ["Next.js", "Express.js", "FastAPI", "Gemini AI"],
+      keyFeatures: [
+        {
+          title: "Retirement Projection",
+          description:
+            "Users receive a personalized view of how their current financial habits may support future goals.",
+        },
+        {
+          title: "Financial Scenario Simulation",
+          description:
+            "The platform explores many possible future conditions to show a more realistic range of outcomes.",
+        },
+        {
+          title: "Personal AI Advisor",
+          description:
+            "Users receive practical guidance based on their financial information and retirement targets.",
+        },
       ],
     },
   },
