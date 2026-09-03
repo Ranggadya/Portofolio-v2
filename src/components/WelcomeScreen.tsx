@@ -61,7 +61,7 @@ export default function WelcomeScreen({ onComplete }: WelcomeScreenProps) {
             <div className="welcome-screen__content">
                 <div className="welcome-screen__eyebrow">
                     <span className="welcome-screen__status" />
-                    <span>PORTFOLIO.OS / INITIALIZED</span>
+                    <span>RA / INITIALIZED</span>
                 </div>
 
                 <h1 className="welcome-screen__title">

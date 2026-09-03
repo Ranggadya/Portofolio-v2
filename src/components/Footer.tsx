@@ -49,13 +49,14 @@ export default function Footer() {
                     <div className="md:col-span-5 flex flex-col gap-4">
                         <button
                             onClick={() => scrollToSection("home")}
-                            className="flex items-center gap-2 w-fit"
+                            className="flex items-center gap-2.5 w-fit group focus:outline-none"
+                            aria-label="Home"
                         >
-                            <span className="material-symbols-outlined text-cyan-400 text-[22px]">
+                            <span className="material-symbols-outlined text-cyan-400 text-[22px] transition-transform duration-200 group-hover:scale-110">
                                 terminal
                             </span>
-                            <span className="font-grotesk font-bold text-[20px] tracking-tighter text-white">
-                                PORTFOLIO.OS
+                            <span className="font-grotesk font-extrabold text-[22px] tracking-tight text-white flex items-center transition-colors">
+                                RA<span className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.7)]">.</span>
                             </span>
                         </button>
                         <p className="font-geist text-[14px] text-white/30 max-w-xs leading-relaxed">
@@ -113,7 +114,7 @@ export default function Footer() {
                 {/* Bottom Bar */}
                 <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4">
                     <span className="font-jetbrains text-[11px] tracking-widest text-white/20">
-                        © {currentYear} PORTFOLIO.OS — ALL RIGHTS RESERVED.
+                        © {currentYear} RA — ALL RIGHTS RESERVED.
                     </span>
                     <span className="font-jetbrains text-[11px] tracking-widest text-white/20">
                         ENGINEERED WITH{" "}

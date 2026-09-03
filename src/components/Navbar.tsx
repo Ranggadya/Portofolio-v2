@@ -64,13 +64,14 @@ export default function Navbar() {
                     {/* Logo */}
                     <button
                         onClick={() => handleNavLinkClick("home")}
-                        className="flex items-center gap-2 group"
+                        className="flex items-center gap-2.5 group focus:outline-none"
+                        aria-label="Home"
                     >
-                        <span className="material-symbols-outlined text-cyan-400 text-[22px]">
+                        <span className="material-symbols-outlined text-cyan-400 text-[22px] transition-transform duration-200 group-hover:scale-110">
                             terminal
                         </span>
-                        <span className="font-grotesk font-bold text-[20px] tracking-tighter text-white">
-                            PORTFOLIO.OS
+                        <span className="font-grotesk font-extrabold text-[22px] tracking-tight text-white flex items-center transition-colors">
+                            RA<span className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.7)]">.</span>
                         </span>
                     </button>
 
