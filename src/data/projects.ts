@@ -250,4 +250,146 @@ def run_monte_carlo(current_assets: float, annual_contrib: float,
       },
     },
   },
+  {
+    id: 'shoes4us',
+    title: 'Shoes4Us — Full-Stack Footwear E-Commerce Platform',
+    stack: 'React (Vite SPA), Go (Golang), PostgreSQL, Tailwind CSS, Docker',
+    year: '2026',
+    mockup: 'shoes4us',
+    dossier: {
+      ref: 'PJ-2026-03',
+      discipline: 'FULL-STACK E-COMMERCE & MONOREPO ARCHITECTURE',
+      status: 'STATUS: PRODUCTION LIVE',
+      featuredTag: 'E-COMMERCE & RETAIL PLATFORM',
+      estYear: 'EST. 2026',
+      summary:
+        'A high-performance footwear retail platform built on a decoupled monorepo architecture featuring a responsive React client, high-concurrency Go REST API, size-specific inventory locks, and multi-courier shipping.',
+      clientContext: 'Retail Footwear & Lifestyle Storefront',
+      roleDiscipline: 'Full-Stack Architect & Core Developer',
+      timelineState: '2025 — 2026 (Production Live)',
+      primaryStack: 'React, TypeScript, Go (Chi Router), PostgreSQL, Docker',
+      liveUrl: 'https://shoes4us.vercel.app/',
+      githubUrl: 'https://github.com/Ranggadya',
+      challengeParagraphs: [
+        'Traditional footwear e-commerce architectures frequently struggle with inventory race conditions during high-demand releases, slow database query times across multi-attribute shoe variations (size, color, brand), and fragmented shipping rate calculations.',
+        'Shoes4Us addresses this with a decoupled monorepo setup: a lightweight React 18 client-side application for instant product browsing, coupled with a high-throughput Go backend that utilizes atomic row-level locks (FOR UPDATE) in PostgreSQL to ensure sub-15ms checkout validation and 100% accurate stock deduction.',
+      ],
+      systemDesignHeadline: 'Decoupled Monorepo with Go API & PostgreSQL',
+      systemDesignDesc:
+        'Engineered for maximum velocity with strict boundary separation between client-side rendering, administrative product catalogs, and high-concurrency transactional database services.',
+      layers: [
+        {
+          layer: 'LAYER 01: CLIENT STOREFRONT',
+          badge: 'REACT 18 / VITE',
+          title: 'Vite SPA & Context State Engine',
+          description:
+            'Interactive catalog with real-time size availability, instant client cart synchronization, and brand-based filtering.',
+        },
+        {
+          layer: 'LAYER 02: HIGH-SPEED BACKEND',
+          badge: 'GO 1.24 / CHI',
+          title: 'Go REST API & Chi Routing',
+          description:
+            'Sub-15ms response latency utilizing Chi router, pgx connection pooling, and stateless JWT authentication.',
+        },
+        {
+          layer: 'LAYER 03: DATABASE & SCHEMAS',
+          badge: 'POSTGRESQL',
+          title: 'Relational Schema & Atomic Locks',
+          description:
+            'Indexed product variation tables, row-level inventory locks (FOR UPDATE), and optimized order history tracking.',
+        },
+        {
+          layer: 'LAYER 04: LOGISTICS & DEVOPS',
+          badge: 'DOCKER / CLOUD',
+          title: 'Multi-Courier Shipping & Containerization',
+          description:
+            'Integrated rate calculation for Indonesian couriers (JNE, J&T, SiCepat, POS) and automated Docker Compose production deployment.',
+        },
+      ],
+      codeSnippet: {
+        filename: 'inventory_service.go — ATOMIC STOCK RESERVATION',
+        lang: 'Go 1.24 / pgx',
+        code: `package service
+
+import (
+    "context"
+    "github.com/jackc/pgx/v5/pgxpool"
+)
+
+type InventoryService struct {
+    db *pgxpool.Pool
+}
+
+// ReserveStock atomically verifies and decrements size-specific SKU stock
+func (s *InventoryService) ReserveStock(ctx context.Context, productID string, size int, qty int) (bool, error) {
+    tx, err := s.db.Begin(ctx)
+    if err != nil {
+        return false, err
+    }
+    defer tx.Rollback(ctx)
+
+    var currentStock int
+    query := \`SELECT stock FROM product_variants WHERE product_id = $1 AND size = $2 FOR UPDATE\`
+    if err := tx.QueryRow(ctx, query, productID, size).Scan(&currentStock); err != nil {
+        return false, err
+    }
+
+    if currentStock < qty {
+        return false, ErrInsufficientStock
+    }
+
+    update := \`UPDATE product_variants SET stock = stock - $1 WHERE product_id = $2 AND size = $3\`
+    if _, err := tx.Exec(ctx, update, qty, productID, size); err != nil {
+        return false, err
+    }
+
+    return true, tx.Commit(ctx)
+}`,
+      },
+      decisions: [
+        {
+          title: 'Atomic Row-Level Locking (FOR UPDATE)',
+          description:
+            'Eliminates inventory race conditions when multiple customers buy the same shoe size simultaneously.',
+        },
+        {
+          title: 'Clean Monorepo Decoupling',
+          description:
+            'Independent deploy targets for frontend SPA (Vercel) and Go API backend (Docker / Cloud PaaS) while sharing database contracts.',
+        },
+        {
+          title: 'Multi-Courier Logistics Pipeline',
+          description:
+            'Real-time shipping calculation across Indonesian postal and private courier services during checkout.',
+        },
+      ],
+      capabilities: [
+        {
+          code: '01 // INVENTORY',
+          title: 'Dynamic Size & SKU Matrix',
+          description:
+            'Per-size inventory counters, multi-image upload per product, and real-time out-of-stock indicators.',
+        },
+        {
+          code: '02 // PERFORMANCE',
+          title: 'Sub-15ms Go REST API',
+          description:
+            'High-concurrency Go backend with pgx connection pooling and memory-efficient Chi routing.',
+        },
+        {
+          code: '03 // CHECKOUT UX',
+          title: 'Frictionless Cart & Payment',
+          description:
+            'Instant cart drawer, brand filtering, address validation, and seamless multi-channel checkout.',
+        },
+      ],
+      tools: ['React 18', 'TypeScript', 'Go (Golang)', 'PostgreSQL', 'Tailwind CSS', 'Docker', 'Vite', 'React Router v7'],
+      quote: {
+        text:
+          '“E-commerce succeeds or fails at the speed of checkout and the certainty of inventory. Building Shoes4Us meant creating a zero-friction bridge between desire and delivery.”',
+        author: '— Architecture Philosophy, Shoes4Us',
+      },
+    },
+  },
 ];

@@ -1,6 +1,7 @@
 import type { Project } from '@/types';
 import PortfolioMockup from './PortfolioMockup';
 import AyamSehatMockup from './AyamSehatMockup';
+import Shoes4UsMockup from './Shoes4UsMockup';
 
 interface Props {
   project: Project;
@@ -10,6 +11,7 @@ interface Props {
 const MOCKUPS: Record<Project['mockup'], () => JSX.Element> = {
   portfolio: PortfolioMockup,
   ayamsehat: AyamSehatMockup,
+  shoes4us: Shoes4UsMockup,
 };
 
 export default function ProjectCard({ project, onOpenModal }: Props) {

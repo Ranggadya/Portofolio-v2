@@ -54,7 +54,7 @@ export interface Project {
   title: string;
   stack: string;
   year: string;
-  mockup: 'portfolio' | 'ayamsehat';
+  mockup: 'portfolio' | 'ayamsehat' | 'shoes4us';
   dossier: ProjectDossier;
 }
 
