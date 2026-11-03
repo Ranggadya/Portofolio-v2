@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { certificates } from '@/data/certificates';
+import { certificates as fallbackCertificates } from '@/data/certificates';
+import { fetchCertificates } from '@/services/certificates';
 import type { Certificate } from '@/types';
 import CertificateDrawerModal from './CertificateDrawerModal';
 
@@ -97,12 +98,29 @@ function CredentialIcon({ icon }: { icon?: Certificate['icon'] }) {
 
 export default function Certificates() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const [items, setItems] = useState<Certificate[]>(fallbackCertificates);
+  const [isLive, setIsLive] = useState<boolean>(false);
   const [activeCert, setActiveCert] = useState<Certificate | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(2);
   const [canPrev, setCanPrev] = useState<boolean>(false);
   const [canNext, setCanNext] = useState<boolean>(true);
   const [progress, setProgress] = useState<number>(50);
+
+  useEffect(() => {
+    let mounted = true;
+    fetchCertificates().then((res) => {
+      if (mounted) {
+        if (res.data && res.data.length > 0) {
+          setItems(res.data);
+        }
+        setIsLive(res.isLive);
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const updatePagination = useCallback(() => {
     const el = trackRef.current;
@@ -117,7 +135,7 @@ export default function Certificates() {
     const firstCard = el.firstElementChild as HTMLElement | null;
     const cardWidth = firstCard ? firstCard.offsetWidth + 24 : 360;
     const visibleCards = Math.max(1, Math.round(el.clientWidth / cardWidth));
-    const pages = Math.max(1, Math.ceil(certificates.length / visibleCards));
+    const pages = Math.max(1, Math.ceil(items.length / visibleCards));
     setTotalPages(pages);
 
     const pageIndex = Math.min(
@@ -131,7 +149,7 @@ export default function Certificates() {
         ? Math.min(100, Math.max(15, ((scrollLeft + el.clientWidth) / el.scrollWidth) * 100))
         : 100;
     setProgress(progPercent);
-  }, []);
+  }, [items.length]);
 
   useEffect(() => {
     const el = trackRef.current;
@@ -192,10 +210,10 @@ export default function Certificates() {
         <div>
           <div className="mb-2 flex items-center gap-2">
             <span className="rounded border border-neutral-300 bg-neutral-100 px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-wider text-neutral-800 dark:border-neutral-700 dark:bg-neutral-800 dark:text-neutral-200">
-              Accredited Stack
+              {isLive ? 'Supabase Live Sync' : 'Accredited Stack'}
             </span>
             <span className="font-mono text-xs text-neutral-400 dark:text-neutral-500">
-              {certificates.length} Certified Documents
+              {items.length} Certified Documents
             </span>
           </div>
           <h2 className="text-3xl font-extrabold uppercase leading-[1.05] tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-4xl md:text-5xl">
@@ -243,7 +261,7 @@ export default function Certificates() {
               aria-label="Previous Certificates"
               disabled={!canPrev}
               onClick={handlePrev}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-300 bg-white text-sm font-bold shadow-sm transition-all hover:border-black hover:bg-black hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-40 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-white dark:hover:bg-white dark:hover:text-black"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-300 bg-white text-sm font-bold shadow-sm transition-all hover:border-black hover:bg-black hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-40 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-white dark:hover:bg-white dark:hover:text-black cursor-pointer"
             >
               ←
             </button>
@@ -252,7 +270,7 @@ export default function Certificates() {
               aria-label="Next Certificates"
               disabled={!canNext}
               onClick={handleNext}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-300 bg-white text-sm font-bold shadow-sm transition-all hover:border-black hover:bg-black hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-40 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-white dark:hover:bg-white dark:hover:text-black"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-neutral-300 bg-white text-sm font-bold shadow-sm transition-all hover:border-black hover:bg-black hover:text-white active:scale-95 disabled:pointer-events-none disabled:opacity-40 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-white dark:hover:bg-white dark:hover:text-black cursor-pointer"
             >
               →
             </button>
@@ -267,7 +285,7 @@ export default function Certificates() {
           tabIndex={0}
           className="no-scrollbar -mx-2 flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-2 pb-4 pt-2"
         >
-          {certificates.map((cert, index) => {
+          {items.map((cert, index) => {
             const indexNumber = String(index + 1).padStart(2, '0');
             return (
               <div
@@ -312,11 +330,22 @@ export default function Certificates() {
                           </div>
                         </div>
 
-                        <div className="z-10 flex h-16 w-16 flex-col justify-between rounded border border-neutral-200 bg-white p-1.5 text-right shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
-                          <CredentialIcon icon={cert.icon} />
-                          <div className="font-mono text-[7px] uppercase text-neutral-400 dark:text-neutral-400">
-                            {cert.gradeBadge || '100%'}
-                          </div>
+                        <div className="z-10 flex h-16 w-16 overflow-hidden flex-col justify-between rounded border border-neutral-200 bg-white p-1 text-right shadow-sm dark:border-neutral-700 dark:bg-neutral-800">
+                          {cert.imageUrl ? (
+                            <img
+                              src={cert.imageUrl}
+                              alt={cert.title}
+                              className="h-full w-full object-cover rounded"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <>
+                              <CredentialIcon icon={cert.icon} />
+                              <div className="font-mono text-[7px] uppercase text-neutral-400 dark:text-neutral-400">
+                                {cert.gradeBadge || '100%'}
+                              </div>
+                            </>
+                          )}
                         </div>
 
                         <div className="pointer-events-none absolute -bottom-4 -right-4 select-none font-mono text-6xl font-black text-neutral-200/50 dark:text-neutral-800/40">
@@ -337,7 +366,7 @@ export default function Certificates() {
                         {cert.title}
                       </h3>
 
-                      <p className="pt-1 text-xs font-normal leading-relaxed text-neutral-600 dark:text-neutral-400">
+                      <p className="pt-1 text-xs font-normal leading-relaxed text-neutral-600 dark:text-neutral-400 line-clamp-3">
                         {cert.description}
                       </p>
                     </div>
@@ -380,7 +409,9 @@ export default function Certificates() {
         <div className="flex items-center gap-3">
           <span className="h-2 w-2 rounded-full bg-emerald-500" />
           <span className="font-mono text-xs text-neutral-600 dark:text-neutral-400">
-            All credentials verified against public issuance databases &amp; SHA-256 token checksums.
+            {isLive
+              ? 'Real-time credentials synchronized with Supabase database & public SHA-256 tokens.'
+              : 'All credentials verified against public issuance databases & SHA-256 token checksums.'}
           </span>
         </div>
         <div>
@@ -390,7 +421,7 @@ export default function Certificates() {
             rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-black bg-black px-5 py-2.5 font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-colors hover:bg-neutral-800 dark:border-white dark:bg-white dark:text-black dark:hover:bg-neutral-200"
           >
-            View Full Archive Repository ({certificates.length}) →
+            View Full Archive Repository ({items.length}) →
           </a>
         </div>
       </div>

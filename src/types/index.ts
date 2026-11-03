@@ -92,6 +92,8 @@ export interface Certificate {
   description: string;
   tags: string[];
   verifyUrl: string;
+  imageUrl?: string;
+  link?: string;
   issueDate?: string;
   validUntil?: string;
   badgeCode?: string;

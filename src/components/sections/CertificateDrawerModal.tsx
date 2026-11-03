@@ -31,6 +31,8 @@ export default function CertificateDrawerModal({
 
   if (!certificate) return null;
 
+  const targetLink = certificate.verifyUrl || certificate.link || '#';
+
   return (
     <div
       aria-modal="true"
@@ -39,7 +41,7 @@ export default function CertificateDrawerModal({
       onClick={onClose}
     >
       <div
-        className="w-full max-w-xl space-y-5 rounded-t-3xl border border-neutral-200 bg-white p-6 shadow-2xl transition-all duration-300 dark:border-neutral-800 dark:bg-[#12141a] sm:rounded-2xl sm:p-8"
+        className="max-h-[92vh] w-full max-w-xl overflow-y-auto space-y-5 rounded-t-3xl border border-neutral-200 bg-white p-6 shadow-2xl transition-all duration-300 dark:border-neutral-800 dark:bg-[#12141a] sm:rounded-2xl sm:p-8"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Drawer Header */}
@@ -60,11 +62,33 @@ export default function CertificateDrawerModal({
             type="button"
             aria-label="Close Preview"
             onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 text-sm font-bold text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-black dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white"
+            className="flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 text-sm font-bold text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-black dark:border-neutral-700 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white cursor-pointer"
           >
             ✕
           </button>
         </div>
+
+        {/* Certificate Image Preview (if provided from Supabase) */}
+        {certificate.imageUrl && (
+          <div className="overflow-hidden rounded-xl border border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900/60">
+            <div className="relative group">
+              <img
+                src={certificate.imageUrl}
+                alt={certificate.title}
+                className="max-h-64 w-full object-contain p-2 transition-transform duration-300 group-hover:scale-[1.02]"
+                loading="lazy"
+              />
+              <a
+                href={certificate.imageUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="absolute bottom-2 right-2 rounded-lg bg-black/75 px-2.5 py-1 font-mono text-[10px] font-medium text-white backdrop-blur-sm transition-opacity hover:bg-black"
+              >
+                Open Full Image ↗
+              </a>
+            </div>
+          </div>
+        )}
 
         {/* Drawer Body */}
         <div className="space-y-3">
@@ -98,12 +122,12 @@ export default function CertificateDrawerModal({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-full border border-neutral-300 px-4 py-2 font-mono text-xs text-neutral-700 transition-colors hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800"
+            className="rounded-full border border-neutral-300 px-4 py-2 font-mono text-xs text-neutral-700 transition-colors hover:bg-neutral-100 dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 cursor-pointer"
           >
             Dismiss
           </button>
           <a
-            href={certificate.verifyUrl}
+            href={targetLink}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-1.5 rounded-full border border-black bg-black px-5 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-colors hover:bg-neutral-800 dark:border-white dark:bg-white dark:text-black dark:hover:bg-neutral-200"
