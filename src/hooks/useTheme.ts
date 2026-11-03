@@ -6,11 +6,13 @@ const STORAGE_KEY = 'theme';
 function getInitialTheme(): Theme {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved === 'light' || saved === 'dark') return saved;
+    if (saved === 'dark') return 'dark';
+    if (saved === 'light') return 'light';
   } catch {
     /* storage tidak tersedia */
   }
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  // Default mutlak adalah light theme
+  return 'light';
 }
 
 export function useTheme() {

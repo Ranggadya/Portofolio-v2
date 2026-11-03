@@ -6,12 +6,16 @@
     <meta name="description" content="Portfolio Ranggadya Aditama Ramadhani — Software Engineer & Full-Stack Developer." />
     <title>Ranggadya - Software Engineer &amp; Full-Stack Developer</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- Terapkan tema sebelum paint agar tidak flicker -->
+    <!-- Terapkan tema sebelum paint agar tidak flicker (Default: Light) -->
     <script>
       try {
         var t = localStorage.getItem('theme');
-        var dark = t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (dark) document.documentElement.classList.add('dark');
+        // Default mutlak adalah light. Hanya aktifkan dark jika user sudah sengaja memilih 'dark'.
+        if (t === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
       } catch (e) {}
     </script>
   </head>
