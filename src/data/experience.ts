@@ -2,6 +2,27 @@ import type { Experience } from '@/types';
 
 export const experiences: Experience[] = [
   {
+    id: 'dbs-coding-camp',
+    period: 'Feb 2026 — Jul 2026',
+    current: false,
+    type: 'Bootcamp / Remote',
+    company: 'Coding Camp 2026 powered by DBS Foundation',
+    role: 'Full-Stack Web Developer — Capstone Project',
+    description:
+      'Developed CuanSelor, an AI-powered personal financial planning platform designed to help Gen Z make informed financial decisions and plan for long-term financial goals. Built responsive frontend interfaces, developed backend REST APIs, designed database integrations, and connected the application with AI/ML services for personalized financial insights and retirement projections. Collaborated with AI Engineers and Data Scientists to integrate application features and ensure seamless communication between the frontend, backend, and AI components.',
+    tags: [
+      'Next.js',
+      'React.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'Express.js',
+      'REST API',
+      'Supabase',
+      'PostgreSQL',
+      'AI/ML API Integration',
+    ],
+  },
+  {
     id: 'skenacorp',
     period: 'Jan 2026 — Mar 2026',
     current: false,
