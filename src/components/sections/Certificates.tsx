@@ -6,8 +6,6 @@ import Section from '@/components/ui/Section';
 import SectionHeader from '@/components/ui/SectionHeader';
 import SectionTitle from '@/components/ui/SectionTitle';
 import Pill from '@/components/ui/Pill';
-import Badge from '@/components/ui/Badge';
-import Tag from '@/components/ui/Tag';
 import CertificateDrawerModal from './CertificateDrawerModal';
 
 function CredentialPlaceholderIcon({ icon }: { icon?: Certificate['icon'] }) {
@@ -15,11 +13,11 @@ function CredentialPlaceholderIcon({ icon }: { icon?: Certificate['icon'] }) {
     case 'award':
       return (
         <svg
-          className="h-6 w-6 text-soft"
+          className="h-8 w-8 text-soft"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          strokeWidth={1.75}
+          strokeWidth={1.5}
           aria-hidden="true"
         >
           <path
@@ -32,11 +30,11 @@ function CredentialPlaceholderIcon({ icon }: { icon?: Certificate['icon'] }) {
     case 'cloud':
       return (
         <svg
-          className="h-6 w-6 text-soft"
+          className="h-8 w-8 text-soft"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          strokeWidth={1.75}
+          strokeWidth={1.5}
           aria-hidden="true"
         >
           <path
@@ -50,11 +48,11 @@ function CredentialPlaceholderIcon({ icon }: { icon?: Certificate['icon'] }) {
     case 'palette':
       return (
         <svg
-          className="h-6 w-6 text-soft"
+          className="h-8 w-8 text-soft"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          strokeWidth={1.75}
+          strokeWidth={1.5}
           aria-hidden="true"
         >
           <path
@@ -67,11 +65,11 @@ function CredentialPlaceholderIcon({ icon }: { icon?: Certificate['icon'] }) {
     case 'shield':
       return (
         <svg
-          className="h-6 w-6 text-soft"
+          className="h-8 w-8 text-soft"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          strokeWidth={1.75}
+          strokeWidth={1.5}
           aria-hidden="true"
         >
           <path
@@ -85,11 +83,11 @@ function CredentialPlaceholderIcon({ icon }: { icon?: Certificate['icon'] }) {
     default:
       return (
         <svg
-          className="h-6 w-6 text-soft"
+          className="h-8 w-8 text-soft"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          strokeWidth={1.75}
+          strokeWidth={1.5}
           aria-hidden="true"
         >
           <path
@@ -209,7 +207,7 @@ export default function Certificates() {
         <div>
           <SectionTitle
             title="Licenses & Certifications"
-            description="Accredited industry certifications in frontend engineering, cloud infrastructure, and database architecture with verified registry records."
+            description="Formal industry validations in cloud architecture, full-stack systems, and database engineering with verified registry IDs."
             aside={
               <Pill>
                 {isLive ? 'Supabase Live Sync' : 'Accredited Stack'} • {items.length} Documents
@@ -231,7 +229,7 @@ export default function Certificates() {
                 style={{ width: `${progress}%` }}
               />
             </div>
-            {/* Accessible Dot Touch Targets (min 36x36px with 10px visual dot) */}
+            {/* Accessible Dot Touch Targets */}
             <div className="flex items-center gap-0.5 pl-1">
               {Array.from({ length: totalPages }).map((_, i) => (
                 <button
@@ -275,101 +273,96 @@ export default function Certificates() {
         </div>
       </div>
 
-      {/* Horizontal Scrolling Ribbon Track (All Viewports) */}
+      {/* Horizontal Track Carousel */}
       <div className="relative">
         <div
           ref={trackRef}
           tabIndex={0}
-          aria-label="Certificates Carousel"
+          aria-label="Certificates Carousel Track"
           className="no-scrollbar -mx-2 flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-2 pb-6 pt-2 focus-visible:ring-2 focus-visible:ring-fg rounded-2xl"
         >
           {items.map((cert) => (
             <div
               key={cert.id}
-              className="w-[88%] flex-none snap-start sm:w-[50%] lg:w-[calc(33.333%-16px)]"
+              className="snap-start shrink-0 w-80 md:w-96 rounded-xl border border-line bg-surface p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
             >
-              <article className="group flex h-full flex-col justify-between rounded-2xl border border-line bg-surface p-6 shadow-sm transition-all hover:border-fg hover:shadow-md sm:p-7">
-                {/* Card Top Metadata */}
-                <div>
-                  <div className="flex items-center justify-between gap-2 border-b border-line pb-4">
-                    <Badge tone="success">Verified Credential</Badge>
-                    <span className="font-mono text-xs uppercase tracking-wider text-faint">
-                      {cert.issueDate || 'ISSUE: 2025'}
-                    </span>
-                  </div>
-
-                  {/* Certificate Thumbnail Preview or Icon Box */}
-                  <div className="mt-4 overflow-hidden rounded-xl border border-line bg-subtle">
-                    {cert.imageUrl ? (
-                      <div className="relative h-36 w-full overflow-hidden bg-chip">
-                        <img
-                          src={cert.imageUrl}
-                          alt={cert.title}
-                          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                          loading="lazy"
-                        />
-                      </div>
-                    ) : (
-                      <div className="flex h-24 w-full items-center justify-center bg-subtle">
-                        <CredentialPlaceholderIcon icon={cert.icon} />
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Title & Issuer Info */}
-                  <div className="space-y-2 pt-4">
-                    <div className="flex items-center justify-between font-mono text-xs text-soft">
-                      <span className="font-semibold uppercase tracking-wider text-fg">
-                        {cert.issuer}
-                      </span>
-                      <span className="rounded bg-chip px-2 py-0.5 text-xs text-fg font-medium">
-                        {cert.credentialId}
-                      </span>
+              <div>
+                {/* 4:3 Aspect Ratio Image with Quick Inspect Overlay */}
+                <div className="aspect-[4/3] rounded-lg overflow-hidden bg-subtle border border-line mb-5 relative group">
+                  {cert.imageUrl ? (
+                    <img
+                      src={cert.imageUrl}
+                      alt={cert.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center bg-subtle">
+                      <CredentialPlaceholderIcon icon={cert.icon} />
                     </div>
+                  )}
 
-                    <h3
-                      className="text-lg font-bold leading-snug tracking-tight text-fg transition-opacity group-hover:opacity-90"
-                      style={{ textWrap: 'balance' }}
-                    >
-                      {cert.title}
-                    </h3>
-
-                    <p className="pt-1 text-xs font-normal leading-relaxed text-muted line-clamp-3">
-                      {cert.description}
-                    </p>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setActiveCert(cert)}
+                    className="quick-preview-btn absolute inset-0 bg-fg/80 text-surface opacity-0 group-hover:opacity-100 flex items-center justify-center font-mono text-xs uppercase tracking-wider transition-opacity gap-2 cursor-pointer focus-visible:opacity-100 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-fg"
+                    aria-label={`Quick inspect ${cert.title}`}
+                  >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <span className="font-bold">QUICK INSPECT</span>
+                  </button>
                 </div>
 
-                {/* Card Bottom Meta & Actions */}
-                <div className="mt-4 border-t border-line pt-5">
-                  <ul className="mb-4 flex flex-wrap gap-1.5">
-                    {cert.tags.map((tag) => (
-                      <li key={tag}>
-                        <Tag size="sm">{tag}</Tag>
-                      </li>
-                    ))}
-                  </ul>
+                {/* Issuer Category */}
+                <span className="font-mono text-xs uppercase font-semibold text-soft block mb-1 tracking-wider">
+                  {cert.issuer}
+                </span>
 
-                  <div className="flex items-center justify-between pt-1">
-                    <button
-                      type="button"
-                      onClick={() => setActiveCert(cert)}
-                      className="inline-flex min-h-[44px] items-center gap-1 text-xs font-semibold text-fg hover:opacity-75 focus-visible:ring-2 focus-visible:ring-fg cursor-pointer"
-                    >
-                      Quick Preview ↗
-                    </button>
-                    <span className="font-mono text-xs text-soft">
-                      {cert.score || 'Verified Active'}
-                    </span>
-                  </div>
-                </div>
-              </article>
+                {/* Certificate Title */}
+                <h4
+                  className="text-base sm:text-lg font-bold text-fg uppercase mb-2 tracking-tight line-clamp-2"
+                  style={{ textWrap: 'balance' }}
+                >
+                  {cert.title}
+                </h4>
+
+                {/* Description */}
+                <p className="text-xs text-muted leading-relaxed mb-4 line-clamp-3">
+                  {cert.description}
+                </p>
+              </div>
+
+              {/* Bottom Verification Strip */}
+              <div
+                onClick={() => setActiveCert(cert)}
+                className="flex items-center justify-between bg-subtle p-3 rounded-lg border border-line/70 cursor-pointer hover:bg-chip transition-colors"
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setActiveCert(cert);
+                  }
+                }}
+                aria-label={`View details for ${cert.title}`}
+              >
+                <span className="font-mono text-xs uppercase text-faint">
+                  ID: {cert.credentialId}
+                </span>
+                <span className="font-mono text-xs uppercase font-bold text-fg flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                  VERIFIED
+                </span>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Bottom Bar: Clear Authoritative Registry Status */}
+      {/* Bottom Bar: Clean Registry Status */}
       <div className="mt-8 flex items-center gap-3 border-t border-line pt-6">
         <span className="h-2 w-2 rounded-full bg-emerald-500" />
         <span className="font-mono text-xs text-soft">
