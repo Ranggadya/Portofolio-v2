@@ -88,7 +88,17 @@ export interface Certificate {
   credentialId: string;
   title: string;
   issuer: string;
+  issuerFull?: string;
   description: string;
   tags: string[];
   verifyUrl: string;
+  watermarkText?: string;
+  credentialType?: string;
+  partnerBadge?: string;
+  scoreLabel?: string;
+  scoreDetail?: string;
+  statusYear?: string;
+  issueDate?: string;
+  syllabus?: string;
+  icon?: 'premium' | 'verified' | 'cloud' | 'design' | 'shield' | 'edu';
 }

@@ -53,3 +53,13 @@
     background: radial-gradient(100% 100% at 50% 0%, var(--project-from) 0%, var(--project-via) 45%, var(--project-to) 100%);
   }
 }
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
