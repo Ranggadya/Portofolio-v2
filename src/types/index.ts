@@ -63,6 +63,12 @@ export type ServiceItem =
   | { kind: 'phone'; id: string }
   | { kind: 'brand'; id: string };
 
+export interface ExperienceMetric {
+  label: string;
+  value: string;
+  sub: string;
+}
+
 export interface Experience {
   id: string;
   period: string;
@@ -71,6 +77,14 @@ export interface Experience {
   company: string;
   role: string;
   description: string;
+  env?: string;
+  era?: string;
+  bullets?: string[];
+  metrics?: ExperienceMetric[];
+  artifact?: {
+    name: string;
+    type: string;
+  };
   tags: string[];
 }
 
