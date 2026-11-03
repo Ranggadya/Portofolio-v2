@@ -1,11 +1,61 @@
 export interface NavItem { label: string; href: string }
 
+export interface ProjectDossierLayer {
+  layer: string;
+  badge: string;
+  title: string;
+  description: string;
+}
+
+export interface ProjectDossierDecision {
+  title: string;
+  description: string;
+}
+
+export interface ProjectDossierCapability {
+  code: string;
+  title: string;
+  description: string;
+}
+
+export interface ProjectDossier {
+  ref: string;
+  discipline: string;
+  status: string;
+  featuredTag: string;
+  estYear: string;
+  summary: string;
+  clientContext: string;
+  roleDiscipline: string;
+  timelineState: string;
+  primaryStack: string;
+  liveUrl?: string;
+  githubUrl?: string;
+  challengeParagraphs: string[];
+  systemDesignHeadline: string;
+  systemDesignDesc: string;
+  layers: ProjectDossierLayer[];
+  codeSnippet: {
+    filename: string;
+    lang: string;
+    code: string;
+  };
+  decisions: ProjectDossierDecision[];
+  capabilities: ProjectDossierCapability[];
+  tools: string[];
+  quote: {
+    text: string;
+    author: string;
+  };
+}
+
 export interface Project {
   id: string;
   title: string;
   stack: string;
   year: string;
   mockup: 'portfolio' | 'ayamsehat';
+  dossier: ProjectDossier;
 }
 
 export type ServiceItem =

@@ -61,3 +61,4 @@ A Full-Stack Software Engineer who pairs rigorous backend and system architectur
 - Conformance to WCAG 2.1 AA contrast thresholds in both light and dark modes.
 - Strict semantic landmark elements (`<header>`, `<main>`, `<section>`, `<article>`, `<dl>`, `<nav>`).
 - Keyboard focus visible rings (`focus-visible:outline`), clear interactive tap targets, and `prefers-reduced-motion` accommodations.
+
