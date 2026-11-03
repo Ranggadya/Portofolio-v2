@@ -159,6 +159,18 @@ export async function fetchCertificates(): Promise<{
   isLive: boolean;
   error?: string;
 }> {
+  const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
+  if (anonKey.startsWith('http')) {
+    console.error(
+      '[Supabase Error] VITE_SUPABASE_ANON_KEY di file .env Anda masih berisi URL, bukan API Key! API Key Supabase adalah kode panjang berawalan "eyJhbGci..." yang ada di menu Project Settings > Data API > Project API Keys (anon public).'
+    );
+    return {
+      data: fallbackCertificates,
+      isLive: false,
+      error: 'VITE_SUPABASE_ANON_KEY must be a JWT token, not a URL.',
+    };
+  }
+
   if (!isSupabaseConfigured || !supabase) {
     return {
       data: fallbackCertificates,
@@ -179,7 +191,13 @@ export async function fetchCertificates(): Promise<{
         .select('*')
         .order('id', { ascending: true });
 
-      if (!error && data && data.length > 0) {
+      if (error) {
+        console.warn(`[Supabase] Gagal mengambil tabel "${tableName}":`, error.message);
+        continue;
+      }
+
+      if (data && data.length > 0) {
+        console.log(`[Supabase] Berhasil sinkronisasi ${data.length} sertifikat dari tabel "${tableName}"!`, data);
         const normalized = data.map((row, idx) =>
           normalizeSupabaseCertificate(row as SupabaseCertificateRow, idx)
         );
@@ -189,8 +207,8 @@ export async function fetchCertificates(): Promise<{
           isLive: true,
         };
       }
-    } catch {
-      // Continue to next candidate table if any
+    } catch (err) {
+      console.warn(`[Supabase] Exception pada tabel "${tableName}":`, err);
     }
   }
 
