@@ -52,9 +52,7 @@
   .project-card-bg {
     background: radial-gradient(100% 100% at 50% 0%, var(--project-from) 0%, var(--project-via) 45%, var(--project-to) 100%);
   }
-}
-
-@layer utilities {
+  /* Hide scrollbar for clean carousel presentation */
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }

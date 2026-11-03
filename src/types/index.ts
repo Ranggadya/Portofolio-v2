@@ -88,17 +88,18 @@ export interface Certificate {
   credentialId: string;
   title: string;
   issuer: string;
-  issuerFull?: string;
+  issuerSub?: string;
   description: string;
   tags: string[];
   verifyUrl: string;
-  watermarkText?: string;
-  credentialType?: string;
-  partnerBadge?: string;
-  scoreLabel?: string;
-  scoreDetail?: string;
-  statusYear?: string;
   issueDate?: string;
+  validUntil?: string;
+  badgeCode?: string;
+  badgeCategory?: string;
+  badgeAuthority?: string;
+  gradeBadge?: string;
+  watermark?: string;
+  score?: string;
   syllabus?: string;
-  icon?: 'premium' | 'verified' | 'cloud' | 'design' | 'shield' | 'edu';
+  icon?: 'award' | 'verified' | 'cloud' | 'palette' | 'shield' | 'code';
 }

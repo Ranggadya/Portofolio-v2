@@ -14,10 +14,10 @@ export const profile = {
   discipline: 'Full-Stack & Software Engineering',
   experience: 'Undergrad & Industry Experience',
   aboutHeadline:
-    'Software Engineer & Full-Stack Developer building resilient, high-performance digital systems.',
+    'ENGINEERING SCALABLE, RELIABLE, AND MEANINGFUL DIGITAL SOLUTIONS.',
   aboutParagraphs: [
-    "Hello! I'm Ranggadya Aditama Ramadhani, a Computer Science student at Diponegoro University and a passionate Software Engineer working across the entire web stack. I specialize in turning complex system requirements into clean, scalable architectures—from responsive, accessible frontends in React and Next.js to reliable backend services with Laravel, Node.js, and modern databases.",
-    "With industry experience as an intern at SKENACORP and PT DSI, I bring a practical, engineering-first mindset to production code: optimizing query performance, structuring modular design systems, integrating AI solutions like Gemini, and prioritizing clean, maintainable software craftsmanship.",
+    "I'm a Software Engineer and Full-Stack Developer with a background in Computer Science at Diponegoro University. I enjoy designing and building web applications that solve real-world problems, from intuitive user interfaces to reliable backend systems and well-structured databases.Throughout my experience in software development, I've worked on various projects involving enterprise applications, manufacturing digitalization, ERP systems, and data-driven platforms. My experience spans frontend and backend development, REST API design, database management, and system integration, allowing me to understand how different components work together to deliver effective software solutions.",
+    "Beyond writing code, I value understanding business requirements, solving technical challenges, and building systems that are maintainable, efficient, and reliable. I believe great software engineering is not just about making things work, but about creating meaningful solutions that deliver lasting value. I'm continuously exploring new technologies, refining my engineering practices, and looking for opportunities to build impactful digital products.",
   ],
   principles: [
     { title: '01. Performance First', text: 'Sub-second response times, optimized bundling, efficient state flow.' },
