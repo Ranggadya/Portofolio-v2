@@ -167,9 +167,9 @@ export async function fetchCertificates(): Promise<{
   }
 
   const configuredTable =
-    import.meta.env.VITE_SUPABASE_CERTIFICATES_TABLE || 'certificates';
+    import.meta.env.VITE_SUPABASE_CERTIFICATES_TABLE || 'certifikat';
   const candidateTables = Array.from(
-    new Set([configuredTable, 'certificates', 'certificate', 'sertifikat'])
+    new Set([configuredTable, 'certifikat', 'certificates', 'certificate', 'sertifikat'])
   );
 
   for (const tableName of candidateTables) {
