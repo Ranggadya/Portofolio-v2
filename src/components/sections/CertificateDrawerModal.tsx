@@ -126,14 +126,20 @@ export default function CertificateDrawerModal({
           >
             Dismiss
           </button>
-          <a
-            href={targetLink}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-full border border-black bg-black px-5 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-colors hover:bg-neutral-800 dark:border-white dark:bg-white dark:text-black dark:hover:bg-neutral-200"
-          >
-            Public Verify Link ↗
-          </a>
+          {targetLink && targetLink !== '#' ? (
+            <a
+              href={targetLink}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-black bg-black px-5 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-white shadow-sm transition-colors hover:bg-neutral-800 dark:border-white dark:bg-white dark:text-black dark:hover:bg-neutral-200"
+            >
+              Public Verify Link ↗
+            </a>
+          ) : (
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200 bg-neutral-100 px-4 py-2 font-mono text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:border-neutral-800 dark:bg-neutral-800 dark:text-neutral-400">
+              Verified Credential
+            </span>
+          )}
         </div>
       </div>
     </div>

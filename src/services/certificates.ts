@@ -20,6 +20,14 @@ export interface SupabaseCertificateRow {
 function inferIssuer(title: string): { issuer: string; authority: string; category: string; icon: Certificate['icon'] } {
   const t = title.toLowerCase();
 
+  if (t.includes('oracle')) {
+    return {
+      issuer: 'Oracle Academy',
+      authority: 'Oracle Certified',
+      category: 'Database Specialization',
+      icon: 'shield',
+    };
+  }
   if (t.includes('google')) {
     return {
       issuer: 'Google Career Certs',
@@ -68,12 +76,20 @@ function inferIssuer(title: string): { issuer: string; authority: string; catego
       icon: 'palette',
     };
   }
-  if (t.includes('react')) {
+  if (t.includes('react') || t.includes('front-end') || t.includes('back-end') || t.includes('javascript')) {
     return {
       issuer: 'Dicoding Indonesia',
-      authority: 'React Ecosystem',
-      category: 'Frontend Specialization',
+      authority: 'Dicoding Partner',
+      category: 'Developer Specialization',
       icon: 'code',
+    };
+  }
+  if (t.includes('database') || t.includes('sql')) {
+    return {
+      issuer: 'Oracle Academy',
+      authority: 'Database Systems',
+      category: 'Database Competency',
+      icon: 'shield',
     };
   }
 
@@ -115,12 +131,21 @@ export function normalizeSupabaseCertificate(
   const imageUrl = row.img || row.image_url || row.image || row.gambar || undefined;
   const verifyUrl = row.link || row.verify_url || row.url || '#';
   const idStr = String(row.id ?? index + 1);
-  const credentialId = `CERT-${idStr.padStart(3, '0')}`;
+
+  let credentialId = `CERT-${idStr.padStart(3, '0')}`;
+  if (row.link && row.link.includes('dicoding.com/certificates/')) {
+    const parts = row.link.split('/certificates/');
+    if (parts[1]) {
+      credentialId = `DC-${parts[1].trim().split('/')[0]}`;
+    }
+  } else if (title.toLowerCase().includes('oracle')) {
+    credentialId = `ORA-${idStr.padStart(3, '0')}`;
+  }
 
   const { issuer, authority, category, icon } = inferIssuer(title);
   const tags = inferTags(title);
 
-  let yearStr = '2024';
+  let yearStr = '2025';
   if (row.created_at) {
     const d = new Date(row.created_at);
     if (!isNaN(d.getTime())) {
