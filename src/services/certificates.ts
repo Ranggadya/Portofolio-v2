@@ -3,116 +3,154 @@ import { certificates as fallbackCertificates } from '@/data/certificates';
 import type { Certificate } from '@/types';
 
 export interface SupabaseCertificateRow {
-  id?: string | number;
+  id?: number | string;
   title?: string;
-  judul?: string;
-  name?: string;
-  image?: string;
-  image_url?: string;
-  gambar?: string;
-  img?: string;
-  photo?: string;
-  file_url?: string;
-  link?: string;
-  verify_url?: string;
-  url?: string;
-  credential_id?: string;
-  code?: string;
-  issuer?: string;
-  penerbit?: string;
-  issuer_sub?: string;
-  description?: string;
-  deskripsi?: string;
-  syllabus?: string;
-  silabus?: string;
-  tags?: string[] | string;
-  score?: string;
-  grade?: string;
-  issue_date?: string;
-  date?: string;
-  year?: string | number;
-  watermark?: string;
-  badge_category?: string;
-  badge_code?: string;
-  badge_authority?: string;
-  grade_badge?: string;
-  icon?: 'award' | 'verified' | 'cloud' | 'palette' | 'shield' | 'code';
+  img?: string | null;
+  link?: string | null;
+  created_at?: string | null;
+  // Fallbacks for alternative naming
+  image?: string | null;
+  image_url?: string | null;
+  gambar?: string | null;
+  verify_url?: string | null;
+  url?: string | null;
   [key: string]: unknown;
+}
+
+function inferIssuer(title: string): { issuer: string; authority: string; category: string; icon: Certificate['icon'] } {
+  const t = title.toLowerCase();
+
+  if (t.includes('google')) {
+    return {
+      issuer: 'Google Career Certs',
+      authority: 'Google Authorized',
+      category: 'Professional Certificate',
+      icon: 'award',
+    };
+  }
+  if (t.includes('dicoding')) {
+    return {
+      issuer: 'Dicoding Indonesia',
+      authority: 'Dicoding Partner',
+      category: 'Specialization Certificate',
+      icon: 'code',
+    };
+  }
+  if (t.includes('aws') || t.includes('amazon') || t.includes('cloud')) {
+    return {
+      issuer: 'Amazon Web Services',
+      authority: 'AWS Training',
+      category: 'Cloud Certification',
+      icon: 'cloud',
+    };
+  }
+  if (t.includes('meta')) {
+    return {
+      issuer: 'Meta via Coursera',
+      authority: 'Meta Authorized',
+      category: 'Professional Certificate',
+      icon: 'code',
+    };
+  }
+  if (t.includes('bnsp') || t.includes('skkni') || t.includes('nasional')) {
+    return {
+      issuer: 'BNSP Republik Indonesia',
+      authority: 'SKKNI RI',
+      category: 'National Competency',
+      icon: 'shield',
+    };
+  }
+  if (t.includes('ui') || t.includes('ux') || t.includes('design') || t.includes('figma')) {
+    return {
+      issuer: 'Design System Academy',
+      authority: 'UI/UX Standards',
+      category: 'Design Specialization',
+      icon: 'palette',
+    };
+  }
+  if (t.includes('react')) {
+    return {
+      issuer: 'Dicoding Indonesia',
+      authority: 'React Ecosystem',
+      category: 'Frontend Specialization',
+      icon: 'code',
+    };
+  }
+
+  return {
+    issuer: 'Accredited Authority',
+    authority: 'Verified Issuance',
+    category: 'Credential Certificate',
+    icon: 'award',
+  };
+}
+
+function inferTags(title: string): string[] {
+  const t = title.toLowerCase();
+  const tags: string[] = [];
+
+  if (t.includes('react')) tags.push('React.js');
+  if (t.includes('javascript') || t.includes('js')) tags.push('JavaScript ES6+');
+  if (t.includes('frontend') || t.includes('front-end')) tags.push('Frontend Architecture');
+  if (t.includes('backend') || t.includes('back-end') || t.includes('api')) tags.push('REST API');
+  if (t.includes('web')) tags.push('Web Development');
+  if (t.includes('cloud') || t.includes('aws')) tags.push('Cloud Architecture');
+  if (t.includes('database') || t.includes('sql') || t.includes('mysql')) tags.push('SQL & Database');
+  if (t.includes('ui') || t.includes('ux') || t.includes('design')) tags.push('UI/UX Systems');
+  if (t.includes('pwa')) tags.push('PWA & Service Worker');
+  if (t.includes('node')) tags.push('Node.js');
+
+  if (tags.length === 0) {
+    tags.push('Certified Stack', 'Verified Active');
+  }
+
+  return tags.slice(0, 3);
 }
 
 export function normalizeSupabaseCertificate(
   row: SupabaseCertificateRow,
   index: number
 ): Certificate {
-  const title =
-    row.title || row.judul || row.name || `Certificate ${index + 1}`;
-  const imageUrl =
-    row.image_url ||
-    row.image ||
-    row.gambar ||
-    row.img ||
-    row.photo ||
-    row.file_url ||
-    undefined;
-  const verifyUrl =
-    row.link ||
-    row.verify_url ||
-    row.url ||
-    row.credential_url ||
-    'https://www.dicoding.com';
-  const credentialId =
-    row.credential_id ||
-    row.code ||
-    (typeof row.id === 'string' ? row.id : `CERT-${String(index + 1).padStart(3, '0')}`);
-  const id = String(row.id || `cert-${index + 1}`);
-  const issuer = row.issuer || row.penerbit || 'Accredited Authority';
-  const issuerSub = row.issuer_sub || row.issuerSub || issuer;
-  const description =
-    row.description ||
-    row.deskripsi ||
-    'Sertifikasi kredensial profesional terverifikasi dengan kompetensi teruji.';
+  const title = (row.title || `Certificate ${index + 1}`).trim();
+  const imageUrl = row.img || row.image_url || row.image || row.gambar || undefined;
+  const verifyUrl = row.link || row.verify_url || row.url || '#';
+  const idStr = String(row.id ?? index + 1);
+  const credentialId = `CERT-${idStr.padStart(3, '0')}`;
 
-  let tags: string[] = [];
-  if (Array.isArray(row.tags)) {
-    tags = row.tags.map(String);
-  } else if (typeof row.tags === 'string' && row.tags.trim()) {
-    tags = row.tags.split(',').map((t) => t.trim());
-  } else {
-    tags = ['Certified', 'Verified Active'];
+  const { issuer, authority, category, icon } = inferIssuer(title);
+  const tags = inferTags(title);
+
+  let yearStr = '2024';
+  if (row.created_at) {
+    const d = new Date(row.created_at);
+    if (!isNaN(d.getTime())) {
+      yearStr = String(d.getFullYear());
+    }
   }
 
-  const issueDate =
-    row.issue_date ||
-    (row.date ? `ISSUE: ${row.date}` : undefined) ||
-    (row.year ? `ISSUE: ${row.year}` : 'ISSUE: 2023');
-
-  const syllabus =
-    row.syllabus ||
-    row.silabus ||
-    row.description ||
-    'Kompetensi teruji dan standar kurikulum sertifikasi profesional industri.';
+  const issueDate = `ISSUE: ${yearStr}`;
 
   return {
-    id,
+    id: idStr,
     credentialId,
     title,
     issuer,
-    issuerSub: String(issuerSub),
-    description,
+    issuerSub: `${issuer} // Official Record`,
+    description: `Sertifikasi kredensial profesional "${title}" dengan verifikasi kurikulum dan kompetensi teruji.`,
     tags,
     verifyUrl: String(verifyUrl),
     imageUrl: imageUrl ? String(imageUrl) : undefined,
     link: String(verifyUrl),
     issueDate,
-    validUntil: row.valid_until ? String(row.valid_until) : (row.date ? String(row.date) : issueDate),
-    badgeCode: row.badge_code || credentialId,
-    badgeCategory: row.badge_category || 'Credential Certificate',
-    badgeAuthority: row.badge_authority || issuer,
-    gradeBadge: row.grade_badge || row.score || '100%',
-    watermark: row.watermark || 'OFFICIAL',
-    score: row.score || row.grade || 'Verified Active',
-    syllabus,
-    icon: row.icon || 'award',
+    validUntil: yearStr,
+    badgeCode: credentialId,
+    badgeCategory: category,
+    badgeAuthority: authority,
+    gradeBadge: 'A+ Grade',
+    watermark: 'OFFICIAL',
+    score: 'Score: Verified Active',
+    syllabus: `Standar kurikulum dan evaluasi kompetensi pada program "${title}". Memenuhi kriteria verifikasi profesional resmi.`,
+    icon,
   };
 }
 
@@ -128,45 +166,37 @@ export async function fetchCertificates(): Promise<{
     };
   }
 
-  const tableName =
+  const configuredTable =
     import.meta.env.VITE_SUPABASE_CERTIFICATES_TABLE || 'certificates';
+  const candidateTables = Array.from(
+    new Set([configuredTable, 'certificates', 'certificate', 'sertifikat'])
+  );
 
-  try {
-    const { data, error } = await supabase
-      .from(tableName)
-      .select('*')
-      .order('id', { ascending: true });
+  for (const tableName of candidateTables) {
+    try {
+      const { data, error } = await supabase
+        .from(tableName)
+        .select('*')
+        .order('id', { ascending: true });
 
-    if (error) {
-      console.warn(`[Supabase] Could not fetch table "${tableName}":`, error.message);
-      return {
-        data: fallbackCertificates,
-        isLive: false,
-        error: error.message,
-      };
+      if (!error && data && data.length > 0) {
+        const normalized = data.map((row, idx) =>
+          normalizeSupabaseCertificate(row as SupabaseCertificateRow, idx)
+        );
+
+        return {
+          data: normalized,
+          isLive: true,
+        };
+      }
+    } catch {
+      // Continue to next candidate table if any
     }
-
-    if (!data || data.length === 0) {
-      return {
-        data: fallbackCertificates,
-        isLive: true,
-      };
-    }
-
-    const normalized = data.map((row, idx) =>
-      normalizeSupabaseCertificate(row as SupabaseCertificateRow, idx)
-    );
-
-    return {
-      data: normalized,
-      isLive: true,
-    };
-  } catch (err) {
-    console.warn('[Supabase] Exception fetching certificates:', err);
-    return {
-      data: fallbackCertificates,
-      isLive: false,
-      error: err instanceof Error ? err.message : String(err),
-    };
   }
+
+  return {
+    data: fallbackCertificates,
+    isLive: false,
+    error: 'Table not found or empty',
+  };
 }
