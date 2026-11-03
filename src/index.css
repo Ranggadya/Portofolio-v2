@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --surface: 255 255 255;
+    --subtle: 250 250 250;
+    --chip: 245 245 245;
+    --line: 229 229 229;
+    --fg: 15 17 21;
+    --muted: 82 82 82;
+    --soft: 115 115 115;
+    --faint: 163 163 163;
+    --project-from: #d8eef8;
+    --project-via: #c3e2f4;
+    --project-to: #e9f4fa;
+    color-scheme: light;
+  }
+
+  .dark {
+    --surface: 11 12 14;
+    --subtle: 20 21 24;
+    --chip: 30 31 35;
+    --line: 42 43 49;
+    --fg: 245 245 245;
+    --muted: 190 190 196;
+    --soft: 150 150 158;
+    --faint: 110 110 118;
+    --project-from: #16222b;
+    --project-via: #14202a;
+    --project-to: #101920;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-surface font-sans text-fg antialiased transition-colors duration-300 selection:bg-fg selection:text-surface;
+  }
+
+  :focus-visible {
+    @apply outline outline-2 outline-offset-2 outline-fg;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+    * { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
+}
+
+@layer components {
+  .hero-heading { letter-spacing: -0.035em; line-height: 0.95; }
+  .project-card-bg {
+    background: radial-gradient(100% 100% at 50% 0%, var(--project-from) 0%, var(--project-via) 45%, var(--project-to) 100%);
+  }
+}
