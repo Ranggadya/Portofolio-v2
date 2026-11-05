@@ -9,7 +9,7 @@ export const profile = {
   email: 'ranggadya2530@gmail.com',
   location: 'Semarang, ID (GMT+7)',
   photo: '/photo.jpg',
-  resumeUrl: '/cv.pdf',
+  resumeUrl: '/CV.pdf',
   status: 'Open for Opportunities',
   discipline: 'Full-Stack & Software Engineering',
   experience: 'Undergrad & Industry Experience',
