@@ -268,7 +268,7 @@ def run_monte_carlo(current_assets: float, annual_contrib: float,
       roleDiscipline: 'Full-Stack Architect & Core Developer',
       timelineState: '2025 — 2026 (Production Live)',
       primaryStack: 'React, TypeScript, Go (Chi Router), PostgreSQL, Docker',
-      liveUrl: 'https://shoes4us.vercel.app/',
+      liveUrl: 'https://shoes4-us.vercel.app/',
       githubUrl: 'https://github.com/Ranggadya',
       challengeParagraphs: [
         'Traditional footwear e-commerce architectures frequently struggle with inventory race conditions during high-demand releases, slow database query times across multi-attribute shoe variations (size, color, brand), and fragmented shipping rate calculations.',
