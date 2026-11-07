@@ -94,7 +94,7 @@ export const experiences: Experience[] = [
     period: 'Nov 2025 — Dec 2025',
     current: false,
     type: 'Internship / On-site',
-    company: 'PT DSI (Dwi Selo Giri Mas)',
+    company: 'esikatERP (PT Duta Solusi Informatika)',
     role: 'Full-Stack Developer Intern',
     env: 'ENV // ENTERPRISE PAYROLL & ERP',
     era: 'MANUFACTURING INTEGRATION',
