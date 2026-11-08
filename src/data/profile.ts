@@ -1,4 +1,6 @@
 
+import type { NavItem } from '@/types';
+
 export const profile = {
   brand: 'RANGGADYA.',
   fullName: 'Ranggadya Aditama Ramadhani',
@@ -52,3 +54,13 @@ export const profile = {
     { label: 'INSTAGRAM', href: 'https://www.instagram.com/rnggdyar/' },
   ],
 } as const;
+
+export const NAV_ITEMS: NavItem[] = [
+  { label: 'HOME', href: '#home' },
+  { label: 'ABOUT', href: '#about' },
+  { label: 'PROJECTS', href: '#projects' },
+  { label: 'SERVICES', href: '#services' },
+  { label: 'EXPERIENCE', href: '#experience' },
+  { label: 'TECH STACK', href: '#tech-stack' },
+  { label: 'CERTIFICATES', href: '#credentials' },
+];
