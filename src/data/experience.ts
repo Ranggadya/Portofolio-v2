@@ -15,8 +15,8 @@ export const experiences: Experience[] = [
     bullets: [
       'System Analysis & Requirements: Analyzed User Requirement Specifications (URS) and plant manufacturing workflows to formulate functional system specifications for IBC usage, cleaning monitoring, and administrative operations.',
       'Full-Stack Feature Implementation: Developed end-to-end web features using React and Go Fiber, implementing responsive user interfaces, modular REST APIs, backend business logic, and PostgreSQL database operations.',
-      'Data Pipeline & API Integration: Engineered background data retrieval workers in Go to consume Batch Reporter API records, ensuring reliable synchronization between shop-floor batch data and the application database.',
-      'Security & Operational Traceability: Implemented JWT authentication with refresh token rotation, Role-Based Access Control (RBAC), Server-Sent Events (SSE) for live updates, and audit trail logging to meet operational compliance standards.',
+      'Data Pipeline & API Integration: Developed background data retrieval workers in Go to consume Batch Reporter API records, ensuring reliable synchronization between shop-floor batch data and the application database.',
+      'Security & Operational Traceability: Implemented JWT authentication with refresh token management, Role-Based Access Control (RBAC), Server-Sent Events (SSE) for live updates, and audit trail logging to support operational accountability and traceability.',
     ],
     tags: [
       'Go (Fiber)',
@@ -43,7 +43,7 @@ export const experiences: Experience[] = [
     bullets: [
       'Full-Stack Application Development: Developed interactive client interfaces in Next.js and integrated them with Express.js backend services and REST APIs to deliver multi-step financial planning workflows.',
       'Data Modeling & Persistence: Designed relational schemas and implemented data access patterns in PostgreSQL to reliably persist user financial profiles, scenario projections, and asset allocations.',
-      'Cross-Functional AI Integration: Collaborated with team AI Engineers and Data Scientists to consume computational models and integrate contextual Google Gemini insights into client-facing advisory views.',
+      'Cross-Functional AI Integration: Collaborated with AI Engineers and Data Scientists to integrate financial simulation outputs and Google Gemini-generated insights into user-facing financial planning features.',
     ],
     tags: [
       'Next.js',
@@ -68,7 +68,7 @@ export const experiences: Experience[] = [
       'Developed web-based data collection and monitoring solutions to support digital editorial operations, combining automated scraping pipelines with internal analytical dashboards.',
     bullets: [
       'Automated Data Extraction: Developed Python scraping scripts to systematically extract, clean, and structure editorial content from target online publications.',
-      'Monitoring Dashboard Development: Built internal dashboard interfaces using React and TypeScript to visualize publication metrics, article feeds, and aggregation trends.',
+      'Monitoring Dashboard Development: Built internal dashboard interfaces using React and TypeScript to present collected editorial articles, publication data, and content tracking information.',
       'Modular Component Design: Authored reusable, type-safe UI components with Tailwind CSS to establish consistent layouts across internal tracking tools.',
     ],
     tags: [
@@ -92,9 +92,9 @@ export const experiences: Experience[] = [
     description:
       'Contributed to the development and documentation of an enterprise resource planning (ERP) platform supporting manufacturing operations, inventory tracking, and business workflows.',
     bullets: [
-      'ERP Module Development: Supported implementation and maintenance for inventory tracking, production scheduling, and material handling modules using Laravel and MySQL.',
-      'Web-Based System Documentation: Developed responsive documentation portals using React and Laravel to clearly map ERP workflows, data schemas, and module interactions.',
-      'Cross-Component Data Integration: Implemented and validated REST endpoints to maintain consistent data synchronization between inventory management and production records.',
+      'ERP Feature Development: Contributed to inventory and production-related functionality within the enterprise resource planning system using Laravel and MySQL.',
+      'Web-Based System Documentation: Developed responsive system documentation portals using React and Laravel to clearly map ERP workflows, data schemas, and module interactions.',
+      'System Data Integration: Supported data integration workflows across ERP modules to maintain consistent data flow between inventory and manufacturing records.',
     ],
     tags: [
       'Laravel',
@@ -117,9 +117,8 @@ export const experiences: Experience[] = [
     description:
       'Undergraduate degree in Computer Science (Informatika) focusing on foundational computing theory, data structures, algorithms, relational database systems, and software engineering methodologies.',
     bullets: [
-      'Core Computer Science Foundations: Completed coursework in Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems, Computer Networks, and Software Engineering.',
-      'Applied Software Projects: Translated theoretical computer science principles into practical software applications through individual coursework, group projects, and laboratory practicums.',
-      'Architectural & Engineering Study: Continuously explored modern backend architectures, full-stack frameworks, and industry development standards alongside academic studies.',
+      'Computer Science Foundations: Relevant coursework in Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems, Computer Networks, and Software Engineering.',
+      'Applied Software Development: Applied computing principles and software engineering practices to build web applications and technical solutions through coursework, group projects, and practical assignments.',
     ],
     tags: [
       'Computer Science',
