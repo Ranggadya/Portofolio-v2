@@ -58,10 +58,11 @@ export interface Project {
   dossier: ProjectDossier;
 }
 
-export type ServiceItem =
-  | { kind: 'text'; id: string; title: string; description: string }
-  | { kind: 'phone'; id: string }
-  | { kind: 'brand'; id: string };
+export interface ServiceItem {
+  id: string;
+  title: string;
+  description: string;
+}
 
 export interface ExperienceMetric {
   label: string;

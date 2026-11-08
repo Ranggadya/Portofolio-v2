@@ -2,25 +2,33 @@ import type { ServiceItem } from '@/types';
 
 export const services: ServiceItem[] = [
   {
-    kind: 'text', id: 'ui-ux', title: 'UI/UX Design',
+    id: 'full-stack',
+    title: 'Full-Stack Application Development',
     description:
-      'Designing interfaces that feel intuitive, enhance usability across every platform, align with user needs and behaviors, and support business goals effectively.',
+      'Developing end-to-end web applications by integrating responsive frontend interfaces, backend services, REST APIs, and relational databases into cohesive software solutions.',
   },
   {
-    kind: 'text', id: 'web-design', title: 'Web Design',
+    id: 'backend-api',
+    title: 'Backend & API Engineering',
     description:
-      'Designing modern and responsive websites that adapt across devices and platforms, built with clarity, usability, and creativity to reflect your brand in the best way.',
-  },
-  { kind: 'phone', id: 'phone-mockup' },
-  { kind: 'brand', id: 'brand-graphic' },
-  {
-    kind: 'text', id: 'graphic-design', title: 'Graphic Design',
-    description:
-      'Designing visuals that capture attention, communicate ideas with clarity and impact, build strong and memorable brand identity, and inspire connection through creativity.',
+      'Building structured backend services, RESTful APIs, business logic, authentication, and authorization workflows to support reliable application functionality and data operations.',
   },
   {
-    kind: 'text', id: 'design-system', title: 'Design System',
+    id: 'database-engineering',
+    title: 'Database Design & Engineering',
     description:
-      'Creating scalable and unified systems, ensuring design consistency everywhere, streamlining workflow across all teams, and adapting as products continue to grow.',
+      'Designing relational database structures, data models, and query workflows to support consistent data management, efficient application operations, and maintainable system architecture.',
+  },
+  {
+    id: 'system-integration',
+    title: 'System Integration & Data Processing',
+    description:
+      'Connecting application services, external APIs, and data sources through structured integration workflows, automated data processing, and synchronization mechanisms.',
+  },
+  {
+    id: 'business-digitalization',
+    title: 'Business Process Digitalization',
+    description:
+      'Translating operational workflows and business requirements into practical digital systems, including internal applications, monitoring platforms, and process-oriented software solutions.',
   },
 ];
