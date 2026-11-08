@@ -59,6 +59,8 @@ export default function Shoes4UsMockup() {
               <img
                 src="/shoes4us.jpg"
                 alt="Shoes4Us Showcase"
+                loading="lazy"
+                decoding="async"
                 className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                 onError={(e) => {
                   // Fallback if image path has issues

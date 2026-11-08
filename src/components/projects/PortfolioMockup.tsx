@@ -12,7 +12,7 @@ export default function PortfolioMockup() {
         </div>
       </div>
       <div className="mx-auto my-auto max-w-3xl py-12 text-center md:py-16 xl:max-w-4xl xl:py-24">
-        <h3 className="text-2xl font-extrabold leading-[1.15] tracking-tight text-[#111827] sm:text-4xl md:text-5xl xl:text-6xl">
+        <h3 className="text-2xl font-extrabold leading-[1.15] tracking-tight text-neutral-900 sm:text-4xl md:text-5xl xl:text-6xl">
           I'm Rangga passionate<br />
           <span className="font-semibold text-slate-400">software engineer &amp; full-stack developer</span>
           <br />specializing in digital solutions
