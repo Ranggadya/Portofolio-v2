@@ -17,7 +17,7 @@ export const services: ServiceItem[] = [
     id: 'database-engineering',
     title: 'Database Design & Engineering',
     description:
-      'Designing relational database structures, data models, and query workflows to support consistent data management, efficient application operations, and maintainable system architecture.',
+      'Designing relational database schemas, data models, and query workflows to support data integrity, consistent persistence, and reliable application operations.',
   },
   {
     id: 'system-integration',
