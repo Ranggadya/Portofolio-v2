@@ -9,7 +9,7 @@ interface Props {
 
 export default function Section({ id, children, className = 'py-16 md:py-24', bordered = true }: Props) {
   return (
-    <section id={id} className={`scroll-mt-6 ${bordered ? 'border-t border-line' : ''} ${className}`}>
+    <section id={id} className={`scroll-mt-20 md:scroll-mt-24 ${bordered ? 'border-t border-line' : ''} ${className}`}>
       {children}
     </section>
   );
