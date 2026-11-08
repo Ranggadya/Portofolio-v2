@@ -311,7 +311,7 @@ export default function ProjectDossierModal({
             <div className="flex items-center justify-between border-b border-line pb-2 font-mono text-[11px] uppercase tracking-wider text-soft">
               <span>02 // ARCHITECTURE &amp; SYSTEM ANATOMY</span>
               <span className="rounded border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 font-semibold text-emerald-600 dark:text-emerald-400">
-                VERIFIED BLUEPRINT
+                SYSTEM DESIGN
               </span>
             </div>
 
@@ -401,7 +401,7 @@ export default function ProjectDossierModal({
           >
             <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-wider text-soft">
               <span>03 // Key Architecture Capabilities</span>
-              <span>Specs Verified</span>
+              <span>PROJECT CAPABILITIES</span>
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
               {dossier.capabilities.map((cap) => (

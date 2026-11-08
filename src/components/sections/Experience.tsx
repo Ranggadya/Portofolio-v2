@@ -21,15 +21,13 @@ function ExperienceItem({ job }: ExperienceItemProps) {
   return (
     <div
       ref={ref}
-      className={`group relative flex flex-col md:flex-row items-start transition-all duration-700 ease-out ${
-        inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
+      className={`group relative flex flex-col md:flex-row items-start transition-all duration-700 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
     >
       {/* Timeline Node Marker */}
       <div
-        className={`absolute left-4 md:left-60 top-1.5 -translate-x-1/2 z-10 flex items-center justify-center transition-all duration-500 ease-out delay-100 ${
-          inView ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
-        }`}
+        className={`absolute left-4 md:left-60 top-1.5 -translate-x-1/2 z-10 flex items-center justify-center transition-all duration-500 ease-out delay-100 ${inView ? 'opacity-100 scale-100' : 'opacity-0 scale-50'
+          }`}
         aria-hidden="true"
       >
         {job.current ? (
@@ -44,19 +42,17 @@ function ExperienceItem({ job }: ExperienceItemProps) {
 
       {/* Left Side: Chrono & Era Meta */}
       <div
-        className={`w-full md:w-60 md:shrink-0 pl-10 md:pl-0 md:pr-8 flex flex-row flex-wrap md:flex-col items-center md:items-end justify-between md:justify-start gap-2 md:gap-1.5 text-left md:text-right mb-3 md:mb-0 transition-all duration-700 ease-out delay-150 ${
-          inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-3'
-        }`}
+        className={`w-full md:w-60 md:shrink-0 pl-10 md:pl-0 md:pr-8 flex flex-row flex-wrap md:flex-col items-center md:items-end justify-between md:justify-start gap-2 md:gap-1.5 text-left md:text-right mb-3 md:mb-0 transition-all duration-700 ease-out delay-150 ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-3'
+          }`}
       >
         <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-fg whitespace-nowrap">
           {job.period}
         </span>
         <span
-          className={`inline-block px-2.5 py-0.5 rounded font-mono text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase ${
-            job.current
+          className={`inline-block px-2.5 py-0.5 rounded font-mono text-[10px] sm:text-[11px] font-semibold tracking-wider uppercase ${job.current
               ? 'bg-emerald-50 text-emerald-800 border border-emerald-200 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-800'
               : 'bg-chip text-muted border border-line/60'
-          }`}
+            }`}
         >
           {job.type}
         </span>
@@ -69,9 +65,8 @@ function ExperienceItem({ job }: ExperienceItemProps) {
 
       {/* Right Side: Milestone Telemetry Card */}
       <div
-        className={`w-full pl-10 md:pl-8 flex-1 min-w-0 transition-all duration-700 ease-out delay-200 ${
-          inView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-[0.99]'
-        }`}
+        className={`w-full pl-10 md:pl-8 flex-1 min-w-0 transition-all duration-700 ease-out delay-200 ${inView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-[0.99]'
+          }`}
       >
         <div className="rounded-2xl border border-line bg-surface p-6 md:p-8 shadow-sm space-y-6 hover:border-fg/40 transition-colors">
           {/* Role & Company Header */}
@@ -181,9 +176,9 @@ export default function Experience() {
         right="(2023 — PRESENT)"
       />
       <SectionTitle
-        title="Work Experience & Track Record"
-        description="Proven track record delivering production-grade web applications, engineering performant frontends, and translating ambitious architectural concepts into scalable digital reality."
-        aside={<Pill>3+ Years Industry Experience</Pill>}
+        title="Professional Experience & Education"
+        description="Experience in designing and developing software solutions, building full-stack applications, and engineering reliable systems to address complex business and operational requirements."
+        aside={<Pill>Industry & Project Experience</Pill>}
       />
 
       {/* Timeline Root Container */}

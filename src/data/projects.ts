@@ -125,61 +125,68 @@ export interface ProjectDossierConfig {
   },
   {
     id: 'cuanselor',
-    title: 'CuanSelor — Smart Retirement Planning Platform & AI Advisor',
-    stack: 'Next.js, FastAPI, Express.js, Gemini AI, Tailwind CSS',
+    title: 'CuanSelor — AI-Powered Financial Planning Platform',
+    stack: 'Next.js, Express.js, FastAPI, PostgreSQL, Gemini AI, Tailwind CSS',
     year: '2026',
     mockup: 'ayamsehat',
     dossier: {
       ref: 'PJ-2026-02',
-      discipline: 'FULL-STACK, FINTECH & AI INTEGRATION',
-      status: 'STATUS: PRODUCTION LIVE',
-      featuredTag: 'ENTERPRISE AI & FINTECH',
+      discipline: 'FULL-STACK DEVELOPMENT & AI SERVICE INTEGRATION',
+      status: 'CAPSTONE PROJECT',
+      featuredTag: 'FINANCIAL TECHNOLOGY & AI',
       estYear: 'EST. 2026',
+
       summary:
-        'An actuarial retirement planning engine with 10,000-iteration Monte Carlo stochastic simulations, probabilistic outcome modeling, and a personalized AI advisor powered by Google Gemini.',
-      clientContext: 'Financial Planning & Actuarial Platform',
-      roleDiscipline: 'Full-Stack Developer & AI Integrator',
-      timelineState: '2025 — 2026 (Live)',
-      primaryStack: 'Next.js, Express.js, FastAPI, Gemini AI, PostgreSQL',
+        'An AI-powered financial planning platform designed to help users make informed long-term financial decisions through personalized financial projections, actuarial simulations, and AI-assisted insights.',
+
+      clientContext: 'AI-Powered Financial Planning Platform',
+      roleDiscipline: 'Full-Stack Web Developer',
+      timelineState: '2026 — Coding Camp Capstone',
+      primaryStack: 'Next.js, Express.js, FastAPI, PostgreSQL',
+
       liveUrl: 'https://cuanselor.my.id',
       githubUrl: 'https://github.com/FarhanGhifari/CuanSelor',
+
       challengeParagraphs: [
-        'Retirement planning in developing economies often suffers from simplistic linear calculations that ignore inflation volatility, market downturn sequences, and individual life event variations.',
-        'CuanSelor solves this by executing 10,000-iteration Monte Carlo simulations across personalized asset allocation models, combined with an intelligent conversational AI agent that breaks down actuarial probability curves into actionable financial steps.',
+        'Long-term financial planning requires users to consider multiple factors, including income, expenses, inflation, investment assumptions, and future financial goals. Without an accessible planning tool, translating these variables into understandable financial projections can be challenging.',
+        'CuanSelor addresses this challenge through an integrated financial planning platform that combines a web-based user experience, backend application services, actuarial simulation capabilities, and AI-assisted financial insights. The platform is designed to make financial planning more accessible through structured data input and understandable projection results.',
       ],
-      systemDesignHeadline: 'Dual-Engine Actuarial & AI Architecture',
+
+      systemDesignHeadline: 'Decoupled Full-Stack & Simulation Architecture',
       systemDesignDesc:
-        'Decoupled microservice architecture utilizing Python FastAPI for high-throughput vectorized numerical simulations, Node/Express for session orchestration, and Next.js for fluid charting.',
+        'The application separates the user-facing web application, core backend services, and computational simulation service. This architecture allows each component to handle its own responsibilities while communicating through service interfaces.',
+
       layers: [
         {
-          layer: 'LAYER 01: FRONTEND UI',
+          layer: 'LAYER 01: PRESENTATION',
           badge: 'NEXT.JS',
-          title: 'Next.js App Router & Chart Visualization',
+          title: 'Web Application & User Experience',
           description:
-            'Interactive client-side retirement sliders, dynamic cash flow charts, and instant re-calculation triggers.',
+            'Delivers the user-facing financial planning experience, including financial data input, planning workflows, and visualization of financial projection results.',
         },
         {
-          layer: 'LAYER 02: ORCHESTRATION',
+          layer: 'LAYER 02: APPLICATION BACKEND',
           badge: 'EXPRESS.JS',
-          title: 'API Gateway & AI Pipeline',
+          title: 'Core API & Business Logic',
           description:
-            'Handles user sessions, authentication, and orchestrates requests between the actuarial engine and Gemini AI.',
+            'Handles application-level requests, business logic, and communication between the frontend, data persistence, and supporting services.',
         },
         {
-          layer: 'LAYER 03: ACTUARIAL CORE',
-          badge: 'FASTAPI / NUMPY',
-          title: 'FastAPI 10K Monte Carlo Engine',
+          layer: 'LAYER 03: COMPUTATIONAL SERVICE',
+          badge: 'FASTAPI',
+          title: 'Financial & Actuarial Simulation',
           description:
-            'High-speed Python microservice executing 10,000 stochastic investment simulations in under 250ms.',
+            'Provides a dedicated Python-based service for computational financial simulations and the processing of projection scenarios.',
         },
         {
-          layer: 'LAYER 04: PERSISTENCE',
-          badge: 'POSTGRESQL',
-          title: 'Relational Portfolio Database',
+          layer: 'LAYER 04: DATA & AI SERVICES',
+          badge: 'POSTGRESQL / GEMINI',
+          title: 'Data Persistence & AI-Assisted Insights',
           description:
-            'PostgreSQL database storing user scenarios, asset allocations, and historical projection snapshots.',
+            'Supports application data management and AI-assisted financial insights through integration with the Google Gemini service.',
         },
       ],
+
       codeSnippet: {
         filename: 'monte_carlo_engine.py — VECTORIZED SIMULATION',
         lang: 'Python 3.11 / NumPy',
@@ -205,106 +212,122 @@ def run_monte_carlo(current_assets: float, annual_contrib: float,
         "success_rate": float(np.mean(trajectories[:, -1] >= current_assets * 3))
     }`,
       },
+
       decisions: [
         {
-          title: 'Vectorized NumPy Computation',
+          title: 'Separation of Application & Computational Services',
           description:
-            'Running 10,000 parallel paths in native C-accelerated NumPy reduces calculation times from several seconds to under 250ms.',
+            'Uses Express.js for core application services and FastAPI for computational workloads, separating business operations from simulation processing.',
         },
         {
-          title: 'Contextual AI Prompt Engineering',
+          title: 'API-Based Service Communication',
           description:
-            'Gemini AI receives structured percentile outputs (P10, P50, P90) to generate grounded, mathematically accurate advice.',
+            'Connects the frontend, backend, and simulation service through defined API interfaces to support modular development and integration.',
         },
         {
-          title: 'Graceful Fallback & Offline Caching',
+          title: 'AI-Assisted Financial Insights',
           description:
-            'Client caches last simulated scenarios locally, ensuring uninterrupted interaction even during temporary network drops.',
+            'Integrates Google Gemini to support the delivery of contextual financial insights alongside structured financial projection results.',
         },
       ],
+
       capabilities: [
         {
-          code: '01 // STOCHASTIC',
-          title: '10,000 Monte Carlo Paths',
+          code: '01 // FULL-STACK',
+          title: 'End-to-End Web Application',
           description:
-            'Sub-second probability modeling displaying worst-case, median, and optimistic market outcomes.',
+            'Development of the web application and backend services using Next.js and Express.js.',
         },
         {
-          code: '02 // AI ADVISOR',
-          title: 'Gemini Pro Context Engine',
+          code: '02 // SIMULATION',
+          title: 'Dedicated Financial Computation Service',
           description:
-            'Context-aware conversational analysis translating probability bands into Indonesian financial advice.',
+            'Integration with a FastAPI-based service for processing financial and actuarial simulation workloads.',
         },
         {
-          code: '03 // FULL-STACK',
-          title: 'Microservices with Next.js',
+          code: '03 // AI INTEGRATION',
+          title: 'AI-Assisted Financial Experience',
           description:
-            'Scalable separation between high-concurrency Python math engine and responsive Next.js frontend.',
+            'Integration of AI capabilities to support contextual financial information and user-facing insights.',
         },
       ],
-      tools: ['Next.js', 'FastAPI', 'Express.js', 'Python', 'NumPy', 'Gemini AI', 'PostgreSQL', 'Tailwind CSS'],
+
+      tools: [
+        'Next.js',
+        'Express.js',
+        'FastAPI',
+        'TypeScript',
+        'JavaScript',
+        'Python',
+        'PostgreSQL',
+        'Gemini AI',
+        'Tailwind CSS',
+      ],
+
       quote: {
         text:
-          '“Financial freedom is not a gamble of luck; it is an engineering problem of probability, discipline, and stochastic resilience.”',
+          'Financial planning becomes more approachable when complex projections are translated into structured information and actionable insights.',
         author: '— Product Philosophy, CuanSelor',
       },
     },
   },
   {
     id: 'shoes4us',
-    title: 'Shoes4Us — Full-Stack Footwear E-Commerce Platform',
-    stack: 'React (Vite SPA), Go (Golang), PostgreSQL, Tailwind CSS, Docker',
+    title: 'Shoes4Us — Full-Stack E-Commerce Platform',
+    stack: 'React, TypeScript, Go, PostgreSQL, Tailwind CSS',
     year: '2026',
     mockup: 'shoes4us',
     dossier: {
       ref: 'PJ-2026-03',
-      discipline: 'FULL-STACK E-COMMERCE & MONOREPO ARCHITECTURE',
-      status: 'STATUS: PRODUCTION LIVE',
+      discipline: 'FULL-STACK DEVELOPMENT & E-COMMERCE ENGINEERING',
+      status: 'FULL-STACK PROJECT',
       featuredTag: 'E-COMMERCE & RETAIL PLATFORM',
       estYear: 'EST. 2026',
       summary:
-        'A high-performance footwear e-commerce platform engineered for zero-friction shopping: sub-15ms catalog discovery, enterprise-grade zero-trust security, and PostgreSQL atomic row-level locks that guarantee size-specific stock availability without checkout race conditions.',
-      clientContext: 'Retail Footwear & Lifestyle Storefront',
-      roleDiscipline: 'Full-Stack Architect & Core Developer',
-      timelineState: '2025 — 2026 (Production Live)',
-      primaryStack: 'React, TypeScript, Go (Chi Router), PostgreSQL, Docker',
+        'A full-stack footwear e-commerce application built with a React-based storefront and Go backend, featuring product catalog management, shopping cart workflows, user authentication, and transactional inventory handling.',
+
+      clientContext: 'Footwear E-Commerce Application',
+      roleDiscipline: 'Full-Stack Developer',
+      timelineState: '2025 — 2026',
+      primaryStack: 'React, TypeScript, Go, PostgreSQL',
       liveUrl: 'https://shoes4-us.vercel.app/',
       githubUrl: 'https://github.com/Ranggadya',
       challengeParagraphs: [
-        'Traditional footwear e-commerce platforms struggle with severe shopping friction: lagging search queries across multi-attribute shoe variations (size, brand, gender), vulnerable transaction endpoints, and checkout race conditions where multiple customers buy the last pair simultaneously—leading to inventory discrepancy and embarrassing order cancellations.',
-        'Shoes4Us eliminates these bottlenecks through a decoupled monorepo architecture: a lightning-fast React 18 client SPA paired with a high-throughput Go (Chi) REST backend. By combining pgx connection pooling, strict Bcrypt and dual-mode JWT auth guards, parameterized SQL queries, and PostgreSQL row-level locking (SELECT ... FOR UPDATE), the system achieves sub-15ms p99 query latency, zero SQL injection vulnerability, and 100% deterministic stock deduction.',
+        'Footwear e-commerce applications need to manage product variations such as shoe sizes, product availability, and pricing while maintaining a consistent shopping experience. Inventory accuracy is particularly important because multiple customers may attempt to purchase the same product variation at the same time.',
+        'Shoes4Us addresses these requirements through a full-stack architecture consisting of a React-based storefront, a Go REST API, and a PostgreSQL database. The application separates frontend interactions from backend business logic and uses database transactions to handle inventory updates consistently.',
       ],
-      systemDesignHeadline: 'High-Throughput Monorepo: Sub-15ms Query Engine & Zero-Trust Security',
+      systemDesignHeadline: 'Full-Stack E-Commerce Architecture',
+
       systemDesignDesc:
-        'Engineered for maximum velocity and transaction safety, separating client-side state discovery, secure administrative catalogs, and ACID-compliant relational inventory locking.',
+        'A modular application architecture separating storefront interactions, backend business logic, authentication, and relational data management. PostgreSQL transactions support consistent inventory updates during order processing.',
       layers: [
         {
-          layer: 'LAYER 01: CLIENT STOREFRONT',
-          badge: 'REACT 18 / VITE SPA',
-          title: 'Instant Discovery & Cart State Engine',
+          layer: 'LAYER 01: STOREFRONT',
+          badge: 'REACT / VITE',
+          title: 'Product Discovery & Shopping Experience',
           description:
-            'Ultra-responsive catalog discovery with zero-lag multi-attribute filtering (brand, size, price), real-time cart drawer synchronization, and optimistic UI updates.',
+            'Provides the customer-facing storefront, product browsing, product filtering, shopping cart interactions, and responsive user interfaces.',
         },
         {
-          layer: 'LAYER 02: HIGH-SPEED BACKEND',
-          badge: 'GO 1.25 / CHI ROUTER',
-          title: 'Sub-15ms Query Engine & Connection Pool',
+          layer: 'LAYER 02: APPLICATION BACKEND',
+          badge: 'GO / CHI ROUTER',
+          title: 'REST API & Business Logic',
           description:
-            'High-concurrency Go REST API utilizing Chi router, memory-efficient JSON serialization, and pgxpool connection pooling to deliver sub-15ms response latency under peak load.',
+            'Handles application requests, product operations, authentication workflows, and backend business logic through Go-based REST endpoints.',
         },
         {
-          layer: 'LAYER 03: ZERO-TRUST DEFENSE',
-          badge: 'SECURITY & RBAC',
-          title: 'Bcrypt Hashing & Dual-Mode Auth Guard',
+          layer: 'LAYER 03: AUTHENTICATION',
+          badge: 'JWT / RBAC',
+          title: 'Authentication & Access Control',
           description:
-            'Enterprise-grade security perimeter featuring Bcrypt credential hashing, dual-mode JWT verification (Bearer + HttpOnly Cookie), RBAC route guards, and strict parameterized queries immune to SQL injection.',
+            'Separates customer and administrative access through authentication mechanisms and role-based authorization.',
         },
         {
-          layer: 'LAYER 04: TRANSACTIONAL INTEGRITY',
-          badge: 'POSTGRESQL LOCKS',
-          title: 'Atomic Row-Level Stock Locking (FOR UPDATE)',
+          layer: 'LAYER 04: DATA MANAGEMENT',
+          badge: 'POSTGRESQL',
+          title: 'Relational Data & Inventory Transactions',
           description:
-            'ACID transactional engine employing SELECT ... FOR UPDATE row-level locks on product_variants, eliminating 100% of overselling and inventory race conditions during flash buys.',
+            'Stores application data in a relational database and uses transactional operations to maintain consistency when updating product inventory.',
         },
       ],
       codeSnippet: {
@@ -344,7 +367,15 @@ func (s *InventoryService) ReserveStock(ctx context.Context, productID string, s
         return false, err
     }
 
-    return true, tx.Commit(ctx)
+    if qty <= 0 {
+    return false, ErrInvalidQuantity
+}
+
+if err := tx.Commit(ctx); err != nil {
+    return false, err
+}
+
+return true, nil
 }`,
       },
       decisions: [
