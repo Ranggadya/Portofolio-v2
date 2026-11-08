@@ -1,34 +1,47 @@
-import type { NavItem } from '@/types';
 
 export const profile = {
   brand: 'RANGGADYA.',
   fullName: 'Ranggadya Aditama Ramadhani',
-  headline: ['RANGGADYA ADITAMA', 'SOFTWARE ENGINEER', 'FULL STACK DEVELOPER'],
+  headline: ['RANGGADYA ADITAMA', 'SOFTWARE ENGINEER', 'FULL-STACK DEVELOPER'],
   tagline:
-    'Architecting resilient digital solutions, scalable full-stack applications, and performant web experiences.',
+    'Building end-to-end software solutions, reliable backend systems, and web applications that solve real-world business problems.',
   email: 'ranggadya2530@gmail.com',
   location: 'Semarang, ID (GMT+7)',
   photo: '/photo.jpg',
-  resumeUrl: '/CV.pdf',
+  resumeUrl: '/cv.pdf',
   status: 'Open for Opportunities',
   discipline: 'Full-Stack & Software Engineering',
-  experience: 'Undergrad & Industry Experience',
+  experience: 'Software Engineering & Full-Stack Development',
   aboutHeadline:
-    'ENGINEERING SCALABLE, RELIABLE, AND MEANINGFUL DIGITAL SOLUTIONS.',
+    'BUILDING SOFTWARE THAT CONNECTS TECHNOLOGY WITH REAL-WORLD NEEDS.',
   aboutParagraphs: [
-    "I'm a Software Engineer and Full-Stack Developer with a background in Computer Science at Diponegoro University. I enjoy designing and building web applications that solve real-world problems, from intuitive user interfaces to reliable backend systems and well-structured databases.Throughout my experience in software development, I've worked on various projects involving enterprise applications, manufacturing digitalization, ERP systems, and data-driven platforms. My experience spans frontend and backend development, REST API design, database management, and system integration, allowing me to understand how different components work together to deliver effective software solutions.",
-    "Beyond writing code, I value understanding business requirements, solving technical challenges, and building systems that are maintainable, efficient, and reliable. I believe great software engineering is not just about making things work, but about creating meaningful solutions that deliver lasting value. I'm continuously exploring new technologies, refining my engineering practices, and looking for opportunities to build impactful digital products.",
+    "I'm a Software Engineer and Full-Stack Developer with a background in Computer Science at Diponegoro University. I focus on building web applications and digital systems that address real-world problems, combining frontend development, backend engineering, database design, and system integration.",
+    "My experience includes developing enterprise-oriented applications, ERP-related solutions, manufacturing digitalization initiatives, and data-driven platforms. I enjoy understanding business workflows, translating requirements into technical solutions, and building software that is maintainable, reliable, and practical to use.",
+    "Beyond implementation, I value clean code, thoughtful system design, and continuous learning. I aim to build software that not only works as expected but also provides measurable value to the people and organizations using it."
   ],
   principles: [
-    { title: '01. Performance First', text: 'Sub-second response times, optimized bundling, efficient state flow.' },
-    { title: '02. Clean Architecture', text: 'Modular component hierarchies, robust type-safety, maintainable code.' },
-    { title: '03. User-Centric Craft', text: 'Seamless interactions, high accessibility, and cohesive design systems.' },
+    {
+      title: '01. Reliable Engineering',
+      text: 'Building dependable applications through structured implementation, validation, and maintainable code.'
+    },
+    {
+      title: '02. End-to-End Development',
+      text: 'Connecting user interfaces, backend services, APIs, and databases into cohesive software systems.'
+    },
+    {
+      title: '03. Business-Oriented Solutions',
+      text: 'Understanding real workflows and translating business requirements into practical technical solutions.'
+    }
   ],
+
+  // Keep existing stats temporarily.
+  // We will validate their accuracy before changing the displayed numbers.
   stats: [
     { value: '10+', label: 'Shipped Projects' },
     { value: '2+ Yrs', label: 'Coding & Engineering' },
     { value: '100%', label: 'Commitment to Craft' },
   ],
+
   socials: {
     github: 'https://github.com/Ranggadya',
     linkedin: 'https://www.linkedin.com/in/ranggadya/',
@@ -39,13 +52,3 @@ export const profile = {
     { label: 'INSTAGRAM', href: 'https://www.instagram.com/rnggdyar/' },
   ],
 } as const;
-
-export const NAV_ITEMS: NavItem[] = [
-  { label: 'HOME', href: '#home' },
-  { label: 'ABOUT', href: '#about' },
-  { label: 'PROJECTS', href: '#projects' },
-  { label: 'SERVICES', href: '#services' },
-  { label: 'EXPERIENCE', href: '#experience' },
-  { label: 'TECH STACK', href: '#tech-stack' },
-  { label: 'CERTIFICATES', href: '#credentials' },
-];

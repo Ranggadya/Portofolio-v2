@@ -1,6 +1,41 @@
+
 import type { Experience } from '@/types';
 
 export const experiences: Experience[] = [
+  
+{
+  id: 'kalbe-production-digitalization',
+  period: 'Aug 2026 — Present',
+  current: true,
+  type: 'Internship / On-site',
+  company: 'PT Bintang Toedjoe (Kalbe Consumer Health)',
+  role: 'Production Digitalization Intern',
+  env: 'ENV // MANUFACTURING DIGITALIZATION',
+  era: 'FULL-STACK ENGINEERING',
+  description:
+    'Contributing as a Full-Stack Developer to the development of IBC Center, an internal web-based monitoring system designed to support IBC availability and condition monitoring across manufacturing operations. The work involves analyzing business requirements from User Requirement Specifications (URS), developing frontend and backend components, implementing data processing workflows, and supporting system integration to improve production visibility and operational traceability.',
+  bullets: [
+    'System Analysis & Requirement Engineering: Analyzed URS documents and manufacturing workflows to translate production requirements into functional system specifications, covering IBC Usage, Cleaning IBC, dashboard monitoring, and system administration.',
+    'Full-Stack Application Development: Developed application components using React and Go (Fiber), implementing frontend interfaces, backend business logic, REST APIs, and PostgreSQL database operations.',
+    'Data Processing & Integration: Worked on backend data retrieval workflows using Go workers to consume Batch Reporter API data and support synchronization with the application database.',
+    'System Reliability & Security: Worked with JWT authentication, refresh tokens, role-based access control (RBAC), Server-Sent Events (SSE), and audit trail requirements to support secure and traceable application operations.',
+  ],
+  tags: [
+    'Go',
+    'Go Fiber',
+    'React.js',
+    'TypeScript',
+    'PostgreSQL',
+    'REST API',
+    'Server-Sent Events',
+    'JWT',
+    'RBAC',
+    'Docker',
+    'Nginx',
+    'System Analysis',
+  ],
+},
+
   {
     id: 'dbs-coding-camp',
     period: 'Feb 2026 — Jul 2026',
@@ -8,36 +43,15 @@ export const experiences: Experience[] = [
     type: 'Bootcamp / Remote',
     company: 'Coding Camp 2026 powered by DBS Foundation',
     role: 'Full-Stack Web Developer — Capstone Project',
-    env: 'ENV // FINTECH & AI PLATFORM',
-    era: 'CAPSTONE ACCELERATOR',
+    env: 'ENV // FINANCIAL TECHNOLOGY',
+    era: 'CAPSTONE PROJECT',
     description:
-      'Developed CuanSelor, an AI-powered personal financial planning platform designed to help Gen Z make informed financial decisions and plan for long-term financial goals. Built responsive frontend interfaces, developed backend REST APIs, designed database integrations, and connected the application with AI/ML services for personalized financial insights and retirement projections. Collaborated with AI Engineers and Data Scientists to integrate application features and ensure seamless communication between the frontend, backend, and AI components.',
-    metrics: [
-      {
-        label: 'SIMULATION ENGINE',
-        value: '10K ITERATIONS',
-        sub: 'Monte Carlo actuarial risk models',
-      },
-      {
-        label: 'CORE PLATFORM',
-        value: 'CUANSELOR',
-        sub: 'AI financial advisor for Gen Z',
-      },
-      {
-        label: 'COLLABORATION',
-        value: 'CROSS-SQUAD',
-        sub: 'Frontend, backend & AI/ML sync',
-      },
-    ],
+      'Developed CuanSelor, an AI-powered personal financial planning platform designed to help Gen Z make informed financial decisions and plan for long-term financial goals. Contributed to frontend development, backend API implementation, database integration, and the integration of AI-powered features in collaboration with AI Engineers and Data Scientists.',
     bullets: [
-      'Architected end-to-end full-stack systems: Developed responsive Next.js frontend interfaces, Express.js backend REST APIs, and Supabase PostgreSQL persistence.',
-      'Integrated AI & Actuarial Models: Connected the application with Gemini AI advisor endpoints and 10,000-iteration Monte Carlo simulation services for retirement forecasts.',
-      'Cross-Functional Squad Leadership: Collaborated with AI Engineers and Data Scientists to ensure deterministic communication between client views, backend services, and machine learning models.',
+      'Full-Stack Development: Developed application features by connecting Next.js frontend interfaces with Express.js backend services and REST APIs.',
+      'Backend & Data Integration: Worked on API communication and PostgreSQL-based data persistence to support financial planning features.',
+      'Cross-Functional Collaboration: Collaborated with AI Engineers and Data Scientists to integrate AI-powered financial insights and retirement planning capabilities into the application.',
     ],
-    artifact: {
-      name: 'ARTIFACT // CUANSELOR-PLATFORM.SPEC',
-      type: 'AI FINTECH ARCHITECTURE / V1.0',
-    },
     tags: [
       'Next.js',
       'React.js',
@@ -47,7 +61,7 @@ export const experiences: Experience[] = [
       'REST API',
       'Supabase',
       'PostgreSQL',
-      'AI/ML API Integration',
+      'AI Integration',
     ],
   },
   {
@@ -57,37 +71,23 @@ export const experiences: Experience[] = [
     type: 'Internship / On-site',
     company: 'SKENACORP',
     role: 'Software Engineer Intern',
-    env: 'ENV // ONLINE MEDIA & SCRAPING',
-    era: 'PRODUCTION INTERNSHIP',
+    env: 'ENV // ONLINE MEDIA & DATA PROCESSING',
+    era: 'INDUSTRY INTERNSHIP',
     description:
-      'Engineered automated web scrapers to collect and aggregate data from online publications, developed real-time analytics dashboards, and created reusable UI component systems with React and TypeScript.',
-    metrics: [
-      {
-        label: 'DATA INGESTION',
-        value: 'AUTOMATED',
-        sub: 'Multi-source publication scrapers',
-      },
-      {
-        label: 'TELEMETRY DASHBOARD',
-        value: 'REAL-TIME',
-        sub: 'Content performance monitor',
-      },
-      {
-        label: 'COMPONENT DESIGN',
-        value: 'MODULAR UI',
-        sub: 'Reusable React/TS component library',
-      },
-    ],
+      'Worked on web-based data collection and monitoring solutions, including automated data extraction from online publications and dashboard development to support editorial content tracking.',
     bullets: [
-      'Engineered automated web scrapers in Python to reliably collect and aggregate structured editorial content across online publications.',
-      'Developed real-time analytics dashboards utilizing React and TypeScript for immediate editorial content tracking.',
-      'Constructed modular and reusable design system UI components to ensure visual coherence across internal publishing tools.',
+      'Web Scraping: Developed Python-based scrapers to collect and structure editorial content from online publications.',
+      'Dashboard Development: Built frontend interfaces using React and TypeScript to present collected content and monitoring information.',
+      'Reusable Components: Developed modular UI components to support consistency and maintainability across internal tools.',
     ],
-    artifact: {
-      name: 'ARTIFACT // SKENA-SCRAPER-PIPELINE.DAG',
-      type: 'ETL DATA INGESTION / V2.1',
-    },
-    tags: ['Python', 'React.js', 'TypeScript', 'Web Scraping', 'Design Systems', 'Dashboard UI'],
+    tags: [
+      'Python',
+      'React.js',
+      'TypeScript',
+      'Web Scraping',
+      'Data Processing',
+      'Dashboard Development',
+    ],
   },
   {
     id: 'dsi',
@@ -95,38 +95,26 @@ export const experiences: Experience[] = [
     current: false,
     type: 'Internship / On-site',
     company: 'esikatERP (PT Duta Solusi Informatika)',
-    role: 'Full-Stack Developer Intern',
-    env: 'ENV // ENTERPRISE PAYROLL & ERP',
-    era: 'MANUFACTURING INTEGRATION',
+    role: 'Software Engineer Intern',
+    env: 'ENV // ENTERPRISE ERP SYSTEM',
+    era: 'ENTERPRISE SOFTWARE',
     description:
-      'Developed an automated enterprise payroll system for employee compensation processing and participated in system integrations with customs, manufacturing, and internal ERP workflows.',
-    metrics: [
-      {
-        label: 'PAYROLL PROCESSING',
-        value: 'AUTOMATED',
-        sub: 'Eliminated manual calculation errors',
-      },
-      {
-        label: 'SYSTEM SYNC',
-        value: 'ERP CONNECT',
-        sub: 'Customs & manufacturing workflows',
-      },
-      {
-        label: 'API CONTRACTS',
-        value: 'RESTFUL',
-        sub: 'Secured PHP Laravel endpoints',
-      },
-    ],
+      'Contributed to the development and documentation of an enterprise ERP system supporting manufacturing operations and business processes. Worked on inventory and production-related modules, web-based documentation, and data integration between system components.',
     bullets: [
-      'Constructed an automated enterprise payroll engine in PHP Laravel, calculating industrial employee compensation and overtime schedules.',
-      'Integrated backend modules with internal manufacturing schedules, material inventories, and customs compliance documentation.',
-      'Structured relational MySQL database tables with indexing, role-based access authorization, and audit logs.',
+      'ERP Development: Contributed to inventory and production-related functionality within an enterprise resource planning system.',
+      'Web Documentation: Developed web-based system documentation using React and Laravel to help present ERP workflows and system information.',
+      'System Integration: Supported data integration across ERP components related to manufacturing operations and business processes.',
     ],
-    artifact: {
-      name: 'ARTIFACT // DSI-PAYROLL-INTEGRATION.SYS',
-      type: 'ERP TRANSACTION SPEC / V1.4',
-    },
-    tags: ['PHP', 'Laravel', 'JavaScript', 'React.js', 'MySQL', 'REST API'],
+    tags: [
+      'PHP',
+      'Laravel',
+      'React.js',
+      'JavaScript',
+      'MySQL',
+      'ERP',
+      'REST API',
+      'System Integration',
+    ],
   },
   {
     id: 'undip',
@@ -135,36 +123,21 @@ export const experiences: Experience[] = [
     type: 'Undergraduate / Active',
     company: 'Diponegoro University (UNDIP)',
     role: 'Bachelor of Computer Science (Informatika)',
-    env: 'ENV // S1 COMPUTER SCIENCE',
+    env: 'ENV // COMPUTER SCIENCE',
     era: 'ACADEMIC FOUNDATIONS',
     description:
-      'Focusing on full-stack software development, distributed systems architecture, database engineering, and cognitive interaction design. Actively building open-source platforms and production-ready applications.',
-    metrics: [
-      {
-        label: 'DEGREE PROGRAM',
-        value: 'INFORMATIKA',
-        sub: 'Diponegoro University (UNDIP)',
-      },
-      {
-        label: 'TECHNICAL RIGOR',
-        value: 'SYSTEMS & DB',
-        sub: 'Architecture & distributed engineering',
-      },
-      {
-        label: 'PRODUCTION BUILDS',
-        value: 'ACTIVE LAB',
-        sub: 'Web platforms & open-source solutions',
-      },
-    ],
+      'Pursuing a Computer Science degree with an academic focus on software development, algorithms, database systems, and software engineering. Applying these foundations through academic assignments, collaborative projects, and independent software development.',
     bullets: [
-      'Comprehensive study of Data Structures, Algorithms, Distributed Computing, Database Management Systems, and Software Craftsmanship.',
-      'Architecting modern web platforms, integrating state-of-the-art frontend tooling with resilient backend microservices.',
-      'Active participation in software engineering research, technical collaborative projects, and community technology workshops.',
+      'Computer Science Foundations: Studying data structures, algorithms, database management systems, software engineering, and other core computing subjects.',
+      'Applied Development: Applying academic knowledge to build web applications and software solutions through individual and collaborative projects.',
+      'Continuous Learning: Exploring software architecture, backend engineering, and modern web development practices to strengthen engineering capabilities.',
     ],
-    artifact: {
-      name: 'ARTIFACT // UNDIP-CS-CURRICULUM.SPEC',
-      type: 'ACADEMIC RECORD / S1 INFORMATIKA',
-    },
-    tags: ['Computer Science', 'Data Structures', 'System Architecture', 'PostgreSQL', 'Software Engineering'],
+    tags: [
+      'Computer Science',
+      'Data Structures & Algorithms',
+      'Database Systems',
+      'Software Engineering',
+      'Web Development',
+    ],
   },
 ];
