@@ -1,4 +1,3 @@
-
 import type { NavItem } from '@/types';
 
 export const profile = {
@@ -6,42 +5,43 @@ export const profile = {
   fullName: 'Ranggadya Aditama Ramadhani',
   headline: ['RANGGADYA ADITAMA', 'SOFTWARE ENGINEER', 'FULL-STACK DEVELOPER'],
   tagline:
-    'Building end-to-end software solutions, reliable backend systems, and web applications that solve real-world business problems.',
+    'Engineering reliable full-stack applications, robust backend services, and practical software solutions designed for real-world business needs.',
   email: 'ranggadya2530@gmail.com',
   location: 'Semarang, ID (GMT+7)',
   photo: '/photo.jpg',
   resumeUrl: '/cv.pdf',
   status: 'Open for Opportunities',
-  discipline: 'Full-Stack & Software Engineering',
-  experience: 'Software Engineering & Full-Stack Development',
+  discipline: 'Software Engineering & Full-Stack Development',
+  experience: 'Enterprise Systems & Digital Solutions',
   aboutHeadline:
-    'BUILDING SOFTWARE THAT CONNECTS TECHNOLOGY WITH REAL-WORLD NEEDS.',
+    'ENGINEERING RELIABLE SOFTWARE AND SCALABLE SYSTEMS FOR REAL-WORLD NEEDS.',
   aboutParagraphs: [
-    "I'm a Software Engineer and Full-Stack Developer with a background in Computer Science at Diponegoro University. I focus on building web applications and digital systems that address real-world problems, combining frontend development, backend engineering, database design, and system integration.",
-    "My experience includes developing enterprise-oriented applications, ERP-related solutions, manufacturing digitalization initiatives, and data-driven platforms. I enjoy understanding business workflows, translating requirements into technical solutions, and building software that is maintainable, reliable, and practical to use.",
-    "Beyond implementation, I value clean code, thoughtful system design, and continuous learning. I aim to build software that not only works as expected but also provides measurable value to the people and organizations using it."
+    "I am a Software Engineer and Full-Stack Developer with a background in Computer Science from Diponegoro University. My work centers on architecting and developing end-to-end web applications and digital systems, integrating responsive frontend interfaces with reliable backend services, robust APIs, and structured relational databases.",
+    "Throughout my experience across enterprise environments, manufacturing digitalization, and data-driven platforms, I have focused on bridging business workflows with technical execution. I analyze operational requirements, model domain logic, and translate complex processes—such as production tracking and resource monitoring—into dependable, scalable software solutions.",
+    "I approach software engineering with a commitment to system reliability, clean architecture, and long-term maintainability. Beyond writing functional code, I design applications to be observable, secure, and resilient under real-world usage—delivering measurable operational value to the organizations and users who rely on them.",
   ],
   principles: [
     {
       title: '01. Reliable Engineering',
-      text: 'Building dependable applications through structured implementation, validation, and maintainable code.'
+      text: 'Building dependable applications through structured implementation, validation, and maintainable code.',
     },
     {
       title: '02. End-to-End Development',
-      text: 'Connecting user interfaces, backend services, APIs, and databases into cohesive software systems.'
+      text: 'Connecting user interfaces, backend services, APIs, and databases into cohesive software systems.',
     },
     {
       title: '03. Business-Oriented Solutions',
-      text: 'Understanding real workflows and translating business requirements into practical technical solutions.'
-    }
+      text: 'Understanding real workflows and translating business requirements into practical technical solutions.',
+    },
   ],
 
-  // Keep existing stats temporarily.
-  // We will validate their accuracy before changing the displayed numbers.
+  // Note: Statistics must remain grounded in verified portfolio content.
+  // '4 Industry Engagements' reflects the 4 verifiable roles in experience.ts (Kalbe, DBS, SKENACORP, esikatERP).
+  // '10+' and '2+ Yrs' should be verified or adjusted by the portfolio owner based on overall repository records.
   stats: [
-    { value: '10+', label: 'Shipped Projects' },
-    { value: '2+ Yrs', label: 'Coding & Engineering' },
-    { value: '100%', label: 'Commitment to Craft' },
+    { value: '4', label: 'Industry Engagements' },
+    { value: '10+', label: 'Projects & Repositories' },
+    { value: '2+ Yrs', label: 'Technical Experience' },
   ],
 
   socials: {
