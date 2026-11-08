@@ -271,156 +271,185 @@ def run_monte_carlo(current_assets: float, annual_contrib: float,
       },
     },
   },
+
   {
     id: 'shoes4us',
     title: 'Shoes4Us — Full-Stack E-Commerce Platform',
-    stack: 'React, TypeScript, Go, PostgreSQL, Tailwind CSS',
+    stack: 'React 19, TypeScript, Go, Chi, PostgreSQL, Tailwind CSS',
     year: '2026',
     mockup: 'shoes4us',
     dossier: {
       ref: 'PJ-2026-03',
-      discipline: 'FULL-STACK DEVELOPMENT & E-COMMERCE ENGINEERING',
-      status: 'FULL-STACK PROJECT',
+      discipline: 'FULL-STACK DEVELOPMENT & BACKEND ENGINEERING',
+      status: 'LIVE APPLICATION',
       featuredTag: 'E-COMMERCE & RETAIL PLATFORM',
       estYear: 'EST. 2026',
-      summary:
-        'A full-stack footwear e-commerce application built with a React-based storefront and Go backend, featuring product catalog management, shopping cart workflows, user authentication, and transactional inventory handling.',
 
-      clientContext: 'Footwear E-Commerce Application',
+      summary:
+        'A full-stack footwear e-commerce platform built with React and Go, featuring a modular REST API, JWT-based authentication, size-specific inventory management, and transaction-safe order processing.',
+
+      clientContext: 'Independent E-Commerce Project',
       roleDiscipline: 'Full-Stack Developer',
-      timelineState: '2025 — 2026',
-      primaryStack: 'React, TypeScript, Go, PostgreSQL',
-      liveUrl: 'https://shoes4-us.vercel.app/',
-      githubUrl: 'https://github.com/Ranggadya',
+      timelineState: '2026 — Independent Project',
+      primaryStack: 'React 19, TypeScript, Go, PostgreSQL',
+
+      liveUrl: 'https://shoes4us.vercel.app/',
+      githubUrl: 'https://github.com/Ranggadya/Shoes4Us',
+
       challengeParagraphs: [
-        'Footwear e-commerce applications need to manage product variations such as shoe sizes, product availability, and pricing while maintaining a consistent shopping experience. Inventory accuracy is particularly important because multiple customers may attempt to purchase the same product variation at the same time.',
-        'Shoes4Us addresses these requirements through a full-stack architecture consisting of a React-based storefront, a Go REST API, and a PostgreSQL database. The application separates frontend interactions from backend business logic and uses database transactions to handle inventory updates consistently.',
+        'Footwear e-commerce systems require more than basic product and order management. Product availability must account for individual size variants, while checkout operations must preserve inventory consistency when multiple customers attempt to purchase the same products concurrently.',
+        'Shoes4Us addresses these requirements through a decoupled frontend and backend architecture. The React storefront communicates with a Go-based REST API, while PostgreSQL handles persistent application data and transactional inventory operations. The backend is organized into distinct domain, repository, service, and handler layers to maintain separation of concerns and support ongoing development.',
       ],
-      systemDesignHeadline: 'Full-Stack E-Commerce Architecture',
+
+      systemDesignHeadline: 'Modular Full-Stack & Transactional Architecture',
 
       systemDesignDesc:
-        'A modular application architecture separating storefront interactions, backend business logic, authentication, and relational data management. PostgreSQL transactions support consistent inventory updates during order processing.',
+        'A decoupled React frontend and Go REST API backed by PostgreSQL. The backend separates HTTP handling, application services, domain contracts, and database access, while transactional checkout operations maintain consistency across inventory and order records.',
+
       layers: [
         {
-          layer: 'LAYER 01: STOREFRONT',
+          layer: 'LAYER 01: PRESENTATION',
           badge: 'REACT / VITE',
-          title: 'Product Discovery & Shopping Experience',
+          title: 'Storefront & Customer Experience',
           description:
-            'Provides the customer-facing storefront, product browsing, product filtering, shopping cart interactions, and responsive user interfaces.',
+            'Provides product discovery, catalog filtering, product details, shopping cart interactions, wishlist management, and responsive customer-facing interfaces using React, TypeScript, and React Router.',
         },
         {
-          layer: 'LAYER 02: APPLICATION BACKEND',
-          badge: 'GO / CHI ROUTER',
+          layer: 'LAYER 02: APPLICATION API',
+          badge: 'GO / CHI',
           title: 'REST API & Business Logic',
           description:
-            'Handles application requests, product operations, authentication workflows, and backend business logic through Go-based REST endpoints.',
+            'Processes application requests through Go HTTP handlers and service components, with Chi routing, centralized response handling, and modular backend dependencies.',
         },
         {
-          layer: 'LAYER 03: AUTHENTICATION',
+          layer: 'LAYER 03: SECURITY & IDENTITY',
           badge: 'JWT / RBAC',
           title: 'Authentication & Access Control',
           description:
-            'Separates customer and administrative access through authentication mechanisms and role-based authorization.',
+            'Implements JWT-based authentication, Bcrypt password hashing, HttpOnly authentication cookies, and role-based middleware to separate customer and administrative operations.',
         },
         {
-          layer: 'LAYER 04: DATA MANAGEMENT',
-          badge: 'POSTGRESQL',
-          title: 'Relational Data & Inventory Transactions',
+          layer: 'LAYER 04: DATA & STORAGE',
+          badge: 'POSTGRESQL / R2',
+          title: 'Relational Data & Object Storage',
           description:
-            'Stores application data in a relational database and uses transactional operations to maintain consistency when updating product inventory.',
+            'Uses PostgreSQL with pgx connection pooling for persistent application data and transactional operations, alongside S3-compatible Cloudflare R2 storage for product media.',
         },
       ],
+
       codeSnippet: {
-        filename: 'inventory_service.go — ATOMIC STOCK RESERVATION',
-        lang: 'Go 1.25 / pgxpool',
-        code: `package service
+        filename: 'order_repository.go — TRANSACTIONAL INVENTORY',
+        lang: 'Go 1.24 / pgx v5',
+        code: `// Begin a database transaction.
+tx, err := r.pool.Begin(ctx)
+if err != nil {
+    return err
+}
+defer tx.Rollback(ctx)
 
-import (
-    "context"
-    "github.com/jackc/pgx/v5/pgxpool"
+// Process size-specific inventory updates.
+const decSizeQuery = \`
+    UPDATE product_sizes
+    SET stock = stock - $1, "updatedAt" = $2
+    WHERE "productId" = $3
+      AND size = $4
+      AND stock >= $1
+\`
+
+cmdTag, err := tx.Exec(
+    ctx,
+    decSizeQuery,
+    item.Quantity,
+    now,
+    item.ProductID,
+    sz,
 )
-
-type InventoryService struct {
-    db *pgxpool.Pool
+if err != nil {
+    return err
 }
 
-// ReserveStock atomically verifies and decrements size-specific SKU stock
-func (s *InventoryService) ReserveStock(ctx context.Context, productID string, size int, qty int) (bool, error) {
-    tx, err := s.db.Begin(ctx)
-    if err != nil {
-        return false, err
-    }
-    defer tx.Rollback(ctx)
-
-    var currentStock int
-    query := \`SELECT stock FROM product_variants WHERE product_id = $1 AND size = $2 FOR UPDATE\`
-    if err := tx.QueryRow(ctx, query, productID, size).Scan(&currentStock); err != nil {
-        return false, err
-    }
-
-    if currentStock < qty {
-        return false, ErrInsufficientStock
-    }
-
-    update := \`UPDATE product_variants SET stock = stock - $1 WHERE product_id = $2 AND size = $3\`
-    if _, err := tx.Exec(ctx, update, qty, productID, size); err != nil {
-        return false, err
-    }
-
-    if qty <= 0 {
-    return false, ErrInvalidQuantity
+if cmdTag.RowsAffected() == 0 {
+    return domain.NewBadRequest(
+        "Insufficient size-specific stock",
+    )
 }
 
-if err := tx.Commit(ctx); err != nil {
-    return false, err
-}
-
-return true, nil
-}`,
+// Commit only after all order operations succeed.
+return tx.Commit(ctx)`,
       },
+
       decisions: [
         {
-          title: 'Atomic Row-Level Locking (SELECT FOR UPDATE)',
+          title: 'Transactional Checkout & Inventory Consistency',
           description:
-            'Eliminates inventory race conditions when multiple customers buy the same shoe size simultaneously, guaranteeing zero stock oversell.',
+            'Groups inventory deduction, order creation, order-item insertion, and cart clearing into a single PostgreSQL transaction. Failed operations prevent partial checkout state from being committed.',
         },
         {
-          title: 'Zero-Trust Security & Parameterized Defense',
+          title: 'Conditional Stock Updates',
           description:
-            'Bcrypt password hashing, dual-mode JWT auth with role guard middleware (Customer/Admin), and strictly parameterized queries to prevent SQL injection and parameter tampering.',
+            'Uses atomic SQL UPDATE statements with stock availability conditions and affected-row validation to prevent inventory quantities from becoming negative during concurrent checkout operations.',
         },
         {
-          title: 'High-Throughput Connection Pooling (pgxpool)',
+          title: 'Layered Backend Architecture',
           description:
-            'Replaces heavy ORM abstractions with lightweight Go Chi routing and raw pgx connection pooling, reducing p99 database query overhead to sub-15ms.',
+            'Separates domain contracts, repository implementations, application services, HTTP handlers, and middleware to improve maintainability, testability, and dependency organization.',
+        },
+        {
+          title: 'Deterministic Inventory Processing',
+          description:
+            'Sorts checkout items by product and size before inventory deduction to establish a consistent database update order and reduce potential deadlocks.',
         },
       ],
+
       capabilities: [
         {
-          code: '01 // QUERY SPEED',
-          title: 'Sub-15ms API Response Latency',
+          code: '01 // BACKEND ENGINEERING',
+          title: 'Modular Go REST API',
           description:
-            'High-concurrency Go backend with pgx connection pooling and B-Tree composite indexing on (product_id, size) for instantaneous catalog filtering.',
+            'Develops backend application services using Go, Chi routing, pgx connection pooling, structured handlers, and layered domain and repository components.',
         },
         {
-          code: '02 // SECURITY SHIELD',
-          title: 'Zero SQLi & Dual-Mode JWT RBAC',
+          code: '02 // TRANSACTION PROCESSING',
+          title: 'Transaction-Safe Order Management',
           description:
-            'Protected against injection attacks via parameterized SQL, accompanied by stateless JWT verification and strict admin route enforcement.',
+            'Implements checkout workflows with transactional inventory updates, order creation, order-item persistence, and cart management.',
         },
         {
-          code: '03 // CONCURRENCY INTEGRITY',
-          title: '0% Stock Overselling Guarantee',
+          code: '03 // SECURITY & IDENTITY',
+          title: 'JWT Authentication & Role-Based Access',
           description:
-            'Deterministic inventory state with transactional isolation and atomic rollbacks, ensuring order and payment certainty.',
+            'Implements password hashing, JWT verification, HttpOnly authentication cookies, and authorization middleware for customer and administrative endpoints.',
+        },
+        {
+          code: '04 // QUALITY ENGINEERING',
+          title: 'Automated Testing & CI Pipeline',
+          description:
+            'Integrates backend vetting, Go unit tests with the race detector, frontend linting and production builds, and Docker image build verification through GitHub Actions.',
         },
       ],
-      tools: ['React 18', 'TypeScript', 'Go (Golang)', 'PostgreSQL', 'pgxpool', 'Tailwind CSS', 'Docker', 'Vite', 'React Router v7'],
+
+      tools: [
+        'React 19',
+        'TypeScript',
+        'Vite',
+        'React Router v7',
+        'Tailwind CSS',
+        'Go 1.24',
+        'Chi Router',
+        'PostgreSQL',
+        'pgx v5',
+        'JWT',
+        'Bcrypt',
+        'Cloudflare R2',
+        'Docker',
+        'GitHub Actions',
+      ],
+
       quote: {
         text:
-          '“E-commerce succeeds or fails at the speed of query and the certainty of checkout. Building Shoes4Us meant creating an unshakeable bridge between instant browsing, bank-grade security, and atomic inventory truth.”',
-        author: '— Architecture Philosophy, Shoes4Us',
+          'Reliable e-commerce systems depend on more than a seamless storefront. They require consistent business logic, secure access control, and transactional integrity across every order.',
+        author: '— Engineering Philosophy, Shoes4Us',
       },
     },
-  },
+  }
 ];
