@@ -263,7 +263,7 @@ def run_monte_carlo(current_assets: float, annual_contrib: float,
       featuredTag: 'E-COMMERCE & RETAIL PLATFORM',
       estYear: 'EST. 2026',
       summary:
-        'A high-performance footwear retail platform built on a decoupled monorepo architecture featuring a responsive React client, high-concurrency Go REST API, size-specific inventory locks, and multi-courier shipping.',
+        'A high-performance footwear e-commerce platform engineered for zero-friction shopping: sub-15ms catalog discovery, enterprise-grade zero-trust security, and PostgreSQL atomic row-level locks that guarantee size-specific stock availability without checkout race conditions.',
       clientContext: 'Retail Footwear & Lifestyle Storefront',
       roleDiscipline: 'Full-Stack Architect & Core Developer',
       timelineState: '2025 — 2026 (Production Live)',
@@ -271,45 +271,45 @@ def run_monte_carlo(current_assets: float, annual_contrib: float,
       liveUrl: 'https://shoes4-us.vercel.app/',
       githubUrl: 'https://github.com/Ranggadya',
       challengeParagraphs: [
-        'Traditional footwear e-commerce architectures frequently struggle with inventory race conditions during high-demand releases, slow database query times across multi-attribute shoe variations (size, color, brand), and fragmented shipping rate calculations.',
-        'Shoes4Us addresses this with a decoupled monorepo setup: a lightweight React 18 client-side application for instant product browsing, coupled with a high-throughput Go backend that utilizes atomic row-level locks (FOR UPDATE) in PostgreSQL to ensure sub-15ms checkout validation and 100% accurate stock deduction.',
+        'Traditional footwear e-commerce platforms struggle with severe shopping friction: lagging search queries across multi-attribute shoe variations (size, brand, gender), vulnerable transaction endpoints, and checkout race conditions where multiple customers buy the last pair simultaneously—leading to inventory discrepancy and embarrassing order cancellations.',
+        'Shoes4Us eliminates these bottlenecks through a decoupled monorepo architecture: a lightning-fast React 18 client SPA paired with a high-throughput Go (Chi) REST backend. By combining pgx connection pooling, strict Bcrypt and dual-mode JWT auth guards, parameterized SQL queries, and PostgreSQL row-level locking (SELECT ... FOR UPDATE), the system achieves sub-15ms p99 query latency, zero SQL injection vulnerability, and 100% deterministic stock deduction.',
       ],
-      systemDesignHeadline: 'Decoupled Monorepo with Go API & PostgreSQL',
+      systemDesignHeadline: 'High-Throughput Monorepo: Sub-15ms Query Engine & Zero-Trust Security',
       systemDesignDesc:
-        'Engineered for maximum velocity with strict boundary separation between client-side rendering, administrative product catalogs, and high-concurrency transactional database services.',
+        'Engineered for maximum velocity and transaction safety, separating client-side state discovery, secure administrative catalogs, and ACID-compliant relational inventory locking.',
       layers: [
         {
           layer: 'LAYER 01: CLIENT STOREFRONT',
-          badge: 'REACT 18 / VITE',
-          title: 'Vite SPA & Context State Engine',
+          badge: 'REACT 18 / VITE SPA',
+          title: 'Instant Discovery & Cart State Engine',
           description:
-            'Interactive catalog with real-time size availability, instant client cart synchronization, and brand-based filtering.',
+            'Ultra-responsive catalog discovery with zero-lag multi-attribute filtering (brand, size, price), real-time cart drawer synchronization, and optimistic UI updates.',
         },
         {
           layer: 'LAYER 02: HIGH-SPEED BACKEND',
-          badge: 'GO 1.24 / CHI',
-          title: 'Go REST API & Chi Routing',
+          badge: 'GO 1.25 / CHI ROUTER',
+          title: 'Sub-15ms Query Engine & Connection Pool',
           description:
-            'Sub-15ms response latency utilizing Chi router, pgx connection pooling, and stateless JWT authentication.',
+            'High-concurrency Go REST API utilizing Chi router, memory-efficient JSON serialization, and pgxpool connection pooling to deliver sub-15ms response latency under peak load.',
         },
         {
-          layer: 'LAYER 03: DATABASE & SCHEMAS',
-          badge: 'POSTGRESQL',
-          title: 'Relational Schema & Atomic Locks',
+          layer: 'LAYER 03: ZERO-TRUST DEFENSE',
+          badge: 'SECURITY & RBAC',
+          title: 'Bcrypt Hashing & Dual-Mode Auth Guard',
           description:
-            'Indexed product variation tables, row-level inventory locks (FOR UPDATE), and optimized order history tracking.',
+            'Enterprise-grade security perimeter featuring Bcrypt credential hashing, dual-mode JWT verification (Bearer + HttpOnly Cookie), RBAC route guards, and strict parameterized queries immune to SQL injection.',
         },
         {
-          layer: 'LAYER 04: LOGISTICS & DEVOPS',
-          badge: 'DOCKER / CLOUD',
-          title: 'Multi-Courier Shipping & Containerization',
+          layer: 'LAYER 04: TRANSACTIONAL INTEGRITY',
+          badge: 'POSTGRESQL LOCKS',
+          title: 'Atomic Row-Level Stock Locking (FOR UPDATE)',
           description:
-            'Integrated rate calculation for Indonesian couriers (JNE, J&T, SiCepat, POS) and automated Docker Compose production deployment.',
+            'ACID transactional engine employing SELECT ... FOR UPDATE row-level locks on product_variants, eliminating 100% of overselling and inventory race conditions during flash buys.',
         },
       ],
       codeSnippet: {
         filename: 'inventory_service.go — ATOMIC STOCK RESERVATION',
-        lang: 'Go 1.24 / pgx',
+        lang: 'Go 1.25 / pgxpool',
         code: `package service
 
 import (
@@ -349,45 +349,45 @@ func (s *InventoryService) ReserveStock(ctx context.Context, productID string, s
       },
       decisions: [
         {
-          title: 'Atomic Row-Level Locking (FOR UPDATE)',
+          title: 'Atomic Row-Level Locking (SELECT FOR UPDATE)',
           description:
-            'Eliminates inventory race conditions when multiple customers buy the same shoe size simultaneously.',
+            'Eliminates inventory race conditions when multiple customers buy the same shoe size simultaneously, guaranteeing zero stock oversell.',
         },
         {
-          title: 'Clean Monorepo Decoupling',
+          title: 'Zero-Trust Security & Parameterized Defense',
           description:
-            'Independent deploy targets for frontend SPA (Vercel) and Go API backend (Docker / Cloud PaaS) while sharing database contracts.',
+            'Bcrypt password hashing, dual-mode JWT auth with role guard middleware (Customer/Admin), and strictly parameterized queries to prevent SQL injection and parameter tampering.',
         },
         {
-          title: 'Multi-Courier Logistics Pipeline',
+          title: 'High-Throughput Connection Pooling (pgxpool)',
           description:
-            'Real-time shipping calculation across Indonesian postal and private courier services during checkout.',
+            'Replaces heavy ORM abstractions with lightweight Go Chi routing and raw pgx connection pooling, reducing p99 database query overhead to sub-15ms.',
         },
       ],
       capabilities: [
         {
-          code: '01 // INVENTORY',
-          title: 'Dynamic Size & SKU Matrix',
+          code: '01 // QUERY SPEED',
+          title: 'Sub-15ms API Response Latency',
           description:
-            'Per-size inventory counters, multi-image upload per product, and real-time out-of-stock indicators.',
+            'High-concurrency Go backend with pgx connection pooling and B-Tree composite indexing on (product_id, size) for instantaneous catalog filtering.',
         },
         {
-          code: '02 // PERFORMANCE',
-          title: 'Sub-15ms Go REST API',
+          code: '02 // SECURITY SHIELD',
+          title: 'Zero SQLi & Dual-Mode JWT RBAC',
           description:
-            'High-concurrency Go backend with pgx connection pooling and memory-efficient Chi routing.',
+            'Protected against injection attacks via parameterized SQL, accompanied by stateless JWT verification and strict admin route enforcement.',
         },
         {
-          code: '03 // CHECKOUT UX',
-          title: 'Frictionless Cart & Payment',
+          code: '03 // CONCURRENCY INTEGRITY',
+          title: '0% Stock Overselling Guarantee',
           description:
-            'Instant cart drawer, brand filtering, address validation, and seamless multi-channel checkout.',
+            'Deterministic inventory state with transactional isolation and atomic rollbacks, ensuring order and payment certainty.',
         },
       ],
-      tools: ['React 18', 'TypeScript', 'Go (Golang)', 'PostgreSQL', 'Tailwind CSS', 'Docker', 'Vite', 'React Router v7'],
+      tools: ['React 18', 'TypeScript', 'Go (Golang)', 'PostgreSQL', 'pgxpool', 'Tailwind CSS', 'Docker', 'Vite', 'React Router v7'],
       quote: {
         text:
-          '“E-commerce succeeds or fails at the speed of checkout and the certainty of inventory. Building Shoes4Us meant creating a zero-friction bridge between desire and delivery.”',
+          '“E-commerce succeeds or fails at the speed of query and the certainty of checkout. Building Shoes4Us meant creating an unshakeable bridge between instant browsing, bank-grade security, and atomic inventory truth.”',
         author: '— Architecture Philosophy, Shoes4Us',
       },
     },
