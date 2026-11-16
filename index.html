@@ -3,14 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Portfolio Ranggadya Aditama Ramadhani — Software Engineer & Full-Stack Developer." />
-    <title>Ranggadya - Software Engineer &amp; Full-Stack Developer</title>
+    <title>Ranggadya — Software Engineer &amp; Full-Stack Developer</title>
+    <meta
+      name="description"
+      content="Portfolio of Ranggadya Aditama Ramadhani — Software Engineer & Full-Stack Developer building reliable web applications, Go/Node.js backend APIs, and PostgreSQL systems."
+    />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0c0e" />
+
+    <!-- Open Graph / Social Preview -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ranggadya — Software Engineer &amp; Full-Stack Developer" />
+    <meta
+      property="og:description"
+      content="Software Engineer & Full-Stack Developer specializing in end-to-end web applications, backend REST APIs, and database-driven systems."
+    />
+    <meta property="og:image" content="/photo.jpg" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ranggadya — Software Engineer &amp; Full-Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="Software Engineer & Full-Stack Developer specializing in end-to-end web applications, backend REST APIs, and database-driven systems."
+    />
+    <meta name="twitter:image" content="/photo.jpg" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <!-- Terapkan tema sebelum paint agar tidak flicker (Default: Light) -->
     <script>
       try {
         var t = localStorage.getItem('theme');
-        // Default mutlak adalah light. Hanya aktifkan dark jika user sudah sengaja memilih 'dark'.
         if (t === 'dark') {
           document.documentElement.classList.add('dark');
         } else {

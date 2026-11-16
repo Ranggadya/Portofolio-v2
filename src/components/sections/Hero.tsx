@@ -20,7 +20,7 @@ export default function Hero() {
         </p>
         <a
           href={`mailto:${profile.email}`}
-          className="inline-flex items-center self-start rounded-full border border-fg px-5 py-2 font-mono text-[11px] tracking-tight shadow-sm transition-all hover:bg-fg hover:text-surface sm:text-xs md:text-sm"
+          className="inline-flex min-h-[44px] items-center self-start rounded-full border border-fg px-5 py-2 font-mono text-[11px] tracking-tight shadow-sm transition-all hover:bg-fg hover:text-surface sm:text-xs md:text-sm"
         >
           {profile.email}
         </a>

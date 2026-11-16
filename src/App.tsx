@@ -12,7 +12,7 @@ export default function App() {
   return (
     <>
       <Header />
-      <main className="mx-auto w-full max-w-[1920px] px-6 sm:px-10 md:px-12 lg:px-16 xl:px-20 2xl:px-24">
+      <main id="main-content" className="mx-auto w-full max-w-[1920px] px-6 sm:px-10 md:px-12 lg:px-16 xl:px-20 2xl:px-24">
         <Hero />
         <Projects />
         <About />

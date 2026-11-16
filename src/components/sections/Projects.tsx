@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { projects } from '@/data/projects';
 import Section from '@/components/ui/Section';
 import SectionHeader from '@/components/ui/SectionHeader';
 import ProjectCard from '@/components/projects/ProjectCard';
-import ProjectDossierModal from '@/components/projects/ProjectDossierModal';
 import type { Project } from '@/types';
+
+const ProjectDossierModal = lazy(() => import('@/components/projects/ProjectDossierModal'));
 
 export default function Projects() {
   const [activeProject, setActiveProject] = useState<Project | null>(null);
@@ -28,12 +29,14 @@ export default function Projects() {
       </div>
 
       {activeProject && (
-        <ProjectDossierModal
-          project={activeProject}
-          onClose={() => setActiveProject(null)}
-          onSelectProject={handleSelectProject}
-          allProjects={projects}
-        />
+        <Suspense fallback={null}>
+          <ProjectDossierModal
+            project={activeProject}
+            onClose={() => setActiveProject(null)}
+            onSelectProject={handleSelectProject}
+            allProjects={projects}
+          />
+        </Suspense>
       )}
     </Section>
   );

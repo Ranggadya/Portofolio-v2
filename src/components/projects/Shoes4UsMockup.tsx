@@ -61,14 +61,19 @@ export default function Shoes4UsMockup() {
           <div className="relative w-full max-w-sm rounded-2xl border border-neutral-200/90 bg-white p-4 shadow-xl">
             <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-gradient-to-br from-neutral-100 via-neutral-200/60 to-neutral-100">
               {!imgFailed ? (
-                <img
-                  src="/shoes4us.jpg"
-                  alt="Shoes4Us Showcase"
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-                  onError={() => setImgFailed(true)}
-                />
+                <picture>
+                  <source srcSet="/shoes4us.webp" type="image/webp" />
+                  <img
+                    src="/shoes4us.jpg"
+                    alt="Shoes4Us Showcase"
+                    width={800}
+                    height={367}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                    onError={() => setImgFailed(true)}
+                  />
+                </picture>
               ) : (
                 <div className="flex h-full w-full flex-col items-center justify-center gap-2 p-4 text-neutral-400">
                   <svg

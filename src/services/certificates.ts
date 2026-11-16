@@ -1,4 +1,4 @@
-import { supabase, isSupabaseConfigured } from '@/lib/supabase';
+import { isSupabaseConfigured, supabaseConfig } from '@/lib/supabase';
 import { certificates as fallbackCertificates } from '@/data/certificates';
 import type { Certificate } from '@/types';
 
@@ -8,7 +8,6 @@ export interface SupabaseCertificateRow {
   img?: string | null;
   link?: string | null;
   created_at?: string | null;
-  // Fallbacks for alternative naming
   image?: string | null;
   image_url?: string | null;
   gambar?: string | null;
@@ -17,7 +16,12 @@ export interface SupabaseCertificateRow {
   [key: string]: unknown;
 }
 
-function inferIssuer(title: string): { issuer: string; authority: string; category: string; icon: Certificate['icon'] } {
+function inferIssuer(title: string): {
+  issuer: string;
+  authority: string;
+  category: string;
+  icon: Certificate['icon'];
+} {
   const t = title.toLowerCase();
 
   if (t.includes('oracle')) {
@@ -179,16 +183,13 @@ export function normalizeSupabaseCertificate(
   };
 }
 
-export async function fetchCertificates(): Promise<{
+export async function fetchCertificates(signal?: AbortSignal): Promise<{
   data: Certificate[];
   isLive: boolean;
   error?: string;
 }> {
-  const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
-  if (anonKey.startsWith('http')) {
-    console.error(
-      '[Supabase Error] VITE_SUPABASE_ANON_KEY di file .env Anda masih berisi URL, bukan API Key! API Key Supabase adalah kode panjang berawalan "eyJhbGci..." yang ada di menu Project Settings > Data API > Project API Keys (anon public).'
-    );
+  const rawAnonKey = (import.meta.env.VITE_SUPABASE_ANON_KEY || '').trim();
+  if (rawAnonKey.startsWith('http')) {
     return {
       data: fallbackCertificates,
       isLive: false,
@@ -196,7 +197,7 @@ export async function fetchCertificates(): Promise<{
     };
   }
 
-  if (!isSupabaseConfigured || !supabase) {
+  if (!isSupabaseConfigured) {
     return {
       data: fallbackCertificates,
       isLive: false,
@@ -210,19 +211,38 @@ export async function fetchCertificates(): Promise<{
   );
 
   for (const tableName of candidateTables) {
-    try {
-      const { data, error } = await supabase
-        .from(tableName)
-        .select('*')
-        .order('id', { ascending: true });
+    if (signal?.aborted) break;
 
-      if (error) {
-        console.warn(`[Supabase] Gagal mengambil tabel "${tableName}":`, error.message);
-        continue;
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 5000);
+    const onExternalAbort = () => controller.abort();
+    signal?.addEventListener('abort', onExternalAbort, { once: true });
+
+    try {
+      const endpoint = `${supabaseConfig.url}/rest/v1/${encodeURIComponent(
+        tableName
+      )}?select=*&order=id.asc`;
+
+      const response = await fetch(endpoint, {
+        method: 'GET',
+        signal: controller.signal,
+        headers: {
+          apikey: supabaseConfig.anonKey,
+          Authorization: `Bearer ${supabaseConfig.anonKey}`,
+          Accept: 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        // Only try fallback table names if host responded (e.g., 404 table missing)
+        if (response.status === 404 || response.status === 400) {
+          continue;
+        }
+        break;
       }
 
-      if (data && data.length > 0) {
-        console.log(`[Supabase] Berhasil sinkronisasi ${data.length} sertifikat dari tabel "${tableName}"!`, data);
+      const data: unknown = await response.json();
+      if (Array.isArray(data) && data.length > 0) {
         const normalized = data.map((row, idx) =>
           normalizeSupabaseCertificate(row as SupabaseCertificateRow, idx)
         );
@@ -233,13 +253,20 @@ export async function fetchCertificates(): Promise<{
         };
       }
     } catch (err) {
-      console.warn(`[Supabase] Exception pada tabel "${tableName}":`, err);
+      if (import.meta.env.DEV && !(err instanceof DOMException && err.name === 'AbortError')) {
+        console.warn(`[Supabase REST] Failed to fetch "${tableName}":`, err);
+      }
+      // Host unreachable or timed out: fail fast instead of retrying other table names
+      break;
+    } finally {
+      window.clearTimeout(timeoutId);
+      signal?.removeEventListener('abort', onExternalAbort);
     }
   }
 
   return {
     data: fallbackCertificates,
     isLive: false,
-    error: 'Table not found or empty',
+    error: 'Table not found or unavailable',
   };
 }
