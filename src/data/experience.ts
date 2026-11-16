@@ -7,7 +7,7 @@ export const experiences: Experience[] = [
     current: true,
     type: 'Internship / On-site',
     company: 'PT Bintang Toedjoe (Kalbe Consumer Health)',
-    role: 'Production Digitalization Intern',
+    role: 'Software Engineer & Digitalization Intern',
     env: 'ENV // MANUFACTURING DIGITALIZATION',
     era: 'FULL-STACK ENGINEERING',
     description:
