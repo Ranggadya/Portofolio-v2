@@ -43,7 +43,7 @@ export default function Shoes4UsMockup() {
           </p>
           <div className="flex flex-wrap items-center gap-3 pt-1">
             <a
-              href="https://shoes4us.vercel.app/"
+              href="https://shoes4-us.vercel.app/"
               target="_blank"
               rel="noreferrer"
               className="inline-block rounded-lg bg-black px-5 py-2.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-neutral-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-neutral-900 sm:text-sm"

@@ -4,122 +4,111 @@ export const projects: Project[] = [
   {
     id: 'portfolio',
     title: 'Personal Portfolio Website — High Performance & Editorial UX',
-    stack: 'React.js, TypeScript, Vite, Tailwind CSS',
+    stack: 'React 18, TypeScript, Vite, Tailwind CSS',
     year: '2026',
     mockup: 'portfolio',
     dossier: {
       ref: 'PJ-2026-01',
-      discipline: 'FRONTEND ARCHITECTURE & BRUTALIST DESIGN',
+      discipline: 'FRONTEND ARCHITECTURE & EDITORIAL DESIGN SYSTEM',
       status: 'STATUS: PRODUCTION LIVE',
       featuredTag: 'FEATURED CASE STUDY',
       estYear: 'EST. 2026',
       summary:
-        'A high-conviction editorial showcase and modular engineering architecture built for sub-second performance, tactile typography, and fluid user interactions across all viewports.',
-      clientContext: 'Self-Initiated Showcase',
-      roleDiscipline: 'Lead Architect & Frontend',
-      timelineState: '2026 — Present (v2.0)',
+        'An editorial brutalist engineering portfolio designed for rapid 15–30 second recruiter scanning and deep technical evaluation—featuring a semantic dual-theme token system, code-split modal views, and verified bundle & media optimizations.',
+      clientContext: 'Personal Engineering Showcase',
+      roleDiscipline: 'Frontend Architect & Engineer',
+      timelineState: '2026 — Production Live',
       primaryStack: 'React 18, TypeScript, Vite, Tailwind CSS',
       liveUrl: 'https://github.com/Ranggadya/Portofolio-v2',
       githubUrl: 'https://github.com/Ranggadya/Portofolio-v2',
       challengeParagraphs: [
-        'Standard developer portfolios frequently compromise between aesthetic individuality and technical execution speed. The objective was to engineer an editorial brutalist web portfolio delivering zero layout shift, sub-300ms First Contentful Paint (FCP), and an uncompromising typographic hierarchy inspired by international Swiss publishing.',
-        'Every visual artifact—from state pill tags and mono headers to theme variables—is driven by a unified token engine that adapts seamlessly between high-contrast Dark and Tactile Light editorial sheets with zero flicker.',
+        'Engineering portfolios often fall into two extremes: over-animated templates that obscure technical substance, or dense text pages that are difficult for recruiters and engineering leads to scan quickly.',
+        'This portfolio balances editorial clarity with strict frontend engineering discipline. It pairs a high-contrast Swiss typographic grid and semantic CSS variable tokens (Light & Dark mode without flash) with aggressive bundle dieting, lazy-loaded case study drawers, and WCAG 2.1 AA keyboard & touch accessibility.',
       ],
-      systemDesignHeadline: 'Modular Decoupled Architecture',
+      systemDesignHeadline: 'Semantic Token System & Zero-Jank Frontend Architecture',
       systemDesignDesc:
-        'Engineered with strict separation of concerns, zero layout shift (CLS: 0.00), and an event-driven modal orchestration pattern built on semantic accessibility primitives.',
+        'Built around a lightweight component hierarchy, pre-paint theme hydration, and observer-driven runtime interactions that avoid layout thrashing during scrolling.',
       layers: [
         {
-          layer: 'LAYER 01: PRESENTATION',
-          badge: 'VITE / REACT',
-          title: 'React 18 & Self-Hosted Fonts',
+          layer: 'LAYER 01: DESIGN TOKENS',
+          badge: 'CSS VARIABLES',
+          title: 'Semantic Light & Dark Surface Contract',
           description:
-            'Bundled local font sources via @fontsource, eliminating third-party CDN latency and ensuring reliable offline rendering.',
+            'Dynamic RGB CSS variables (--surface, --subtle, --chip, --line, --fg, --muted, --soft) paired with an inline pre-paint script for flicker-free theme switching.',
         },
         {
-          layer: 'LAYER 02: ORCHESTRATION',
-          badge: 'HOOK / STORE',
-          title: 'Theme Engine & URL Synced State',
+          layer: 'LAYER 02: TYPOGRAPHY',
+          badge: 'LATIN SUBSETS',
+          title: 'Self-Hosted Editorial Font Pairing',
           description:
-            'Pre-paint inline anti-flicker script coupled with React custom hook and localStorage persistence for deterministic state hydration.',
+            'Pairs Plus Jakarta Sans Variable with Space Grotesk Latin subsets via @fontsource, removing third-party font CDN requests and unused glyph subsets.',
         },
         {
-          layer: 'LAYER 03: DESIGN TOKENS',
-          badge: 'CSS VARS',
-          title: 'Tailwind Semantic Token Contract',
+          layer: 'LAYER 03: BUNDLE & MEDIA',
+          badge: 'VITE / WEBP',
+          title: 'Code Splitting & Native REST Fetching',
           description:
-            'Dynamic CSS color variables (--surface, --fg, --subtle, --chip, --line) ensuring instantaneous light/dark adaptation.',
+            'Splits React vendor and heavy modal chunks via React.lazy() and uses native REST fetch with AbortController timeouts instead of heavy client SDKs.',
         },
         {
-          layer: 'LAYER 04: EDGE DELIVERY',
-          badge: 'CDN / CI',
-          title: 'Edge Deployment & Typecheck Pipeline',
+          layer: 'LAYER 04: INTERACTION & A11Y',
+          badge: 'WCAG 2.1 AA',
+          title: 'Observer Scroll-Spy & Focus-Trapped Modals',
           description:
-            'Automated TypeScript compile-time verification (tsc --noEmit) and high-speed production bundling delivering sub-40ms response times.',
+            'Uses IntersectionObserver and ResizeObserver for zero-reflow scroll tracking, full keyboard focus trapping, and >=44px mobile touch targets.',
         },
       ],
-      codeSnippet: {
-        filename: 'dossier.types.ts — ARCHITECTURAL CONTRACT',
-        lang: 'TypeScript 5.4',
-        code: `// Formal contract specifying case study telemetry & modal hydration
-export interface ProjectDossierConfig {
-  readonly id: \`PJ-\${number}-\${number}\`;
-  slug: string;
-  metrics: {
-    firstContentfulPaintMs: 280;
-    cumulativeLayoutShift: 0.00;
-    accessibilityScore: 100;
-  };
-  architecture: {
-    renderingPattern: 'MODULAR_ISLAND_HYDRATION';
-    stateSync: 'LOCAL_STORAGE_PERSISTENCE';
-    tokenSystem: 'EDITORIAL_TACTILE_V2';
-  };
-  activeTab: 'OVERVIEW' | 'ARCHITECTURE' | 'STACK' | 'BENCHMARKS';
-}`,
-      },
       decisions: [
         {
-          title: 'Zero Layout Shift (CLS)',
+          title: 'Native REST Fetch over Heavy SDK (-49.6% Initial JS)',
           description:
-            'Reserved bounding boxes, CSS aspect-ratio locks, and pre-computed font fallback metrics prevent layout jank across viewports.',
+            'Replaced the monolithic @supabase/supabase-js client with native fetch() against the PostgREST endpoint and deferred execution via IntersectionObserver, cutting initial JS from 460.87 kB to 232.37 kB.',
         },
         {
-          title: 'WCAG 2.1 AA A11y Trap',
+          title: 'WebP Media Pipeline & Explicit Aspect Ratios (-75% Image Weight)',
           description:
-            'Focus trapping within modal sheets, Esc key dismissal handler, and accessible aria-modal and aria-expanded state bindings.',
+            'Converted showcase and portrait assets to WebP with <picture> JPEG fallbacks and explicit width/height attributes to eliminate Cumulative Layout Shift (CLS).',
         },
         {
-          title: 'Clean Separation of Concerns',
+          title: 'Zero-Reflow Runtime Observers',
           description:
-            'Complete decoupling of product content data from UI components, allowing instant updates without altering markup.',
+            'Replaced per-pixel scroll DOM queries with IntersectionObserver for navbar scroll-spy and ResizeObserver + requestAnimationFrame for carousel pagination.',
         },
       ],
       capabilities: [
         {
-          code: '01 // PERF',
-          title: 'Sub-0.3s FCP & 100 A11y',
+          code: '01 // BUNDLE DIET',
+          title: '-49.6% Initial JS Payload',
           description:
-            'Strict pre-rendering, modern asset bundling, zero non-critical runtime JavaScript overhead.',
+            'Initial JS reduced from 460.87 kB (131.17 kB gzip) to 232.37 kB (73.25 kB gzip) via SDK removal, vendor chunk splitting, and lazy modal loading.',
         },
         {
-          code: '02 // TOKENS',
-          title: 'Design Token Contract',
+          code: '02 // MEDIA & FONTS',
+          title: '-58% Total Media & Latin Font Subsets',
           description:
-            'Custom CSS variables for brutalist editorial typography (Plus Jakarta Sans, Space Grotesk).',
+            'Responsive WebP compression (shoes4us 132.9 KB -> 33.0 KB) and Space Grotesk Latin subsetting reduce network transfer size from 15 font files to 7.',
         },
         {
-          code: '03 // MODULARITY',
-          title: 'Atomic Component Architecture',
+          code: '03 // ACCESSIBILITY',
+          title: 'WCAG 2.1 AA & 44px Touch Ergonomics',
           description:
-            'Composable project cards, responsive bento grids, and lightweight tactile paper modal overlays.',
+            'Full keyboard navigation, modal focus trap with focus restoration, semantic ARIA tabs, >=4.5:1 text contrast, and 44x44px minimum touch targets.',
         },
       ],
-      tools: ['React 18', 'TypeScript', 'Vite', 'Tailwind CSS', 'PostCSS', 'Space Grotesk', 'Plus Jakarta Sans'],
+      tools: [
+        'React 18',
+        'TypeScript 5',
+        'Vite 5',
+        'Tailwind CSS 3.4',
+        'CSS Variables',
+        'IntersectionObserver API',
+        'WebP Media',
+        'Vercel Edge',
+      ],
       quote: {
         text:
-          '“Code is not merely an implementation detail; it is the ultimate design material. Building an engineered portfolio means treating typography, latency, and layout resilience with equal craftsmanship.”',
-        author: '— Architectural Note, Ranggadya',
+          'A portfolio should be proof of its own claims—engineered with the same restraint, performance budget, and accessibility rigor expected in production software.',
+        author: '— Design & Engineering Note, Ranggadya',
       },
     },
   },
@@ -293,7 +282,7 @@ def run_monte_carlo(current_assets: float, annual_contrib: float,
       timelineState: '2026 — Independent Project',
       primaryStack: 'React 19, TypeScript, Go, PostgreSQL',
 
-      liveUrl: 'https://shoes4us.vercel.app/',
+      liveUrl: 'https://shoes4-us.vercel.app/',
       githubUrl: 'https://github.com/Ranggadya/Shoes4Us',
 
       challengeParagraphs: [

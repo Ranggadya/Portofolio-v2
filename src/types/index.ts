@@ -35,7 +35,7 @@ export interface ProjectDossier {
   systemDesignHeadline: string;
   systemDesignDesc: string;
   layers: ProjectDossierLayer[];
-  codeSnippet: {
+  codeSnippet?: {
     filename: string;
     lang: string;
     code: string;
